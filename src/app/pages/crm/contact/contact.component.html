@@ -1,0 +1,182 @@
+<div widget class="card" style="max-height: 100%;">
+    <div class="card-header">
+        <span class="text-uppercase">{{ "contact" | translate }}: {{ contact.name }} {{ contact.surname }}</span>
+        <div class="widget-controls"> 
+            <i class="fa fa-times cursor" (click)="close()"></i>
+        </div>        
+    </div>
+    <div class="card-body scroll">
+        <div class="row">
+            <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="card border-0 box-shadow mb-4">
+                    <az-image-display *ngIf="contact?.id" [appTypeId]="appTypes.contact" [linkTypeId]="contact.id"></az-image-display>
+                    <!-- <img class="card-img-top w-100" src="assets/img/users/user-orig.jpg" alt="user"> -->
+                  
+                  <div class="card-body"> 
+                      <h4 class="card-title text-center mb-4">{{ contact.name }} {{ contact.surname }}</h4>
+                      <!-- <h5 class="card-title text-center text-info">Web Developer</h5> -->
+                      <div *ngIf="contact.description" class="row mb-4">
+                        <div class="col-md-12">
+                            <p class="card-text text-justify mb-4">{{ contact.description }}</p>
+                        </div>
+                      </div>
+                                                        
+                     <!-- <div class="dropdown-divider w-100"></div> -->
+
+                      <div *ngIf="contact.address || contact.city" class="row mb-4">
+                        <div class="col-md-2">
+                            <i class="fa fa-home"></i>
+                        </div>
+                        <!-- <div class="col-md-12 text-left"><h6 class="card-subtitle">{{ "address.address" | translate }}</h6></div> -->
+                        <div class="col-md-10 text-left">
+                            <span *ngIf="contact.address">{{ contact.address }}</span><br *ngIf="contact.address && contact.city?.name">
+                            <span *ngIf="contact.city?.postalCode">{{ contact.city.postalCode }}</span><span *ngIf="contact.city?.name"> {{ contact.city.name }}</span><br *ngIf="contact.address && contact.city?.name">
+                            <span *ngIf="contact.city?.name">{{ contact.city.province.name }}, {{ contact.city.country.nicename }}</span>
+                        </div>
+                      </div>
+                      <div *ngIf="contact.phone || contact.mobile" class="row mb-4">
+                        <div class="col-md-2">
+                            <i *ngIf="contact.phone" class="fa fa-phone"></i><br *ngIf="contact.phone && contact.mobile">
+                            <i *ngIf="contact.phone" class="fa fa-mobile"></i>
+                        </div>
+                        <!-- <div class="col-md-12 text-left">{{ "general.phone" | translate }}</div> -->
+                        <div class="col-md-10 text-left">
+                            <span *ngIf="contact.phone">{{ contact.phone }}</span><br *ngIf="contact.phone && contact.mobile">
+                            <span *ngIf="contact.mobile">{{ contact.mobile }}</span>
+                        </div>
+                      </div>
+
+                      <div *ngIf="contact.email" class="row mb-4">
+                        <div class="col-md-2">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <!-- <div class="col-md-12 text-left">{{ "general.email" | translate }}</div> -->
+                        <div class="col-md-10 text-left">
+                            {{ contact.email }}
+                        </div>
+                      </div>
+                      
+                      <div>&nbsp;</div>
+                      <!-- <div class="dropdown-divider w-100"></div> -->
+                      <div class="d-flex flex-row justify-content-center align-items-center w-100 mt-4">
+                        <a href="javascript:void(0);" class="mx-2 text-info">
+                          <span class="fa-stack">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x"></i>
+                          </span>
+                        </a>
+                        <a href="javascript:void(0);" class="mx-2 text-info">
+                          <span class="fa-stack">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x"></i>
+                          </span>
+                        </a>
+                        <a href="javascript:void(0);" class="mx-2 text-info">
+                          <span class="fa-stack">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-google fa-stack-1x"></i>
+                          </span>
+                        </a>
+                      </div>
+          
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="card card-info border-0 box-shadow">
+                    <div class="card-body bg-white">
+                
+                        <form [formGroup]="personalForm" class="row">
+                
+                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('name').touched && personalForm.get('name').hasError('required'), 'has-success' : !personalForm.get('name').hasError('required') }">
+                                <label class="form-control-label">{{ "contact.name" | translate }}</label>
+                                <input formControlName="name" class="form-control" [ngClass]="{'form-control-danger' :  personalForm.get('name').hasError('required'), 'form-control-success' :  !personalForm.get('name').hasError('required') }" type="text"> 
+                                <small class="text-danger" *ngIf="personalForm.get('name').touched && personalForm.get('name').hasError('required')">{{ "contact.name" | translate }} {{ "form.isrequired" | translate}}</small>                             
+                            </div>
+                
+                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('surname').touched && personalForm.get('surname').hasError('required'), 'has-success' : !personalForm.get('surname').hasError('required') }">
+                                <label class="form-control-label">{{ "contact.surname" | translate }}</label>
+                                <input formControlName="surname" class="form-control" [ngClass]="{'form-control-danger' :  personalForm.get('surname').hasError('required'), 'form-control-success' :  !personalForm.get('surname').hasError('required') }" type="text"> 
+                                <small class="text-danger" *ngIf="personalForm.get('surname').touched && personalForm.get('surname').hasError('required')">{{ "contact.surname" | translate }} {{ "form.isrequired" | translate}}</small>                             
+                            </div>
+                               
+                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : (personalForm.get('email').touched && personalForm.get('email').hasError('required')) || (personalForm.get('email').touched && personalForm.get('email').hasError('invalidEmail')), 
+                                                                         'has-success' : !personalForm.get('email').hasError('required') && !personalForm.get('email').hasError('invalidEmail')}">
+                                <label class="form-control-label">{{ "general.email" | translate }}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope"></i></span></div>
+                                    <input formControlName="email" class="form-control" [ngClass]="{'form-control-danger' : (personalForm.get('email').touched && personalForm.get('email').hasError('required')) || (personalForm.get('email').touched && personalForm.get('email').hasError('invalidEmail')), 
+                                                                                                    'form-control-success' :  !personalForm.get('email').hasError('required') && !personalForm.get('email').hasError('invalidEmail')}" type="text">                      
+                                </div>
+                                <small class="text-danger" *ngIf="personalForm.get('email').touched && personalForm.get('email').hasError('required')">{{ "general.email" | translate }} {{ "form.isrequired" | translate}}</small>                              
+                                <small class="text-danger" *ngIf="personalForm.get('email').touched && personalForm.get('email').hasError('invalidEmail')">{{ "form.invalid"| translate }} {{ "general.email" | translate }}</small>
+                            </div>
+                            <div class="col-md-6"></div>    
+
+                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('phone').touched && personalForm.get('phone').hasError('required'), 'has-success' : !personalForm.get('phone').hasError('required') }">
+                                <label class="form-control-label">{{ "general.phone" | translate}}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div>
+                                    <input formControlName="phone" class="form-control" [ngClass]="{'form-control-danger' :  personalForm.get('phone').hasError('required'), 'form-control-success' :  !personalForm.get('phone').hasError('required') }" type="number"> 
+                                </div>
+                                <small class="text-danger" *ngIf="personalForm.get('phone').touched && personalForm.get('phone').hasError('required')">{{ "general.phone" }} {{ "for.isrequired" | translate }}</small>                             
+                            </div>
+
+                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('mobile').touched && personalForm.get('mobile').hasError('required'), 'has-success' : !personalForm.get('mobile').hasError('required') }">
+                                <label class="form-control-label">{{ "general.mobile" | translate}}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div>
+                                    <input formControlName="mobile" class="form-control" [ngClass]="{'form-control-danger' :  personalForm.get('mobile').hasError('required'), 'form-control-success' :  !personalForm.get('mobile').hasError('required') }" type="number"> 
+                                </div>
+                                <small class="text-danger" *ngIf="personalForm.get('mobile').touched && personalForm.get('mobile').hasError('required')">{{ "general.mobile" }} {{ "for.isrequired" | translate }}</small>                             
+                            </div>
+                               
+                            <div formGroupName="city" (change)="changeCountry($event)" class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('city.countryId').touched && personalForm.get('city.countryId').hasError('required'), 'has-success' : !personalForm.get('city.countryId').hasError('required') }">
+                                <label class="form-control-label">{{ "address.country" | translate }}</label>
+                                <select formControlName="countryId" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('city.countryId').touched && personalForm.get('city.countryId').hasError('required'), 'form-control-success' : !personalForm.get('city.countryId').hasError('required') }">
+                                    <option *ngFor="let country of countries" [value]="country.id">{{ country.nicename }}</option>
+                                </select>
+                                <small class="text-danger" *ngIf="personalForm.get('city.countryId').touched && personalForm.get('city.countryId').hasError('required')">{{ "address.country" | translate }} {{"form.isrequired" | translate}}</small>                             
+                            </div>
+
+                            <div formGroupName="city" class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('city.provinceId').touched && personalForm.get('city.provinceId').hasError('required'), 'has-success' : !personalForm.get('city.provinceId').hasError('required') }">
+                                <label class="form-control-label">{{ "address.state" | translate }}</label>
+                                <select formControlName="provinceId" (change)="changeProvince($event)" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('city.provinceId').touched && personalForm.get('city.provinceId').hasError('required'), 'form-control-success' : !personalForm.get('city.provinceId').hasError('required') }">
+                                    <option [value]="null"></option>
+                                    <option *ngFor="let province of provinces" [value]="province.id">{{ province.name }}</option>
+                                </select>
+                                <small class="text-danger" *ngIf="personalForm.get('city.provinceId').touched && personalForm.get('city.provinceId').hasError('required')">{{ "address.state" | translate }} {{ "form.isrequired" | translate}}</small>                             
+                            </div>
+
+                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('cityId').touched && personalForm.get('cityId').hasError('required'), 'has-success' : !personalForm.get('cityId').hasError('required') }">
+                                <label class="form-control-label">{{"address.city" | translate}}</label>
+                                <select formControlName="cityId" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('cityId').touched && personalForm.get('cityId').hasError('required'), 'form-control-success' : !personalForm.get('cityId').hasError('required') }">
+                                    <option [value]="null"></option>
+                                    <option *ngFor="let city of cities" [value]="city.id">{{ city.postalCode }} {{ city.name }}</option>
+                                </select>
+                                <small class="text-danger" *ngIf="personalForm.get('cityId').touched && personalForm.get('cityId').hasError('required')">{{"address.city" | translate}} {{"form.isrequired" | translate}}</small>
+                            </div>
+                
+                            <div class="form-group col-md-6">
+                                <label class="form-control-label">{{"address.address" | translate}}</label>
+                                <textarea formControlName="address" class="form-control" rows="2"></textarea>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label class="form-control-label">{{"general.description" | translate}}</label>
+                                <textarea formControlName="description" class="form-control" rows="5"></textarea>
+                            </div> 
+                            
+                            <div class="form-group col-12 pt-3 text-right">
+                                <button [disabled]="!personalForm.dirty" class="btn btn-success cursor" (click)="undoChanges()" type="reset">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!personalForm.valid" class="btn btn-success cursor" (click)="onSubmit()" type="button">{{ "form.save" | translate }}</button>
+                            </div>
+                        </form>
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="row bottom-30">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span class="text-uppercase">{{ "companies" | translate }}</span>      
+            </div>
+            <div class="card-body">
+
+                <form class="form-inline">
+                    <div class="form-group col-md-3 col-sm-6">
+                        <input class="form-control" name="name" [(ngModel)]="company.name" placeholder="{{ 'company.name' | translate }}" >
+                    </div>
+                    <div class="form-group col-md-3 col-sm-6">
+                        <button type="submit" class="btn btn-main" (click)="onSearch()">{{ "general.search" | translate }}</button>
+                    </div> 
+                </form>
+
+                <p></p>
+        
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ "company.name" | translate}}</th>
+                                <th>{{ "address.address" | translate}}</th>
+                                <th>{{ "address.country" | translate}}</th>
+                                <th>{{ "general.email" | translate }}</th>
+                                <th>{{ "general.phone" | translate }}</th>
+                                <th>{{ "general.mobile" | translate }}</th>
+                                <th>{{ "company.vat" | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let c of companies">
+                                <tr>
+                                    <td>{{ c.name }}</td>
+                                    <td>
+                                        {{ c.address }}
+                                        <span *ngIf="c.postalCode || c.city"><br>{{ c.postalCode }} {{ c.city }}</span>
+                                        <span *ngIf="c.state"><br>{{ c.state}}</span>
+                                    </td>
+                                    <td>{{ c.country }}</td>
+                                    <td>{{ c.email }}</td>
+                                    <td>{{ c.phone }}</td>
+                                    <td>{{ c.mobile }}</td>
+                                    <td>{{ c.vat }}</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+</div>

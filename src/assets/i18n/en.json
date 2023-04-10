@@ -1,0 +1,55 @@
+{
+    "info.user.loginsuccess": "Successfully logged in",
+
+    "err" : "ERROR : ",
+    "err.badrequest" : "Bad request!",
+    "err.user.nocurrent" : "No current user found!",
+
+    "warn.noresultsfound": "No results found!",
+    "warn.user.invalidcredentials" : "Invalid credentials!",
+
+    "menu.dashboard": "Dashboard",
+    "menu.crm": "CRM",
+    "menu.companies" : "Companies",
+    "menu.contacts": "Contacts",
+    "menu.projects": "Projects",
+    "menu.tasks": "Tasks",
+    "menu.invoices": "Invoices",
+    "menu.invoicesOut": "Outgoing invoices",
+
+    "form.save": "Save",
+    "form.undoChanges": "Undo",
+    "form.isrequired" : "is required",
+    "form.invalid": "invalid",
+
+    "login.password.minimumlength" : "needs at least 4 characters",
+    "login.signin" : "Sign in",
+    "login.changeLanguage": "Change language:",
+    
+    "user.username": "Username",
+    "user.password": "Password",
+
+    "general.add": "Add",    
+    "general.email": "Email",
+    "general.phone": "Phone",
+    "general.mobile": "Mobile",
+    "general.search": "Search",
+    "general.description": "Description",
+    "general.advanced": "Advanced",
+    
+    "address.address": "Address",
+    "address.postalCode": "Postalcode",
+    "address.city": "City",
+    "address.state": "State",
+    "address.country": "Country",
+
+    "companies": "Companies",
+    "company": "Company",
+    "company.name": "Name",
+    "company.vat": "VAT",
+
+    "contacts": "Contacts",
+    "contact": "Contact",
+    "contact.name" : "Name",
+    "contact.surname": "Surname"
+}

@@ -1,0 +1,60 @@
+{
+    "info.user.loginsuccess": "Succesvol ingelogd",
+
+    "err" : "ERROR : ",
+    "err.badrequest" : "Foutieve aanvraag",
+    "err.user.nocurrent" : "Geen huidige gebruiker gevonden!",
+    "error.invalidFile" : "Foutief bestand!",
+    "err.pathNotFound": "Locatie niet gevonden!",
+
+    "warn.noresultsfound": "Geen resultaten gevonden!",
+    "warn.user.invalidcredentials" : "Ongeldige inloggegevens!",
+
+    "menu.dashboard": "Dashboard",
+    "menu.crm": "CRM",
+    "menu.companies" : "Bedrijven",
+    "menu.contacts": "Contacten",
+    "menu.projects": "Projecten",
+    "menu.tasks": "Taken",
+    "menu.invoices": "Facturen",
+    "menu.invoicesOut": "Uitgaande facturen",
+
+    "form.save": "Bewaar",
+    "form.undoChanges": "Ongedaan maken",
+    "form.isrequired" : "is verplicht",
+    "form.invalid": "foutief",
+    "form.chooseimage": "Kies een afbeelding",
+    "form.fileUploaded": "Bestand opgeladen",
+
+    "login.changeLanguage": "Wijzig taal:",
+    "login.password.minimumlength" : "moet minstens 4 karakters hebben",
+    "login.signin" : "Aanmelden",
+    
+    "user.username": "Gebruikersnaam",
+    "user.password": "Wachtwoord",
+
+    "general.add": "Toevoegen",
+    "general.email": "Email",
+    "general.phone": "Telefoon",
+    "general.mobile": "GSM",
+    "general.search": "Zoeken",
+    "general.description": "Omschrijving",
+    "general.advanced": "Geavanceerd",
+    "general.images": "Afbeeldingen",
+    
+    "address.address": "Adres",
+    "address.postalCode": "Postcode",
+    "address.city": "Gemeente",
+    "address.state": "Provincie",
+    "address.country": "Land",
+
+    "companies": "Bedrijven",
+    "company": "Bedrijf",
+    "company.name": "Naam",
+    "company.vat": "BTW",
+
+    "contacts": "Contacten",
+    "contact": "Contact",
+    "contact.name" : "Naam",
+    "contact.surname": "Familienaam"
+}

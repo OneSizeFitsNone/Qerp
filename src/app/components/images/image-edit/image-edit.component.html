@@ -1,0 +1,64 @@
+<div widget class="card" style="max-height: 100%;">
+    <div class="card-header">
+        <span class="text-uppercase">
+            {{ "general.images" | translate }}
+        </span>
+        <div class="widget-controls"> 
+            <i class="fa fa-times cursor" (click)="close()"></i>
+        </div>        
+    </div>
+    <div class="card-body scroll">
+
+        <div class="row">
+            <div class="col-lg-3 col-md-12 col-sm-12">
+      
+                <div *ngIf="isUploading" class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+
+                <div *ngIf="!isUploading" class="form-group">
+                    <div class="input-group file-upload">
+                        <input type="file" accept="image/*" (change)="fileChange(input)" #input class="file-upload-btn"/>
+                        <input type="text" class="form-control" placeholder="{{ 'form.chooseimage' | translate }}" value="{{file}}">
+
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button"><i class="fa fa-upload"></i></button>
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mbm-20" [dragula]="'bag'" [(dragulaModel)]='images'>
+            
+            <div *ngFor="let image of images; let i = index;" id="{{image.id + '-' + i}}" class="col-xl-3 col-lg-3 col-md-3 col-sm-12 bottom-30 draggable">              
+                <div class="card">
+
+                    <div class="card-header text-truncate">
+                        <span class="mr-2">
+                            <i *ngIf="!image.isEdit" class="fa fa fa-edit cursor" (click)="image.isEdit = !image.isEdit"></i>
+                            <i *ngIf="image.isEdit" class="fa fa fa-save cursor" (click)="saveImage(image)"></i>
+                        </span>
+                        <span>
+                            <i class="fa fa fa-trash cursor" (click)="deleteImage(image)"></i>
+                        </span>
+
+                    </div>
+                    <div #imageblock class="card-body d-flex align-items-middle justify-content-center" style="height: 325px;" [ngStyle]="{'height.px': imageblock.offsetWidth }">
+                        <img src="{{ location + image.imagelink }}" style="object-fit: contain; max-width: 100%; max-height: 100%;" >
+                        <div *ngIf="image.description && !image.isEdit" class="imageDescription d-flex justify-content-center">
+                            {{ image.description }}
+                        </div>
+                        <div *ngIf="image.isEdit" class="form-group imageDescription d-flex justify-content-center">
+                            <textarea class="form-control" rows="4" [(ngModel)]="image.description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</div>

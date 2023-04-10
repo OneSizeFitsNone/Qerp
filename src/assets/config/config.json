@@ -1,0 +1,6 @@
+{
+    "apiServer": {
+      "url": "https://api.qerp.eu/api",
+      "version": "v1"
+    }
+}

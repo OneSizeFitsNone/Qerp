@@ -1,0 +1,34 @@
+<div class="login-container">
+    <div class="col-xl-4 col-md-6 col-10 mx-auto">
+        <div class="card">
+
+            <div class="card-body text-center">
+                <div class="card-header text-left">
+                    {{ "login.changeLanguage" | translate }}
+                    <img class="flags" src="assets/img/flags/nl.jpg" (click)="setLanguage('nl')">
+                    <img class="flags" src="assets/img/flags/en.jpg" (click)="setLanguage('en')">
+                </div>
+
+                <h2 class="card-title"><img src="assets/img/logo/qerp_logo.jpg"></h2>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class=" text-left">
+                    <div class="form-group">
+                        <input [formControl]="username" class="form-control checking-field" placeholder="{{ 'user.username' | translate }}" type="text">                      
+                        <span class="help-block text-danger" *ngIf="form.get('username').touched && form.get('username').hasError('required')">{{ 'user.username' | translate }} {{ 'form.isrequired' | translate }}</span>                              
+                    </div>
+                    <div class="form-group">
+                        <input [formControl]="password" class="form-control checking-field" placeholder="{{ 'user.password' | translate }}" type="password">
+                        <span class="help-block text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('required')">{{ 'user.password' | translate }} {{ 'form.isrequired' | translate }}</span>                              
+                        <span class="help-block text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">{{ 'user.password' | translate }} {{ 'login.password.minimumlength' | translate }}</span>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="!form.valid" class="btn btn-main btn-block" type="submit">{{ 'login.signin' | translate }}</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
