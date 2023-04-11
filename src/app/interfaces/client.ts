@@ -16,6 +16,7 @@ export interface IClient {
     cityId: number
     description: string;
     email: string;
+    invoiceSameAddress: boolean;
     invoiceAddress: string;
     invoicePostalCode: string;
     invoiceCityId: number;

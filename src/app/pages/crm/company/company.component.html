@@ -1,6 +1,6 @@
 <div widget class="card" style="max-height: 100%!important;">
     <div class="card-header">
-        <span class="text-uppercase">{{ "contact" | translate }}: {{ contact.name }} {{ contact.surname }}</span>
+        <span class="text-uppercase">{{ "company" | translate }}: {{ company.name }}</span>
         <div class="widget-controls"> 
             <i class="fa fa-times cursor" (click)="close()"></i>
         </div>        
@@ -9,46 +9,46 @@
         <div class="row">
             <div class="col-lg-3 col-md-12 col-sm-12">
                 <div class="card border-0 box-shadow mb-4">
-                    <az-image-display *ngIf="contact?.id" [appTypeId]="appTypes.contact" [linkTypeId]="contact.id"></az-image-display>
+                    <az-image-display *ngIf="company?.id" [appTypeId]="appTypes.company" [linkTypeId]="company.id"></az-image-display>
                     <!-- <img class="card-img-top w-100" src="assets/img/users/user-orig.jpg" alt="user"> -->
                   
                   <div class="card-body"> 
-                      <h4 class="card-title text-center mb-4">{{ contact.name }} {{ contact.surname }}</h4>
-                      <!-- <h5 class="card-title text-center text-info">Web Developer</h5> -->
-                      <div *ngIf="contact.description" class="row mb-4">
+                      <h4 class="card-title text-center mb-4">{{ company.name }}</h4>
+
+                      <div *ngIf="company.description" class="row mb-4">
                         <div class="col-md-12">
-                            <p class="card-text text-justify mb-4" style="white-space: pre-wrap;">{{ contact.description }}</p>
+                            <p class="card-text text-justify mb-4" style="white-space: pre-wrap;">{{ company.description }}</p>
                         </div>
                       </div>
                                                         
 
-                      <div *ngIf="contact.address || contact.city" class="row mb-4">
+                      <div *ngIf="company.address || company.city" class="row mb-4">
                         <div class="col-md-2">
                             <i class="fa fa-home"></i>
                         </div>
                         <div class="col-md-10 text-left" style="white-space: pre-wrap;">
-                            <span *ngIf="contact.address">{{ contact.address }}</span><br *ngIf="contact.address && contact.city?.name">
-                            <span *ngIf="contact.city?.postalCode">{{ contact.city.postalCode }}</span><span *ngIf="contact.city?.name"> {{ contact.city.name }}</span><br *ngIf="contact.address && contact.city?.name">
-                            <span *ngIf="contact.city?.name">{{ contact.city.province.name }}, {{ contact.city.country.nicename }}</span>
+                            <span *ngIf="company.address">{{ company.address }}</span><br *ngIf="company.address && company.city?.name">
+                            <span *ngIf="company.city?.postalCode">{{ company.city.postalCode }}</span><span *ngIf="company.city?.name"> {{ company.city.name }}</span><br *ngIf="company.address && company.city?.name">
+                            <span *ngIf="company.city?.name">{{ company.city.province.name }}, {{ company.city.country.nicename }}</span>
                         </div>
                       </div>
-                      <div *ngIf="contact.phone || contact.mobile" class="row mb-4">
+                      <div *ngIf="company.phone || company.mobile" class="row mb-4">
                         <div class="col-md-2">
-                            <i *ngIf="contact.phone" class="fa fa-phone"></i><br *ngIf="contact.phone && contact.mobile">
-                            <i *ngIf="contact.phone" class="fa fa-mobile"></i>
+                            <i *ngIf="company.phone" class="fa fa-phone"></i><br *ngIf="company.phone && company.mobile">
+                            <i *ngIf="company.phone" class="fa fa-mobile"></i>
                         </div>
                         <div class="col-md-10 text-left">
-                            <span *ngIf="contact.phone">{{ contact.phone }}</span><br *ngIf="contact.phone && contact.mobile">
-                            <span *ngIf="contact.mobile">{{ contact.mobile }}</span>
+                            <span *ngIf="company.phone">{{ company.phone }}</span><br *ngIf="company.phone && company.mobile">
+                            <span *ngIf="company.mobile">{{ company.mobile }}</span>
                         </div>
                       </div>
 
-                      <div *ngIf="contact.email" class="row mb-4">
+                      <div *ngIf="company.email" class="row mb-4">
                         <div class="col-md-2">
                             <i class="fa fa-envelope"></i>
                         </div>
                         <div class="col-md-10 text-left">
-                            {{ contact.email }}
+                            {{ company.email }}
                         </div>
                       </div>
                       
@@ -79,10 +79,10 @@
 
                       <div class="row mt-4">
                         <div class="col-md-12 text-left">
-                            <small>Created: {{ contact.created | date:"yyyy/MM/dd HH:mm" }}</small>
+                            <small>Created: {{ company.created | date:"yyyy/MM/dd HH:mm" }}</small>
                         </div>
                         <div class="col-md-12 text-left">
-                            <small>Updated: {{ contact.updated | date:"yyyy/MM/dd HH:mm" }}</small>
+                            <small>Updated: {{ company.updated | date:"yyyy/MM/dd HH:mm" }}</small>
                         </div>
 
                       </div>
@@ -102,13 +102,7 @@
                                 <input formControlName="name" class="form-control" [ngClass]="{'form-control-danger' :  personalForm.get('name').hasError('required'), 'form-control-success' :  !personalForm.get('name').hasError('required') }" type="text"> 
                                 <small class="text-danger" *ngIf="personalForm.get('name').touched && personalForm.get('name').hasError('required')">{{ "contact.name" | translate }} {{ "form.isrequired" | translate}}</small>                             
                             </div>
-                
-                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('surname').touched && personalForm.get('surname').hasError('required'), 'has-success' : !personalForm.get('surname').hasError('required') }">
-                                <label class="form-control-label">{{ "contact.surname" | translate }}</label>
-                                <input formControlName="surname" class="form-control" [ngClass]="{'form-control-danger' :  personalForm.get('surname').hasError('required'), 'form-control-success' :  !personalForm.get('surname').hasError('required') }" type="text"> 
-                                <small class="text-danger" *ngIf="personalForm.get('surname').touched && personalForm.get('surname').hasError('required')">{{ "contact.surname" | translate }} {{ "form.isrequired" | translate}}</small>                             
-                            </div>
-                               
+                                              
                             <div class="form-group col-md-6" [ngClass]="{'has-danger' : (personalForm.get('email').touched && personalForm.get('email').hasError('required')) || (personalForm.get('email').touched && personalForm.get('email').hasError('invalidEmail')), 
                                                                          'has-success' : !personalForm.get('email').hasError('required') && !personalForm.get('email').hasError('invalidEmail')}">
                                 <label class="form-control-label">{{ "general.email" | translate }}</label>
@@ -119,8 +113,7 @@
                                 </div>
                                 <small class="text-danger" *ngIf="personalForm.get('email').touched && personalForm.get('email').hasError('required')">{{ "general.email" | translate }} {{ "form.isrequired" | translate}}</small>                              
                                 <small class="text-danger" *ngIf="personalForm.get('email').touched && personalForm.get('email').hasError('invalidEmail')">{{ "form.invalid"| translate }} {{ "general.email" | translate }}</small>
-                            </div>
-                            <div class="col-md-6"></div>    
+                            </div> 
 
                             <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('phone').touched && personalForm.get('phone').hasError('required'), 'has-success' : !personalForm.get('phone').hasError('required') }">
                                 <label class="form-control-label">{{ "general.phone" | translate}}</label>
@@ -169,6 +162,64 @@
                             <div class="form-group col-md-6">
                                 <label class="form-control-label">{{"address.address" | translate}}</label>
                                 <textarea formControlName="address" class="form-control" rows="2"></textarea>
+                            </div>
+
+                            <!-- Marker -->
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="custom-checkbox">
+                                            <input formControlName="invoiceSameAddress" type="checkbox" class="myCheckbox checkbox-primary" id="invoiceSameAddress">
+                                            <label class="form-control-label" for="invoiceSameAddress">{{ "address.invoiceSameAddress" | translate }}</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div *ngIf="!personalForm.get('invoiceSameAddress').value" class="row">
+                                    <div formGroupName="invoiceCity" (change)="changeInvoiceCountry($event)" class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('invoiceCity.countryId').touched && personalForm.get('invoiceCity.countryId').hasError('required'), 'has-success' : !personalForm.get('invoiceCity.countryId').hasError('required') }">
+                                        <label class="form-control-label">{{ "address.invoiceCountry" | translate }}</label>
+                                        <select formControlName="countryId" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('invoiceCity.countryId').touched && personalForm.get('invoiceCity.countryId').hasError('required'), 'form-control-success' : !personalForm.get('invoiceCity.countryId').hasError('required') }">
+                                            <option *ngFor="let country of countries" [value]="country.id">{{ country.nicename }}</option>
+                                        </select>
+                                        <small class="text-danger" *ngIf="personalForm.get('invoiceCity.countryId').touched && personalForm.get('invoiceCity.countryId').hasError('required')">{{ "address.country" | translate }} {{"form.isrequired" | translate}}</small>                             
+                                    </div>
+        
+                                    <div formGroupName="invoiceCity" class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('invoiceCity.provinceId').touched && personalForm.get('invoiceCity.provinceId').hasError('required'), 'has-success' : !personalForm.get('invoiceCity.provinceId').hasError('required') }">
+                                        <label class="form-control-label">{{ "address.invoiceState" | translate }}</label>
+                                        <select formControlName="provinceId" (change)="changeInvoiceProvince($event)" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('invoiceCity.provinceId').touched && personalForm.get('invoiceCity.provinceId').hasError('required'), 'form-control-success' : !personalForm.get('invoiceCity.provinceId').hasError('required') }">
+                                            <option [value]="null"></option>
+                                            <option *ngFor="let province of invoiceProvinces" [value]="province.id">{{ province.name }}</option>
+                                        </select>
+                                        <small class="text-danger" *ngIf="personalForm.get('invoiceCity.provinceId').touched && personalForm.get('invoiceCity.provinceId').hasError('required')">{{ "address.state" | translate }} {{ "form.isrequired" | translate}}</small>                             
+                                    </div>
+        
+                                    <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('invoiceCityId').touched && personalForm.get('invoiceCityId').hasError('required'), 'has-success' : !personalForm.get('invoiceCityId').hasError('required') }">
+                                        <label class="form-control-label">{{"address.invoiceCity" | translate}}</label>
+                                        <select formControlName="invoiceCityId" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('invoiceCityId').touched && personalForm.get('invoiceCityId').hasError('required'), 'form-control-success' : !personalForm.get('invoiceCityId').hasError('required') }">
+                                            <option [value]="null"></option>
+                                            <option *ngFor="let city of invoiceCities" [value]="city.id">{{ city.postalCode }} {{ city.name }}</option>
+                                        </select>
+                                        <small class="text-danger" *ngIf="personalForm.get('invoiceCityId').touched && personalForm.get('invoiceCityId').hasError('required')">{{"address.city" | translate}} {{"form.isrequired" | translate}}</small>
+                                    </div>
+                        
+                                    <div class="form-group col-md-6">
+                                        <label class="form-control-label">{{"address.invoiceAddress" | translate}}</label>
+                                        <textarea formControlName="invoiceAddress" class="form-control" rows="2"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+                            <!-- end marker -->
+                            <div class="form-group col-md-6">
+                                <label class="form-control-label">{{"vat.vatnumber" | translate}}</label>
+                                <input formControlName="vat" class="form-control" type="text"> 
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="form-control-label">{{"general.iban" | translate}}</label>
+                                <input formControlName="iban" class="form-control" type="text"> 
                             </div>
 
                             <div class="form-group col-md-12">

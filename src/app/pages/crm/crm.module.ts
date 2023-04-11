@@ -11,6 +11,7 @@ import { ImageDisplayComponent } from 'src/app/components/images/image-display/i
 import { ImageEditComponent } from 'src/app/components/images/image-edit/image-edit.component';
 import { AppModule } from 'src/app/app.module';
 import { ImageModule } from 'src/app/components/images/image.module';
+import { CompanyComponent } from './company/company.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'companies', pathMatch: 'full'},
@@ -31,6 +32,7 @@ export const routes: Routes = [
         ContactsComponent,
         CompaniesComponent,
         ContactComponent,
+        CompanyComponent,
 
     ],
     exports: [ 

@@ -46,7 +46,7 @@ export class ContactsComponent {
 
   onSearch() {
     if(this.contact.city.provinceId == null) { delete this.contact.city.provinceId; }
-    if(this.contact.city.provinceId == null) { delete this.contact.city.provinceId; }
+    if(this.contact.city.countryId == null) { delete this.contact.city.countryId; }
     this.contactService.findContact(this.contact);
   }
 

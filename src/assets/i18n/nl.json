@@ -41,12 +41,18 @@
     "general.description": "Omschrijving",
     "general.advanced": "Geavanceerd",
     "general.images": "Afbeeldingen",
+    "general.iban": "IBAN",
     
     "address.address": "Adres",
     "address.postalCode": "Postcode",
     "address.city": "Gemeente",
     "address.state": "Provincie",
     "address.country": "Land",
+    "address.invoiceSameAddress": "Facturatie adres is hetzelfde als hoofd adres",
+    "address.invoiceAddress": "Facturatie adres",
+    "address.invoiceCity": "Facturatie gemeente",
+    "address.invoiceState": "Facturatie provincie",
+    "address.invoiceCountry": "Facturatie land",
 
     "companies": "Bedrijven",
     "company": "Bedrijf",
@@ -56,5 +62,7 @@
     "contacts": "Contacten",
     "contact": "Contact",
     "contact.name" : "Naam",
-    "contact.surname": "Familienaam"
+    "contact.surname": "Familienaam",
+    
+    "vat.vatnumber": "BTW nummer"
 }
