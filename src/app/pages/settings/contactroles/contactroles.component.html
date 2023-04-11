@@ -1,1 +1,61 @@
-<p>contactroles works!</p>
+<div widget class="card" style="max-height: 100%!important;">
+    <div class="card-header">
+        <span class="text-uppercase">{{ "contactroles" | translate }}</span>
+    </div>
+    <div class="card-body scroll">
+        <form class="row">
+
+            <div class="form-group col-lg-3 col-md-6 col-sm-8">
+                <input class="form-control" name="crSearch" [(ngModel)]="crSearch" placeholder="{{ 'contactroles.name' | translate }}" (ngModelChange)="onInputChange()" >
+            </div>
+
+            <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
+                <div class="box">
+                    <i class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
+                    data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
+                </div>
+            </div> 
+
+        </form>
+
+        <p></p>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ "contactroles.name" | translate}}</th>
+                        <th>{{ "general.description" | translate}}</th>
+                        <th>{{ "created" | translate }}</th>
+                        <th>{{ "updated" | translate }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let oCr of crsSearch">
+                        <tr *ngIf="selectedId==oCr.id">
+                            <td>{{ oCr.name }}</td>
+                            <td style="white-space: pre-wrap;">{{ oCr.description }}</td>
+                            <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                            <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                            <td class="text-right"><i class="fa fa-edit cursor" (click)="selectedId=oCr.id"></i></td>
+                        </tr>
+                        <tr *ngIf="selectedId==oCr.id">
+                            <td>
+
+                            </td>
+                            <td style="white-space: pre-wrap;">{{ oCr.description }}</td>
+                            <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                            <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                            <td class="text-right"><i class="fa fa-floppy-disk cursor" (click)="saveContactrole(oCr)"></i></td>
+                        </tr>
+                    </ng-container>
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+</div>

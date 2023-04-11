@@ -35,6 +35,8 @@
     "user.username": "Gebruikersnaam",
     "user.password": "Wachtwoord",
 
+    "general.created": "Aangemaakt",
+    "general.updated": "Gewijzigd",
     "general.add": "Toevoegen",
     "general.email": "Email",
     "general.phone": "Telefoon",
@@ -66,5 +68,8 @@
     "contact.name" : "Naam",
     "contact.surname": "Familienaam",
     
+    "contactroles": "Contact rollen",
+    "contactroles.name" : "Naam",
+
     "vat.vatnumber": "BTW nummer"
 }
