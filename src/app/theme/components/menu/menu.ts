@@ -45,7 +45,22 @@ export const menuItems = [
     icon: 'fa-sign-out',
     selected: false, 
     expanded: false,
-    order: 400
+    order: 500
+  },
+
+  {
+    title: 'menu.settings',
+    routerLink: 'settings',
+    icon: 'fa-gear',
+    selected: false, 
+    expanded: false,
+    order: 99999,
+    subMenu: [
+      {
+        title: 'menu.settings.contactroles',
+        routerLink: 'settings/contactroles',
+      },
+    ]
   },
 
 /*   {

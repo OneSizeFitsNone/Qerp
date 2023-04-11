@@ -6,10 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CompaniesComponent } from './companies/companies.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactComponent } from './contact/contact.component';
-import { ImageThumbnailComponent } from 'src/app/components/images/image-thumbnail/image-thumbnail.component';
-import { ImageDisplayComponent } from 'src/app/components/images/image-display/image-display.component';
-import { ImageEditComponent } from 'src/app/components/images/image-edit/image-edit.component';
-import { AppModule } from 'src/app/app.module';
 import { ImageModule } from 'src/app/components/images/image.module';
 import { CompanyComponent } from './company/company.component';
 

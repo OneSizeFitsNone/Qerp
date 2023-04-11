@@ -13,11 +13,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DragulaModule } from 'ng2-dragula';
-import { ImageEditComponent } from './components/images/image-edit/image-edit.component';
-import { ImageDisplayComponent } from './components/images/image-display/image-display.component';
-import { ImageThumbnailComponent } from './components/images/image-thumbnail/image-thumbnail.component';
-
-
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");

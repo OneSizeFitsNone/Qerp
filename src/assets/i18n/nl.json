@@ -18,6 +18,8 @@
     "menu.tasks": "Taken",
     "menu.invoices": "Facturen",
     "menu.invoicesOut": "Uitgaande facturen",
+    "menu.settings": "Instellingen",
+    "menu.settings.contactroles": "Contact rollen",
 
     "form.save": "Bewaar",
     "form.undoChanges": "Ongedaan maken",

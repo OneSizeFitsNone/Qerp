@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ModuleWithProviders } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 /* import { BlankComponent } from './blank/blank.component';
@@ -16,6 +15,7 @@ export const routes: Routes = [
             { path: 'crm', loadChildren: () => import('./crm/crm.module').then(m => m.CRMModule)}, //data: { breadcrumb: 'menu.crm' }
             { path: 'pm', loadChildren: () => import('./pm/pm.module').then(m => m.PMModule)},
             { path: 'finances', loadChildren: () => import('./finances/finances.module').then(m => m.FinancesModule)},
+            { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)},
 /*             { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule), data: { breadcrumb: 'Maps' } },
             { path: 'charts', loadChildren: () => import('./charting/charting.module').then(m => m.ChartingModule), data: { breadcrumb: 'Charts' } },
             { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UiModule), data: { breadcrumb: 'UI' } },
