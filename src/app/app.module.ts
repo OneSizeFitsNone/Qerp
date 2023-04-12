@@ -22,6 +22,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     ErrorComponent,
+    
   ],
   imports: [
     DragulaModule,

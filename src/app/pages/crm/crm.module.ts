@@ -8,6 +8,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { ContactComponent } from './contact/contact.component';
 import { ImageModule } from 'src/app/components/images/image.module';
 import { CompanyComponent } from './company/company.component';
+import { TabsModule } from 'src/app/components/tabs/tabs.module';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'companies', pathMatch: 'full'},
@@ -22,7 +23,8 @@ export const routes: Routes = [
     ReactiveFormsModule,
     TranslateModule,
     RouterModule.forChild(routes),
-    ImageModule
+    ImageModule,
+    TabsModule
   ],
     declarations: [
         ContactsComponent,

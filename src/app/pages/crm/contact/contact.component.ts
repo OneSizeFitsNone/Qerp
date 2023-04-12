@@ -14,7 +14,7 @@ import { ProvinceService } from 'src/app/services/general/province.service';
   selector: 'az-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-  providers: [ContactService, CountryService, ProvinceService, CityService]
+  providers: [ContactService, CountryService, ProvinceService, CityService, AppTypes]
 })
 export class ContactComponent {
   @Input() id: number;

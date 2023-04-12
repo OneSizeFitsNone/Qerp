@@ -1,0 +1,151 @@
+
+<form class="row">
+
+    <div class="form-group col-lg-3 col-md-6 col-sm-8">
+        <input class="form-control" name="crSearch" [(ngModel)]="ccSearch" placeholder="{{ 'contactroles.name' | translate }}" (ngModelChange)="onInputChange()" >
+    </div>
+
+    <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
+        <div class="box">
+            <i class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.add' | translate }}" (click)="onCreateClientcontact()"></i>
+        </div>
+    </div> 
+
+</form>
+
+<p></p>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>{{ "contact.name" | translate}}</th>
+                <th>{{ "contactroles.role" | translate}}</th>
+                <th>{{ "address.address" | translate }}</th>
+                <th>{{ "general.email" | translate }}</th>
+                <th>{{ "general.phone" | translate }}</th>
+                <th>{{ "general.created" | translate }}</th>
+                <th>{{ "general.updated" | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let oCr of clientContactsSearch">
+
+                <ng-container *ngIf="appTypeId == appTypes.client">
+                    <tr >
+                        <td >{{ oCr.contact.name }}</td>
+                        <td>
+                            <ng-container *ngIf="oCr.id!=clientContact.id">
+                                {{ oCr.contactrole.name }}
+                            </ng-container>
+                            <ng-container *ngIf="oCr.id==clientContact.id">
+                                <select class="form-control" name="roleId" [(ngModel)]="clientContact.contactroleId">
+                                    <option *ngFor="let roles of contactroles" [ngValue]="roles.id">{{ roles.name }}</option>
+                                </select>
+                            </ng-container>
+                        </td>
+                        <td style="white-space: pre-wrap;">
+                            {{ oCr.contact.address }}
+                            <span *ngIf="oCr.contact.city">
+                                <br *ngIf="oCr.contact.address">{{ oCr.contact.city.postalCode }} {{ oCr.contact.city.name }}<br>
+                                {{ oCr.contact.city.province.name }}, {{ oCr.contact.city.province.country.nicename }}
+                            </span>
+                        </td>
+                        <td>{{ oCr.contact.email }}</td>
+                        <td>
+                            <div *ngIf="oCr.contact?.phone" class="row" >
+                                <div class="col-12">
+                                    <i class="fa fa-phone mr-2"></i>{{ oCr.contact.phone }}
+                                </div>
+                            </div>
+                            <div *ngIf="oCr.contact?.mobile" class="row" >
+                                <div class="col-12">
+                                    <i class="fa fa-mobile mr-2"></i>{{ oCr.contact.mobile }}
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                        <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                        <td>
+                            <i class="fa fa-edit cursor mr-2" (click)="editClientcontact(oCr)"></i>
+                            <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>
+                        </td>
+                    </tr>
+                </ng-container>
+
+                <ng-container *ngIf="appTypeId == appTypes.contact">
+                    <tr class="font-weight-normal">
+                        <td>{{ oCr.client.name }}
+
+                        </td>
+                        <td>
+                            <ng-container *ngIf="oCr.id!=clientContact.id">
+                                {{ oCr.contactrole.name }}
+                            </ng-container>
+                            <ng-container *ngIf="oCr.id==clientContact.id">
+                                <select class="form-control" name="roleId" [(ngModel)]="clientContact.contactroleId">
+                                    <option *ngFor="let roles of contactroles" [ngValue]="roles.id">{{ roles.name }}</option>
+                                </select>
+                            </ng-container>
+                        </td>
+                        <td style="white-space: pre-wrap;">
+                            <div class="row" >
+                                <div *ngIf="oCr.client?.address" class="col-12">
+                                    {{ oCr.client.address }}
+                                </div>
+                                <div *ngIf="oCr.client.city" class="col-12">
+                                    {{ oCr.client.city.postalCode }} {{ oCr.client.city.name }}
+                                </div>
+                                <div *ngIf="oCr.client.city" class="col-12">
+                                    {{ oCr.client.city.province.name }}, {{ oCr.client.city.province.country.nicename }}
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ oCr.client?.email }}</td>
+                        <td>
+                            <div *ngIf="oCr.client?.phone" class="row" >
+                                <div class="col-12">
+                                    <i class="fa fa-phone mr-2"></i>{{ oCr.client?.phone }}
+                                </div>
+                            </div>
+                            <div *ngIf="oCr.client?.mobile" class="row" >
+                                <div class="col-12">
+                                    <i class="fa fa-mobile mr-2"></i>{{ oCr.client?.mobile }}
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                        <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                        <td>
+                            <i class="fa fa-edit cursor mr-2" (click)="editClientcontact(oCr)"></i>
+                            <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>
+                        </td>
+                    </tr>
+                </ng-container>
+
+
+
+<!--                 <tr *ngIf="clientContact?.id == oCr.id">
+                    <td>
+                        <input class="form-control" name="name" [(ngModel)]="contactrole.name" placeholder="{{ 'contactroles.name' | translate }}">
+                    </td>
+                    <td style="white-space: pre-wrap;">
+                        <textarea class="form-control" name="description" [(ngModel)]="contactrole.description" placeholder="{{ 'general.description' | translate }}" rows="2"></textarea>
+                    </td>
+                    <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                    <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                    <td class="text-right">
+                        <i class="fa fa-save cursor mr-2" (click)="saveClientcontact(contactrole)"></i>
+                        <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>
+                    </td>
+                </tr> -->
+
+            </ng-container>
+
+        </tbody>
+    </table>
+</div>
+
+

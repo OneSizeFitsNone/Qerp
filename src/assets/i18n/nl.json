@@ -69,7 +69,11 @@
     "contact.surname": "Familienaam",
     
     "contactroles": "Contact rollen",
-    "contactroles.name" : "Naam",
+    "contactroles.name": "Naam",
+    "contactroles.role": "Functie",
 
-    "vat.vatnumber": "BTW nummer"
+    "vat.vatnumber": "BTW nummer",
+
+    "projects": "Projecten",
+    "project": "Project"
 }

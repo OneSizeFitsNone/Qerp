@@ -12,7 +12,7 @@
             <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
                 <div class="box">
                     <i class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
-                    data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
+                        data-placement="bottom" title="{{ 'general.add' | translate }}" (click)="onCreateRole()"></i>
                 </div>
             </div> 
 
@@ -33,22 +33,34 @@
                 </thead>
                 <tbody>
                     <ng-container *ngFor="let oCr of crsSearch">
-                        <tr *ngIf="selectedId==oCr.id">
-                            <td>{{ oCr.name }}</td>
-                            <td style="white-space: pre-wrap;">{{ oCr.description }}</td>
-                            <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                            <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
-                            <td class="text-right"><i class="fa fa-edit cursor" (click)="selectedId=oCr.id"></i></td>
-                        </tr>
-                        <tr *ngIf="selectedId==oCr.id">
-                            <td>
-
-                            </td>
-                            <td style="white-space: pre-wrap;">{{ oCr.description }}</td>
-                            <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                            <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
-                            <td class="text-right"><i class="fa fa-floppy-disk cursor" (click)="saveContactrole(oCr)"></i></td>
-                        </tr>
+                        <ng-container *ngIf="contactrole?.id != oCr.id">
+                            <tr >
+                                <td>{{ oCr.name }}</td>
+                                <td style="white-space: pre-wrap;">{{ oCr.description }}</td>
+                                <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                                <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                                <td class="text-right">
+                                    <i class="fa fa-edit cursor mr-2" (click)="editContactrole(oCr)"></i>
+                                    <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-container *ngIf="contactrole?.id == oCr.id">
+                            <tr>
+                                <td>
+                                    <input class="form-control" name="name" [(ngModel)]="contactrole.name" placeholder="{{ 'contactroles.name' | translate }}">
+                                </td>
+                                <td style="white-space: pre-wrap;">
+                                    <textarea class="form-control" name="description" [(ngModel)]="contactrole.description" placeholder="{{ 'general.description' | translate }}" rows="2"></textarea>
+                                </td>
+                                <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                                <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                                <td class="text-right">
+                                    <i class="fa fa-save cursor mr-2" (click)="saveContactrole(contactrole)"></i>
+                                    <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>
+                                </td>
+                            </tr>
+                        </ng-container>
                     </ng-container>
 
                 </tbody>
