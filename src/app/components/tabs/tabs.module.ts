@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClientcontactsTabComponent } from './contactroles-tab/clientcontacts-tab.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -10,7 +12,9 @@ import { ClientcontactsTabComponent } from './contactroles-tab/clientcontacts-ta
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
     TranslateModule,
+    NgSelectModule
   ],
     declarations: [
       ClientcontactsTabComponent

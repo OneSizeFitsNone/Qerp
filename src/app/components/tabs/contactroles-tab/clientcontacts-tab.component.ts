@@ -1,7 +1,12 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { AppTypes } from 'src/app/interfaces/apptypes';
+import { ICity } from 'src/app/interfaces/city';
+import { IClient } from 'src/app/interfaces/client';
 import { IClientcontact } from 'src/app/interfaces/clientcontact';
+import { IContact } from 'src/app/interfaces/contact';
 import { IContactrole } from 'src/app/interfaces/contactrole';
+import { CompanyService } from 'src/app/services/crm/company/company.service';
+import { ContactService } from 'src/app/services/crm/contact/contact.service';
 import { ContactroleService } from 'src/app/services/settings/contactrole.service';
 import { ClientcontactsService } from 'src/app/services/tabs/clientcontacts.service';
 
@@ -9,7 +14,7 @@ import { ClientcontactsService } from 'src/app/services/tabs/clientcontacts.serv
   selector: 'az-clientcontacts-tab',
   templateUrl: './clientcontacts-tab.component.html',
   styleUrls: ['./clientcontacts-tab.component.scss'],
-  providers: [ClientcontactsService, AppTypes, ContactroleService]
+  providers: [ClientcontactsService, AppTypes, ContactroleService, ContactService, CompanyService]
 })
 
 export class ClientcontactsTabComponent {
@@ -23,12 +28,18 @@ export class ClientcontactsTabComponent {
   public clientContact: IClientcontact = <IClientcontact>{};
 
   public contactroles: Array<IContactrole> = [];
+  public companies: Array<IClient> = [];
+  public contacts: Array<IContact> = [];  
 
   public ccSearch: string = "";
+  public contactSearch: string = "";
+  public companySearch: string = "";
 
   constructor(
     private clientcontactService: ClientcontactsService,
     private contactroleService: ContactroleService,
+    private contactService: ContactService,
+    private companyService: CompanyService,
     private appTypes: AppTypes,
   ) { 
     this.clientcontactService.clientcontacts.subscribe(crs => {
@@ -41,12 +52,25 @@ export class ClientcontactsTabComponent {
       );
 
     });
+    
     this.clientcontactService.clientcontact.subscribe(cr => {
-      this.clientContact = cr; 
+      this.clientContact = cr;
+      if(this.clientContact.id) {
+        if(this.appTypeId == this.appTypes.contact) {
+          this.onSearchCompany("");
+        }      
+        else {
+          this.onSearchContact("");
+        }
+      }
     });
+
     this.contactroleService.contactroles.subscribe(cr => {
       this.contactroles = cr
     });
+
+    this.contactService.contacts.subscribe(c => { this.contacts = c });
+    this.companyService.companies.subscribe(c => { this.companies = c });
   }
 
   ngOnInit() {
@@ -78,7 +102,7 @@ export class ClientcontactsTabComponent {
     this.clientcontactService.createClientcontact();
   }
 
-  public editClientcontact(oClientcontact) {
+  public editClientcontact(oClientcontact) {   
     this.clientcontactService.getClientcontact(oClientcontact.id);
   }
 
@@ -88,6 +112,30 @@ export class ClientcontactsTabComponent {
 
   public deleteContactrole(oClientcontact: IClientcontact) {
     this.clientcontactService.deleteClientcontact(oClientcontact);
+  }
+
+  public onSearchCompany(searchString: string) {
+    let oCompany: IClient = <IClient>{};
+    oCompany.city = <ICity>{};
+    oCompany.forcedId = this.clientContact.clientId;
+
+    if(this.companySearch.length > 3) {
+      oCompany.name = searchString;
+    }
+
+    this.companyService.findCompany(oCompany);
+  }
+
+  public onSearchContact(searchString: string) {
+    let oContact: IContact = <IContact>{};
+    oContact.city = <ICity>{}
+    oContact.forcedId = this.clientContact.contactId;
+
+    if(searchString.length > 3) {
+      oContact.fullname = searchString;  
+    }
+
+    this.contactService.findContact(oContact);
   }
 
 }

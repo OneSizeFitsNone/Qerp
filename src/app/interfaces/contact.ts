@@ -33,4 +33,6 @@ export interface IContact {
     tasknotes: Array<ITasknote>;
     tasks: Array<ITask>;
     users: Array<IUser>;
+
+    forcedId: number;
 }

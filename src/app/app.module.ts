@@ -13,6 +13,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DragulaModule } from 'ng2-dragula';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -29,6 +30,7 @@ export function tokenGetter() {
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
+    NgSelectModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

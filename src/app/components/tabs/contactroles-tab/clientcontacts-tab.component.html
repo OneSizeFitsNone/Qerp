@@ -35,7 +35,21 @@
 
                 <ng-container *ngIf="appTypeId == appTypes.client">
                     <tr >
-                        <td >{{ oCr.contact.name }}</td>
+                        <td>
+                            <ng-container *ngIf="oCr.id!=clientContact.id">
+                                {{ oCr.contact.name }}
+                            </ng-container>
+                            <ng-container *ngIf="oCr.id==clientContact.id">
+                                <ng-multiselect-dropdown
+                                    name="contacts"
+                                    placeholder="{{ 'contact.name' | translate }}"
+                                    [settings]="{singleSelection: false, idField: 'id', textField: 'fullname', allowSearchFilter: true}"
+                                    [data]="contacts"
+                                    [(ngModel)]="oCr.contactId"
+                                    (onFilterChange)="onSearchContact($event)">
+                                </ng-multiselect-dropdown>
+                            </ng-container>
+                        </td>
                         <td>
                             <ng-container *ngIf="oCr.id!=clientContact.id">
                                 {{ oCr.contactrole.name }}
@@ -77,8 +91,32 @@
 
                 <ng-container *ngIf="appTypeId == appTypes.contact">
                     <tr class="font-weight-normal">
-                        <td>{{ oCr.client.name }}
+                        <td>
+                            <ng-container *ngIf="oCr.id!=clientContact.id">
+                                {{ oCr.client.name }}
+                            </ng-container>
+                            <ng-container *ngIf="oCr.id==clientContact.id">
 
+                                <input class="form-control" type="text" name="company" list="companies">
+                                <datalist id="companies">
+                                    <option *ngFor="let company of companies" [ngValue]="company.id">{{ company.name }}</option>
+                                </datalist>
+
+<!--                                 <select class="form-control" name="companies" [(ngModel)]="oCr.clientId" data-live-search="true">
+                                    <option><input class="form-control" type="text"> </option>
+                                    <option *ngFor="let company of companies" [ngValue]="company.id">{{ company.name }}</option>
+                                </select> -->
+
+                                  
+<!--                                 <ng-select 
+                                    class="form-control"
+                                    [(ngModel)]="oCr.clientId"
+                                    [items]="companies"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    (search)="onSearchCompany($event)"
+                                ></ng-select> -->
+                            </ng-container>
                         </td>
                         <td>
                             <ng-container *ngIf="oCr.id!=clientContact.id">

@@ -37,4 +37,6 @@ export interface IClient {
     invoices: Array<IInvoice>;
     projects: Array<IProject>;
     tasks: Array<ITask>;
+
+    forcedId: number;
 }
