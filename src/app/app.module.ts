@@ -14,6 +14,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DragulaModule } from 'ng2-dragula';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -47,7 +49,9 @@ export function tokenGetter() {
       }
     }),
     ToastrModule.forRoot(), 
-    AppRoutingModule 
+    AppRoutingModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   exports: [
 

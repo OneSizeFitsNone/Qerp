@@ -29,9 +29,15 @@ export class ClientcontactsService {
     private _clientcontact: BehaviorSubject<IClientcontact> = new BehaviorSubject(<IClientcontact>{});
     public clientcontact = this._clientcontact.asObservable();
 
-    public async createClientcontact() {
+    public async createClientcontact(appTypeId: number, linkTypeId: number) {
       let oClientcontact = <IClientcontact>{};
       oClientcontact.id = 0;
+      
+      if(appTypeId == this.appTypes.contact)
+        oClientcontact.contactId = linkTypeId;
+      else if(appTypeId == this.appTypes.client)
+        oClientcontact.clientId = linkTypeId;
+
       this._clientcontact.next(oClientcontact);
       let oCc = this._clientcontacts.value;
       oCc.unshift(oClientcontact);
@@ -149,6 +155,15 @@ export class ClientcontactsService {
 
 
     public async deleteClientcontact(oClientcontact: IClientcontact) {
+      if(oClientcontact.id == 0) {
+        let oCrs = this._clientcontacts.value;
+        let i = oCrs.findIndex(i => i.id == oClientcontact.id);
+        delete oCrs[i];
+        this._clientcontacts.next(oCrs);
+        this._clientcontact.next(<IClientcontact>{})
+        return;
+      }
+
       this.http.delete<IReturnResult>(this.url,{
         headers: new HttpHeaders({
           "Content-Type": "application/json"

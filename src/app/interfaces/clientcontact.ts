@@ -6,6 +6,7 @@ export interface IClientcontact {
     id: number;
     clientId: number;
     contactId: number;
+    contactroleId: number;
     created: Date;
     updated: Date;
     

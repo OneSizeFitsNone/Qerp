@@ -5,6 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ClientcontactsTabComponent } from './contactroles-tab/clientcontacts-tab.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
     TranslateModule,
-    NgSelectModule
+    NgSelectModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
     declarations: [
       ClientcontactsTabComponent

@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, SimpleChanges } from '@angular/core';
 import { AppTypes } from 'src/app/interfaces/apptypes';
 import { ICity } from 'src/app/interfaces/city';
 import { IClient } from 'src/app/interfaces/client';
@@ -41,7 +41,11 @@ export class ClientcontactsTabComponent {
     private contactService: ContactService,
     private companyService: CompanyService,
     private appTypes: AppTypes,
-  ) { 
+    private ref: ChangeDetectorRef
+  ) {    
+  }
+
+  ngOnInit() {
     this.clientcontactService.clientcontacts.subscribe(crs => {
       this.clientContacts = crs
 
@@ -50,9 +54,13 @@ export class ClientcontactsTabComponent {
           (this.appTypeId == this.appTypes.client && cr.contact.fullname.startsWith(this.ccSearch)) ||
           (this.appTypeId == this.appTypes.contact && cr.client.name.startsWith(this.ccSearch))
       );
-
+      this.ref.detectChanges();
     });
     
+    this.contactroleService.contactroles.subscribe(cr => {
+      this.contactroles = cr
+    });
+
     this.clientcontactService.clientcontact.subscribe(cr => {
       this.clientContact = cr;
       if(this.clientContact.id) {
@@ -64,16 +72,16 @@ export class ClientcontactsTabComponent {
         }
       }
     });
-
-    this.contactroleService.contactroles.subscribe(cr => {
-      this.contactroles = cr
+        
+    this.contactService.contacts.subscribe(c => { 
+      this.contacts = c; 
+      this.ref.detectChanges();
+    });
+    this.companyService.companies.subscribe(c => { 
+      this.companies = c;
+      this.ref.detectChanges();
     });
 
-    this.contactService.contacts.subscribe(c => { this.contacts = c });
-    this.companyService.companies.subscribe(c => { this.companies = c });
-  }
-
-  ngOnInit() {
     this.contactroleService.getContactroles();
   }
 
@@ -99,7 +107,7 @@ export class ClientcontactsTabComponent {
   }
 
   public onCreateClientcontact() {
-    this.clientcontactService.createClientcontact();
+    this.clientcontactService.createClientcontact(this.appTypeId, this.linkTypeId);
   }
 
   public editClientcontact(oClientcontact) {   
@@ -107,7 +115,14 @@ export class ClientcontactsTabComponent {
   }
 
   public saveClientcontact(oClientcontact: IClientcontact) {
-    this.clientcontactService.saveClientcontact(oClientcontact, this.appTypeId);
+    if(oClientcontact.contactroleId > 0 && (
+        (this.appTypeId == this.appTypes.client && oClientcontact.contactId > 0) ||
+        (this.appTypeId == this.appTypes.contact && oClientcontact.clientId > 0)
+      ) 
+    ) {
+      this.clientcontactService.saveClientcontact(oClientcontact, this.appTypeId);
+    }
+    
   }
 
   public deleteContactrole(oClientcontact: IClientcontact) {
@@ -117,9 +132,9 @@ export class ClientcontactsTabComponent {
   public onSearchCompany(searchString: string) {
     let oCompany: IClient = <IClient>{};
     oCompany.city = <ICity>{};
-    oCompany.forcedId = this.clientContact.clientId;
+    oCompany.forcedId = this.clientContact.clientId ?? 0;
 
-    if(this.companySearch.length > 3) {
+    if(searchString.length > 3) {
       oCompany.name = searchString;
     }
 
@@ -129,7 +144,7 @@ export class ClientcontactsTabComponent {
   public onSearchContact(searchString: string) {
     let oContact: IContact = <IContact>{};
     oContact.city = <ICity>{}
-    oContact.forcedId = this.clientContact.contactId;
+    oContact.forcedId = this.clientContact.contactId ?? 0;
 
     if(searchString.length > 3) {
       oContact.fullname = searchString;  

@@ -37,17 +37,16 @@
                     <tr >
                         <td>
                             <ng-container *ngIf="oCr.id!=clientContact.id">
-                                {{ oCr.contact.name }}
+                                {{ oCr.contact.fullname }}
                             </ng-container>
                             <ng-container *ngIf="oCr.id==clientContact.id">
-                                <ng-multiselect-dropdown
-                                    name="contacts"
-                                    placeholder="{{ 'contact.name' | translate }}"
-                                    [settings]="{singleSelection: false, idField: 'id', textField: 'fullname', allowSearchFilter: true}"
-                                    [data]="contacts"
-                                    [(ngModel)]="oCr.contactId"
-                                    (onFilterChange)="onSearchContact($event)">
-                                </ng-multiselect-dropdown>
+                                <mat-form-field>
+                                    <mat-select placeholder="{{ 'contact.select' | translate}}" [(ngModel)]="clientContact.contactId">
+                                        <input matInput type="text" placeholder="{{ 'general.search' | translate }}" (keyup)="onSearchContact($event.target.value)">                                   
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </ng-container>
                         </td>
                         <td>
@@ -55,19 +54,21 @@
                                 {{ oCr.contactrole.name }}
                             </ng-container>
                             <ng-container *ngIf="oCr.id==clientContact.id">
-                                <select class="form-control" name="roleId" [(ngModel)]="clientContact.contactroleId">
-                                    <option *ngFor="let roles of contactroles" [ngValue]="roles.id">{{ roles.name }}</option>
-                                </select>
+                                <mat-form-field>
+                                    <mat-select placeholder="{{ 'contactroles.select' | translate}}" [(ngModel)]="clientContact.contactroleId">                                
+                                        <mat-option *ngFor="let roles of contactroles" [value]="roles.id">{{ roles.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </ng-container>
                         </td>
                         <td style="white-space: pre-wrap;">
-                            {{ oCr.contact.address }}
-                            <span *ngIf="oCr.contact.city">
-                                <br *ngIf="oCr.contact.address">{{ oCr.contact.city.postalCode }} {{ oCr.contact.city.name }}<br>
+                            {{ oCr.contact?.address }}
+                            <span *ngIf="oCr.contact?.city">
+                                <br *ngIf="oCr.contact?.address">{{ oCr.contact.city.postalCode }} {{ oCr.contact.city.name }}<br>
                                 {{ oCr.contact.city.province.name }}, {{ oCr.contact.city.province.country.nicename }}
                             </span>
                         </td>
-                        <td>{{ oCr.contact.email }}</td>
+                        <td>{{ oCr.contact?.email }}</td>
                         <td>
                             <div *ngIf="oCr.contact?.phone" class="row" >
                                 <div class="col-12">
@@ -83,7 +84,8 @@
                         <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
                         <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
                         <td>
-                            <i class="fa fa-edit cursor mr-2" (click)="editClientcontact(oCr)"></i>
+                            <i *ngIf="oCr.id!=clientContact.id" class="fa fa-edit cursor mr-2" (click)="editClientcontact(oCr)"></i>
+                            <i *ngIf="oCr.id==clientContact.id" class="fa fa-save cursor mr-2" (click)="saveClientcontact(clientContact)"></i>
                             <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>
                         </td>
                     </tr>
@@ -96,26 +98,13 @@
                                 {{ oCr.client.name }}
                             </ng-container>
                             <ng-container *ngIf="oCr.id==clientContact.id">
-
-                                <input class="form-control" type="text" name="company" list="companies">
-                                <datalist id="companies">
-                                    <option *ngFor="let company of companies" [ngValue]="company.id">{{ company.name }}</option>
-                                </datalist>
-
-<!--                                 <select class="form-control" name="companies" [(ngModel)]="oCr.clientId" data-live-search="true">
-                                    <option><input class="form-control" type="text"> </option>
-                                    <option *ngFor="let company of companies" [ngValue]="company.id">{{ company.name }}</option>
-                                </select> -->
-
-                                  
-<!--                                 <ng-select 
-                                    class="form-control"
-                                    [(ngModel)]="oCr.clientId"
-                                    [items]="companies"
-                                    bindLabel="name"
-                                    bindValue="id"
-                                    (search)="onSearchCompany($event)"
-                                ></ng-select> -->
+                                <mat-form-field>
+                                    <mat-select placeholder="{{ 'company.select' | translate}}" [(ngModel)]="clientContact.clientId">
+                                        <input matInput type="text" placeholder="{{ 'general.search' | translate }}" (keyup)="onSearchCompany($event.target.value)">                                   
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </ng-container>
                         </td>
                         <td>
@@ -123,9 +112,11 @@
                                 {{ oCr.contactrole.name }}
                             </ng-container>
                             <ng-container *ngIf="oCr.id==clientContact.id">
-                                <select class="form-control" name="roleId" [(ngModel)]="clientContact.contactroleId">
-                                    <option *ngFor="let roles of contactroles" [ngValue]="roles.id">{{ roles.name }}</option>
-                                </select>
+                                <mat-form-field>
+                                    <mat-select placeholder="{{ 'contactroles.select' | translate}}" [(ngModel)]="clientContact.contactroleId">                                 
+                                        <mat-option *ngFor="let roles of contactroles" [value]="roles.id">{{ roles.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </ng-container>
                         </td>
                         <td style="white-space: pre-wrap;">
@@ -133,10 +124,10 @@
                                 <div *ngIf="oCr.client?.address" class="col-12">
                                     {{ oCr.client.address }}
                                 </div>
-                                <div *ngIf="oCr.client.city" class="col-12">
+                                <div *ngIf="oCr.client?.city" class="col-12">
                                     {{ oCr.client.city.postalCode }} {{ oCr.client.city.name }}
                                 </div>
-                                <div *ngIf="oCr.client.city" class="col-12">
+                                <div *ngIf="oCr.client?.city" class="col-12">
                                     {{ oCr.client.city.province.name }}, {{ oCr.client.city.province.country.nicename }}
                                 </div>
                             </div>
@@ -157,28 +148,12 @@
                         <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
                         <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
                         <td>
-                            <i class="fa fa-edit cursor mr-2" (click)="editClientcontact(oCr)"></i>
+                            <i *ngIf="oCr.id!=clientContact.id" class="fa fa-edit cursor mr-2" (click)="editClientcontact(oCr)"></i>
+                            <i *ngIf="oCr.id==clientContact.id" class="fa fa-save cursor mr-2" (click)="saveClientcontact(clientContact)"></i>
                             <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>
                         </td>
                     </tr>
                 </ng-container>
-
-
-
-<!--                 <tr *ngIf="clientContact?.id == oCr.id">
-                    <td>
-                        <input class="form-control" name="name" [(ngModel)]="contactrole.name" placeholder="{{ 'contactroles.name' | translate }}">
-                    </td>
-                    <td style="white-space: pre-wrap;">
-                        <textarea class="form-control" name="description" [(ngModel)]="contactrole.description" placeholder="{{ 'general.description' | translate }}" rows="2"></textarea>
-                    </td>
-                    <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                    <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
-                    <td class="text-right">
-                        <i class="fa fa-save cursor mr-2" (click)="saveClientcontact(contactrole)"></i>
-                        <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>
-                    </td>
-                </tr> -->
 
             </ng-container>
 

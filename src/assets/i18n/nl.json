@@ -62,15 +62,18 @@
     "company": "Bedrijf",
     "company.name": "Naam",
     "company.vat": "BTW",
+    "company.select": "Selecteer een bedrijf",
 
     "contacts": "Contacten",
     "contact": "Contact",
     "contact.name" : "Naam",
     "contact.surname": "Familienaam",
+    "contact.select": "Selecteer een contact",
     
     "contactroles": "Contact rollen",
     "contactroles.name": "Naam",
     "contactroles.role": "Functie",
+    "contactroles.select": "Selecteer functie",
 
     "vat.vatnumber": "BTW nummer",
 
