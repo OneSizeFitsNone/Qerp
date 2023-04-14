@@ -45,13 +45,13 @@ export class ContactComponent {
       'name': ['', Validators.required],
       'surname': ['', Validators.required],
       //'gender': [''],
-      'email': ['', Validators.compose([Validators.required, emailValidator])],
+      'email': ['', Validators.compose([emailValidator])],
       'phone': [''],
       'mobile': [''],
-      'cityId': ['', Validators.required],
+      'cityId': [''],
       'city': this.formBuilder.group({
-        'countryId': ['', Validators.required],
-        'provinceId': ['', Validators.required]
+        'countryId': [''],
+        'provinceId': ['']
       }),
       'address' : [''],
       'description' : ['']

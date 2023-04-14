@@ -46,13 +46,13 @@ export class CompanyComponent {
 
     this.personalForm = this.formBuilder.group({
       'name': ['', Validators.required],
-      'email': ['', Validators.compose([Validators.required, emailValidator])],
+      'email': ['', Validators.compose([emailValidator])],
       'phone': [''],
       'mobile': [''],
-      'cityId': ['', Validators.required],
+      'cityId': [''],
       'city': this.formBuilder.group({
-        'countryId': ['', Validators.required],
-        'provinceId': ['', Validators.required]
+        'countryId': [''],
+        'provinceId': ['']
       }),
       'address' : [''],
       'invoiceSameAddress': [''],
