@@ -7,7 +7,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { RouterModule } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -18,13 +20,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     TranslateModule,
     NgSelectModule,
     MatFormFieldModule,
-    MatSelectModule
-  ],
+    MatSelectModule,
+    MatInputModule,
+    MatCheckboxModule,
+    RouterModule
+  ], 
     declarations: [
-      ClientcontactsTabComponent
+      ClientcontactsTabComponent,
     ],
     exports: [ 
       ClientcontactsTabComponent
+
     ]
 })
 

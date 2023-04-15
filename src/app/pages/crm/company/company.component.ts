@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AppTypes } from 'src/app/interfaces/apptypes';
 import { ICity } from 'src/app/interfaces/city';
 import { IClient } from 'src/app/interfaces/client';
-import { ICompany } from 'src/app/interfaces/company';
 import { ICountry } from 'src/app/interfaces/country';
 import { IProvince } from 'src/app/interfaces/province';
 import { CompanyService } from 'src/app/services/crm/company/company.service';
@@ -19,8 +20,7 @@ import { ProvinceService } from 'src/app/services/general/province.service';
 })
 
 export class CompanyComponent {
-  @Input() id: number;
-  @Output() showCompany = new EventEmitter<boolean>(false);
+  public id: number;
 
   public personalForm:UntypedFormGroup;
   public company: IClient = <IClient>{};
@@ -37,7 +37,9 @@ export class CompanyComponent {
     private countryService: CountryService,
     private provinceService: ProvinceService,
     private cityService: CityService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private location: Location
   ) { 
     
   }
@@ -77,27 +79,26 @@ export class CompanyComponent {
         this.cities = await this.cityService.getListForDDByProvince(this.company.city.provinceId)
       }
       if(this.company.invoiceCity?.countryId) {
-        this.invoiceProvinces = await this.provinceService.getListForDDByCountry(this.company.city.countryId)
+        this.invoiceProvinces = await this.provinceService.getListForDDByCountry(this.company.invoiceCity.countryId)
       }
       if(this.company.invoiceCity?.provinceId) {
-        this.invoiceCities = await this.cityService.getListForDDByProvince(this.company.city.provinceId)
+        this.invoiceCities = await this.cityService.getListForDDByProvince(this.company.invoiceCity.provinceId)
       }
       this.ref.detectChanges();
       this.personalForm.patchValue(this.company);
     });
 
     this.countries = await this.countryService.getListForDD();
-  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes["id"]) {
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
       if(this.id == 0) {
         this.companyService.createCompany();
       }
       else {
         this.companyService.getCompany(this.id);
       }
-    }
+    });
   }
 
   onSubmit() {
@@ -106,12 +107,12 @@ export class CompanyComponent {
   }
 
   close() {
-    this.showCompany.emit(false);
+    this.location.back();
   }
   
   async changeProvince(event: any) {
     this.personalForm.controls['cityId'].setValue(null);
-    let provinceId = Number.isInteger(event) ? event : event.target.value;
+    let provinceId = Number.isInteger(event) ? event : event.value;
     this.cities = await this.cityService.getListForDDByProvince(provinceId);
 
   }
@@ -120,14 +121,14 @@ export class CompanyComponent {
     this.personalForm.controls['cityId'].setValue(null);
     this.personalForm.get('city.provinceId').setValue(null);
 
-    let countryId = Number.isInteger(event) ? event : event.target.value;
+    let countryId = Number.isInteger(event) ? event : event.value;
     this.provinces = await this.provinceService.getListForDDByCountry(countryId);
     this.cities = []
   }
 
   async changeInvoiceProvince(event: any) {
     this.personalForm.controls['invoiceCityId'].setValue(null);
-    let provinceId = Number.isInteger(event) ? event : event.target.value;
+    let provinceId = Number.isInteger(event) ? event : event.value;
     this.invoiceCities = await this.cityService.getListForDDByProvince(provinceId);
 
   }
@@ -136,7 +137,7 @@ export class CompanyComponent {
     this.personalForm.controls['invoiceCityId'].setValue(null);
     this.personalForm.get('invoiceCity.provinceId').setValue(null);
 
-    let countryId = Number.isInteger(event) ? event : event.target.value;
+    let countryId = Number.isInteger(event) ? event : event.value;
     this.invoiceProvinces = await this.provinceService.getListForDDByCountry(countryId);
     this.invoiceCities = []
   }

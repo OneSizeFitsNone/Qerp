@@ -35,6 +35,8 @@ export class ClientcontactsTabComponent {
   public contactSearch: string = "";
   public companySearch: string = "";
 
+  public selectedId: number = -1;
+
   constructor(
     private clientcontactService: ClientcontactsService,
     private contactroleService: ContactroleService,
@@ -151,6 +153,15 @@ export class ClientcontactsTabComponent {
     }
 
     this.contactService.findContact(oContact);
+  }
+
+  public onEnterSearchClientOrContact() {
+    if(this.appTypeId == this.appTypes.client) {
+      this.contactService.saveFromSelect(this.contactSearch);
+    }
+    else if(this.appTypeId == this.appTypes.contact) {
+      this.companyService.saveFromSelect(this.companySearch);
+    }
   }
 
 }

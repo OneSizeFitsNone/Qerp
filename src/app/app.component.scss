@@ -57,10 +57,26 @@ animation: lds-dual-ring 1.2s linear infinite;
 
 .searchformicon {
     font-size: 1.3rem;
-    color: #344154;
+    //color: #344154;
 }
 
 .searchformicon:hover {
     cursor: pointer;
-    color: dimgray;
+    //color: dimgray;
+    opacity: 0.5;
+}
+
+.mat-field {
+    width: 100%;
+}
+
+.mat-check {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.mat-mdc-checkbox label { 
+    align-self: flex-end;
 }

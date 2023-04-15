@@ -50,11 +50,6 @@ export class ContactsComponent {
     this.contactService.findContact(this.contact);
   }
 
-  onShowContact(id: number){
-    this.selectedId = id;
-    this.showContact = true;
-  }
-
   addContact() {
     this.selectedId = 0;
     this.showContact = true;

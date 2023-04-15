@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-12 col-sm-12">
                 <div class="card border-0 box-shadow mb-4">
-                    <az-image-display *ngIf="company?.id" [appTypeId]="appTypes.company" [linkTypeId]="company.id"></az-image-display>
+                    <az-image-display *ngIf="company?.id" [appTypeId]="appTypes.client" [linkTypeId]="company.id"></az-image-display>
                     <!-- <img class="card-img-top w-100" src="assets/img/users/user-orig.jpg" alt="user"> -->
                   
                   <div class="card-body"> 
@@ -96,136 +96,154 @@
                     <div class="card-body bg-white">
                 
                         <form [formGroup]="personalForm" class="row">
-                
-                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('name').touched && personalForm.get('name').hasError('required'), 'has-success' : !personalForm.get('name').hasError('required') }">
-                                <label class="form-control-label">{{ "contact.name" | translate }}</label>
-                                <input formControlName="name" class="form-control" [ngClass]="{'form-control-danger' :  personalForm.get('name').hasError('required'), 'form-control-success' :  !personalForm.get('name').hasError('required') }" type="text"> 
-                                <small class="text-danger" *ngIf="personalForm.get('name').touched && personalForm.get('name').hasError('required')">{{ "contact.name" | translate }} {{ "form.isrequired" | translate}}</small>                             
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "company.name" | translate }}</mat-label>
+                                    <input matInput formControlName="name" >
+                                    <mat-error *ngIf="personalForm.get('name').touched && personalForm.get('name').hasError('required')">
+                                        {{ "company.name" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.email" | translate }}</mat-label>
+                                    <input matInput formControlName="email" >
+                                    <mat-error *ngIf="personalForm.get('email').touched && personalForm.get('email').hasError('invalidEmail')">
+                                        {{ "form.invalid"| translate }} {{ "general.email" | translate }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.phone" | translate }}</mat-label>
+                                    <input matInput formControlName="phone" >
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.mobile" | translate }}</mat-label>
+                                    <input matInput formControlName="mobile" >
+                                </mat-form-field>
+                            </div>
+
+                            <div formGroupName="city" class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "address.country" | translate }}</mat-label>
+                                    <mat-select formControlName="countryId" (selectionChange)="changeCountry($event)">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let country of countries" [value]="country.id">{{ country.nicename }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div formGroupName="city" class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "address.state" | translate }}</mat-label>
+                                    <mat-select formControlName="provinceId" (selectionChange)="changeProvince($event)">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let province of provinces" [value]="province.id">{{ province.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "address.city" | translate }}</mat-label>
+                                    <mat-select formControlName="cityId">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let city of cities" [value]="city.id">{{ city.postalCode }} {{ city.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                                               
-                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : (personalForm.get('email').touched && personalForm.get('email').hasError('required')) || (personalForm.get('email').touched && personalForm.get('email').hasError('invalidEmail')), 
-                                                                         'has-success' : !personalForm.get('email').hasError('required') && !personalForm.get('email').hasError('invalidEmail')}">
-                                <label class="form-control-label">{{ "general.email" | translate }}</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope"></i></span></div>
-                                    <input formControlName="email" class="form-control" [ngClass]="{'form-control-danger' : (personalForm.get('email').touched && personalForm.get('email').hasError('required')) || (personalForm.get('email').touched && personalForm.get('email').hasError('invalidEmail')), 
-                                                                                                    'form-control-success' :  !personalForm.get('email').hasError('required') && !personalForm.get('email').hasError('invalidEmail')}" type="text">                      
-                                </div>
-                                <small class="text-danger" *ngIf="personalForm.get('email').touched && personalForm.get('email').hasError('required')">{{ "general.email" | translate }} {{ "form.isrequired" | translate}}</small>                              
-                                <small class="text-danger" *ngIf="personalForm.get('email').touched && personalForm.get('email').hasError('invalidEmail')">{{ "form.invalid"| translate }} {{ "general.email" | translate }}</small>
-                            </div> 
-
-                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('phone').touched && personalForm.get('phone').hasError('required'), 'has-success' : !personalForm.get('phone').hasError('required') }">
-                                <label class="form-control-label">{{ "general.phone" | translate}}</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div>
-                                    <input formControlName="phone" class="form-control" [ngClass]="{'form-control-danger' :  personalForm.get('phone').hasError('required'), 'form-control-success' :  !personalForm.get('phone').hasError('required') }" type="number"> 
-                                </div>
-                                <small class="text-danger" *ngIf="personalForm.get('phone').touched && personalForm.get('phone').hasError('required')">{{ "general.phone" }} {{ "for.isrequired" | translate }}</small>                             
-                            </div>
-
-                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('mobile').touched && personalForm.get('mobile').hasError('required'), 'has-success' : !personalForm.get('mobile').hasError('required') }">
-                                <label class="form-control-label">{{ "general.mobile" | translate}}</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div>
-                                    <input formControlName="mobile" class="form-control" [ngClass]="{'form-control-danger' :  personalForm.get('mobile').hasError('required'), 'form-control-success' :  !personalForm.get('mobile').hasError('required') }" type="number"> 
-                                </div>
-                                <small class="text-danger" *ngIf="personalForm.get('mobile').touched && personalForm.get('mobile').hasError('required')">{{ "general.mobile" }} {{ "for.isrequired" | translate }}</small>                             
-                            </div>
-                               
-                            <div formGroupName="city" (change)="changeCountry($event)" class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('city.countryId').touched && personalForm.get('city.countryId').hasError('required'), 'has-success' : !personalForm.get('city.countryId').hasError('required') }">
-                                <label class="form-control-label">{{ "address.country" | translate }}</label>
-                                <select formControlName="countryId" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('city.countryId').touched && personalForm.get('city.countryId').hasError('required'), 'form-control-success' : !personalForm.get('city.countryId').hasError('required') }">
-                                    <option *ngFor="let country of countries" [value]="country.id">{{ country.nicename }}</option>
-                                </select>
-                                <small class="text-danger" *ngIf="personalForm.get('city.countryId').touched && personalForm.get('city.countryId').hasError('required')">{{ "address.country" | translate }} {{"form.isrequired" | translate}}</small>                             
-                            </div>
-
-                            <div formGroupName="city" class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('city.provinceId').touched && personalForm.get('city.provinceId').hasError('required'), 'has-success' : !personalForm.get('city.provinceId').hasError('required') }">
-                                <label class="form-control-label">{{ "address.state" | translate }}</label>
-                                <select formControlName="provinceId" (change)="changeProvince($event)" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('city.provinceId').touched && personalForm.get('city.provinceId').hasError('required'), 'form-control-success' : !personalForm.get('city.provinceId').hasError('required') }">
-                                    <option [value]="null"></option>
-                                    <option *ngFor="let province of provinces" [value]="province.id">{{ province.name }}</option>
-                                </select>
-                                <small class="text-danger" *ngIf="personalForm.get('city.provinceId').touched && personalForm.get('city.provinceId').hasError('required')">{{ "address.state" | translate }} {{ "form.isrequired" | translate}}</small>                             
-                            </div>
-
-                            <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('cityId').touched && personalForm.get('cityId').hasError('required'), 'has-success' : !personalForm.get('cityId').hasError('required') }">
-                                <label class="form-control-label">{{"address.city" | translate}}</label>
-                                <select formControlName="cityId" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('cityId').touched && personalForm.get('cityId').hasError('required'), 'form-control-success' : !personalForm.get('cityId').hasError('required') }">
-                                    <option [value]="null"></option>
-                                    <option *ngFor="let city of cities" [value]="city.id">{{ city.postalCode }} {{ city.name }}</option>
-                                </select>
-                                <small class="text-danger" *ngIf="personalForm.get('cityId').touched && personalForm.get('cityId').hasError('required')">{{"address.city" | translate}} {{"form.isrequired" | translate}}</small>
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "address.address" | translate }}</mat-label>
+                                    <textarea matInput formControlName="address" rows="2"></textarea>
+                                </mat-form-field>
                             </div>
                 
-                            <div class="form-group col-md-6">
-                                <label class="form-control-label">{{"address.address" | translate}}</label>
-                                <textarea formControlName="address" class="form-control" rows="2"></textarea>
-                            </div>
+
 
                             <!-- Marker -->
                             <div class="col-md-12">
+
                                 <div class="row">
                                     <div class="col-md-12 ">
-                                        <div class="custom-checkbox">
-                                            <input formControlName="invoiceSameAddress" type="checkbox" class="myCheckbox checkbox-primary" id="invoiceSameAddress">
-                                            <label class="form-control-label" for="invoiceSameAddress">{{ "address.invoiceSameAddress" | translate }}</label>
-                                        </div>
+                                        <section class="mat-check">
+                                            <mat-checkbox formControlName="invoiceSameAddress" >{{ "address.invoiceSameAddress" | translate }}</mat-checkbox>
+                                        </section>
                                     </div>
-
                                 </div>
+
                                 <div *ngIf="!personalForm.get('invoiceSameAddress').value" class="row">
-                                    <div formGroupName="invoiceCity" (change)="changeInvoiceCountry($event)" class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('invoiceCity.countryId').touched && personalForm.get('invoiceCity.countryId').hasError('required'), 'has-success' : !personalForm.get('invoiceCity.countryId').hasError('required') }">
-                                        <label class="form-control-label">{{ "address.invoiceCountry" | translate }}</label>
-                                        <select formControlName="countryId" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('invoiceCity.countryId').touched && personalForm.get('invoiceCity.countryId').hasError('required'), 'form-control-success' : !personalForm.get('invoiceCity.countryId').hasError('required') }">
-                                            <option *ngFor="let country of countries" [value]="country.id">{{ country.nicename }}</option>
-                                        </select>
-                                        <small class="text-danger" *ngIf="personalForm.get('invoiceCity.countryId').touched && personalForm.get('invoiceCity.countryId').hasError('required')">{{ "address.country" | translate }} {{"form.isrequired" | translate}}</small>                             
+
+                                    <div formGroupName="invoiceCity" class="col-md-6" >
+                                        <mat-form-field class="mat-field">
+                                            <mat-label>{{ "address.invoiceCountry" | translate }}</mat-label>
+                                            <mat-select formControlName="countryId" (selectionChange)="changeInvoiceCountry($event)">
+                                                <mat-option [value]="null"></mat-option>
+                                                <mat-option *ngFor="let country of countries" [value]="country.id">{{ country.nicename }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                     </div>
         
-                                    <div formGroupName="invoiceCity" class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('invoiceCity.provinceId').touched && personalForm.get('invoiceCity.provinceId').hasError('required'), 'has-success' : !personalForm.get('invoiceCity.provinceId').hasError('required') }">
-                                        <label class="form-control-label">{{ "address.invoiceState" | translate }}</label>
-                                        <select formControlName="provinceId" (change)="changeInvoiceProvince($event)" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('invoiceCity.provinceId').touched && personalForm.get('invoiceCity.provinceId').hasError('required'), 'form-control-success' : !personalForm.get('invoiceCity.provinceId').hasError('required') }">
-                                            <option [value]="null"></option>
-                                            <option *ngFor="let province of invoiceProvinces" [value]="province.id">{{ province.name }}</option>
-                                        </select>
-                                        <small class="text-danger" *ngIf="personalForm.get('invoiceCity.provinceId').touched && personalForm.get('invoiceCity.provinceId').hasError('required')">{{ "address.state" | translate }} {{ "form.isrequired" | translate}}</small>                             
+                                    <div formGroupName="invoiceCity" class="col-md-6" >
+                                        <mat-form-field class="mat-field">
+                                            <mat-label>{{ "address.invoiceState" | translate }}</mat-label>
+                                            <mat-select formControlName="provinceId" (selectionChange)="changeInvoiceProvince($event)">
+                                                <mat-option [value]="null"></mat-option>
+                                                <mat-option *ngFor="let province of invoiceProvinces" [value]="province.id">{{ province.name }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                     </div>
         
-                                    <div class="form-group col-md-6" [ngClass]="{'has-danger' : personalForm.get('invoiceCityId').touched && personalForm.get('invoiceCityId').hasError('required'), 'has-success' : !personalForm.get('invoiceCityId').hasError('required') }">
-                                        <label class="form-control-label">{{"address.invoiceCity" | translate}}</label>
-                                        <select formControlName="invoiceCityId" class="form-control" [ngClass]="{'form-control-danger' : personalForm.get('invoiceCityId').touched && personalForm.get('invoiceCityId').hasError('required'), 'form-control-success' : !personalForm.get('invoiceCityId').hasError('required') }">
-                                            <option [value]="null"></option>
-                                            <option *ngFor="let city of invoiceCities" [value]="city.id">{{ city.postalCode }} {{ city.name }}</option>
-                                        </select>
-                                        <small class="text-danger" *ngIf="personalForm.get('invoiceCityId').touched && personalForm.get('invoiceCityId').hasError('required')">{{"address.city" | translate}} {{"form.isrequired" | translate}}</small>
+                                    <div class="col-md-6" >
+                                        <mat-form-field class="mat-field">
+                                            <mat-label>{{ "address.invoiceCity" | translate }}</mat-label>
+                                            <mat-select formControlName="invoiceCityId">
+                                                <mat-option [value]="null"></mat-option>
+                                                <mat-option *ngFor="let city of invoiceCities" [value]="city.id">{{ city.postalCode }} {{ city.name }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                     </div>
-                        
-                                    <div class="form-group col-md-6">
-                                        <label class="form-control-label">{{"address.invoiceAddress" | translate}}</label>
-                                        <textarea formControlName="invoiceAddress" class="form-control" rows="2"></textarea>
+
+                                    <div class="col-md-6">
+                                        <mat-form-field class="mat-field">
+                                            <mat-label>{{ "address.invoiceAddress" | translate }}</mat-label>
+                                            <textarea matInput formControlName="invoiceAddress" rows="2"></textarea>
+                                        </mat-form-field>
                                     </div>
+
                                 </div>
                             </div>
-
-                            
-
                             <!-- end marker -->
-                            <div class="form-group col-md-6">
-                                <label class="form-control-label">{{"vat.vatnumber" | translate}}</label>
-                                <input formControlName="vat" class="form-control" type="text"> 
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "vat.vatnumber" | translate }}</mat-label>
+                                    <input matInput formControlName="vat" >
+                                </mat-form-field>
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <label class="form-control-label">{{"general.iban" | translate}}</label>
-                                <input formControlName="iban" class="form-control" type="text"> 
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.iban" | translate }}</mat-label>
+                                    <input matInput formControlName="iban" >
+                                </mat-form-field>
                             </div>
 
-                            <div class="form-group col-md-12">
-                                <label class="form-control-label">{{"general.description" | translate}}</label>
-                                <textarea formControlName="description" class="form-control" rows="5"></textarea>
-                            </div> 
+                            <div class="col-md-12">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.description" | translate }}</mat-label>
+                                    <textarea matInput formControlName="description" rows="5"></textarea>
+                                </mat-form-field>
+                            </div>
                             
                             <div class="form-group col-12 pt-3 text-right">
                                 <button [disabled]="!personalForm.dirty" class="btn btn-success cursor" (click)="undoChanges()" type="reset">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!personalForm.valid" class="btn btn-success cursor" (click)="onSubmit()" type="button">{{ "form.save" | translate }}</button>

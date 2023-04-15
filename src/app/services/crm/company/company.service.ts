@@ -108,4 +108,35 @@ export class CompanyService {
       });
     }
 
+    public saveFromSelect(name: string) {
+      let client: IClient = <IClient>{};
+      client.name = name;
+
+      this.http.post<IReturnResult>(this.url, client, {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json"
+        })
+      }).subscribe({
+        next: (result: IReturnResult) => {
+          if(result.success) {
+            let arrCompanies = this._companies.value;
+            arrCompanies.unshift(result.object);
+            this._companies.next(arrCompanies);
+
+            //this._company.next(result.object);
+            if(result.message.length > 0) {
+                this.toastr.warning(this.translate.instant(result.message));
+            }
+          }
+          else {
+            this._company.next(<IClient>{});
+            this.toastr.warning(this.translate.instant(result.message));
+          }
+        },
+        error: err => {
+          this.toastr.error(this.translate.instant("err") + err);
+        }
+      });
+    }
+
 }

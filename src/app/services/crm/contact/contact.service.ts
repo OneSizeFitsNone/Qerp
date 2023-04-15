@@ -108,4 +108,34 @@ export class ContactService {
       });
     }
 
+    public saveFromSelect(name: string) {
+      let contact: IContact = <IContact>{};
+      contact.name = name.split(' ').slice(0, -1).join(' ');
+      contact.surname = name.split(' ').slice(-1).join(' ');
+      this.http.post<IReturnResult>(this.url, contact, {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json"
+        })
+      }).subscribe({
+        next: (result: IReturnResult) => {
+          if(result.success) { 
+            let arrContacts = this._contacts.value;
+            arrContacts.unshift(result.object);
+            this._contacts.next(arrContacts);
+            //this._contact.next(result.object);
+            if(result.message.length > 0) {
+                this.toastr.warning(this.translate.instant(result.message));
+            }
+          }
+          else {
+            this._contact.next(<IContact>{});
+            this.toastr.warning(this.translate.instant(result.message));
+          }
+        },
+        error: err => {
+          this.toastr.error(this.translate.instant("err") + err);
+        }
+      });
+    }
+
 }

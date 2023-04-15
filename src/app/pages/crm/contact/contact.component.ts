@@ -1,5 +1,7 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { UntypedFormGroup, UntypedFormControl, UntypedFormBuilder, Validators} from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AppTypes } from 'src/app/interfaces/apptypes';
 import { ICity } from 'src/app/interfaces/city';
 import { IContact } from 'src/app/interfaces/contact';
@@ -17,8 +19,7 @@ import { ProvinceService } from 'src/app/services/general/province.service';
   providers: [ContactService, CountryService, ProvinceService, CityService, AppTypes]
 })
 export class ContactComponent {
-  @Input() id: number;
-  @Output() showContact = new EventEmitter<boolean>(false);
+  public id: number;
 
   public personalForm:UntypedFormGroup;
   public contact: IContact = <IContact>{};
@@ -33,7 +34,9 @@ export class ContactComponent {
     private countryService: CountryService,
     private provinceService: ProvinceService,
     private cityService: CityService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private location: Location
   ) { 
     
   }
@@ -71,17 +74,16 @@ export class ContactComponent {
     });
 
     this.countries = await this.countryService.getListForDD();
-  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes["id"]) {
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
       if(this.id == 0) {
         this.contactService.createContact();
       }
       else {
         this.contactService.getContact(this.id);
       }
-    }
+    });
   }
 
   onSubmit() {
@@ -90,12 +92,12 @@ export class ContactComponent {
   }
 
   close() {
-    this.showContact.emit(false);
+    this.location.back();
   }
 
   async changeProvince(event: any) {
     this.personalForm.controls['cityId'].setValue(null);
-    let provinceId = Number.isInteger(event) ? event : event.target.value;
+    let provinceId = Number.isInteger(event) ? event : event.value;
     this.cities = await this.cityService.getListForDDByProvince(provinceId);
 
   }
@@ -104,7 +106,7 @@ export class ContactComponent {
     this.personalForm.controls['cityId'].setValue(null);
     this.personalForm.get('city.provinceId').setValue(null);
 
-    let countryId = Number.isInteger(event) ? event : event.target.value;
+    let countryId = Number.isInteger(event) ? event : event.value;
     this.provinces = await this.provinceService.getListForDDByCountry(countryId);
     this.cities = []
   }

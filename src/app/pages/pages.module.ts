@@ -36,6 +36,8 @@ import { FormsModule } from '@angular/forms';
     BreadcrumbComponent,
     BackTopComponent,
   ],
-  exports: [LoginComponent]
+  exports: [
+    LoginComponent
+  ]
 })
 export class PagesModule { }

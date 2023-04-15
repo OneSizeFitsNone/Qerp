@@ -9,11 +9,17 @@ import { ContactComponent } from './contact/contact.component';
 import { ImageModule } from 'src/app/components/images/image.module';
 import { CompanyComponent } from './company/company.component';
 import { TabsModule } from 'src/app/components/tabs/tabs.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'companies', pathMatch: 'full'},
-  { path: 'companies', component: CompaniesComponent, data: { breadcrumb: 'menu.companies' } },
-  { path: 'contacts', component: ContactsComponent, data: { breadcrumb: 'menu.contacts' } }
+  { path: 'companies', component: CompaniesComponent},
+  { path: 'contacts', component: ContactsComponent },
+  { path: 'company/:id', component: CompanyComponent },
+  { path: 'contact/:id', component: ContactComponent }
 ];
 
 @NgModule({
@@ -24,7 +30,11 @@ export const routes: Routes = [
     TranslateModule,
     RouterModule.forChild(routes),
     ImageModule,
-    TabsModule
+    TabsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCheckboxModule
   ],
     declarations: [
         ContactsComponent,
@@ -35,7 +45,9 @@ export const routes: Routes = [
     ],
     exports: [ 
         ContactsComponent,
-        CompaniesComponent
+        CompaniesComponent,
+        ContactComponent,
+        CompanyComponent
     ]
 })
 

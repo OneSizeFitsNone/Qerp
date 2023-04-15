@@ -8,54 +8,77 @@
 
                 <form class="row">
                     <div class="form-group col-lg-3 col-md-6 col-sm-8">
-                        <input class="form-control" name="name" [(ngModel)]="company.name" placeholder="{{ 'company.name' | translate }}" >
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>{{ "general.search" | translate }}</mat-label>
+                            <input matInput name="name" [(ngModel)]="company.name" (ngModelChange)="onInputChange('name')">
+                        </mat-form-field>
                     </div>
                     <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
                         <div class="box">
-                                <i class="fa fa-search searchformicon" (click)="onSearch()" data-toggle="tooltip" data-animation="false"
-                                    data-placement="bottom" title="{{ 'general.search' | translate }}"></i>&nbsp;
-                                <i class="fa fa-search-plus searchformicon" (click)="advancedSearch = !advancedSearch" data-toggle="tooltip" data-animation="false"
-                                    data-placement="bottom" title="{{ 'general.advanced' | translate }}"></i>&nbsp;
-                                <i class="fa fa-plus-square  searchformicon" (click)="addCompany()" data-toggle="tooltip" data-animation="false"
-                                    data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
+                                <a href="javascript:void(0)" (click)="onSearch()">
+                                    <i class="fa fa-search searchformicon" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.search' | translate }}"></i>
+                                </a>
+                                &nbsp;
+                                <a href="javascript:void(0)" (click)="advancedSearch = !advancedSearch">
+                                    <i class="fa fa-search-plus searchformicon" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.advanced' | translate }}"></i>
+                                </a>
+                                &nbsp;
+                                <a [routerLink]="['/pages/crm/company', 0]">
+                                    <i class="fa fa-plus-square  searchformicon" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
+                                </a>
                         </div>
                     </div>
                     <div *ngIf="advancedSearch" class="form-group col-md-12">
                         <div class="row">
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                <label class="form-control-label">{{ "general.email" | translate }}</label>
-                                <input class="form-control" name="email" [(ngModel)]="company.email" (ngModelChange)="onInputChange('email')" type="text">
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>{{ "general.email" | translate }}</mat-label>
+                                    <input matInput name="email" [(ngModel)]="company.email" (ngModelChange)="onInputChange('email')">
+                                </mat-form-field>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                <label class="form-control-label">{{ "general.description" | translate }}</label>
-                                <input class="form-control" name="description" [(ngModel)]="company.description" (ngModelChange)="onInputChange('description')" type="text">
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>{{ "general.description" | translate }}</mat-label>
+                                    <input matInput name="description" [(ngModel)]="company.description" (ngModelChange)="onInputChange('description')">
+                                </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                <label class="form-control-label">{{ "address.address" | translate }}</label>
-                                <input class="form-control" name="address" [(ngModel)]="company.address" (ngModelChange)="onInputChange('address')" type="text">
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>{{ "address.address" | translate }}</mat-label>
+                                    <input matInput name="address" [(ngModel)]="company.address" (ngModelChange)="onInputChange('address')">
+                                </mat-form-field>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                <label class="form-control-label">{{ "address.country" | translate }}</label>
-                                <select class="form-control" name="country" [(ngModel)]="company.city.countryId" (ngModelChange)="changeCountry($event)">
-                                    <option [ngValue]="null"></option>
-                                    <option *ngFor="let country of countries" [ngValue]="country.id">{{ country.nicename }}</option>
-                                </select>
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>{{ "address.country" | translate }}</mat-label>
+                                    <mat-select name="country" [(ngModel)]="company.city.countryId" (ngModelChange)="changeCountry($event)">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let country of countries" [value]="country.id">{{ country.nicename }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                <label class="form-control-label">{{ "address.state" | translate }}</label>
-                                <select class="form-control" name="province" [(ngModel)]="company.city.provinceId" (ngModelChange)="changeProvince($event)" >
-                                    <option [ngValue]="null"></option>
-                                    <option *ngFor="let province of provinces" [ngValue]="province.id">{{ province.name }}</option>
-                                </select>
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>{{ "address.state" | translate }}</mat-label>
+                                    <mat-select name="province" [(ngModel)]="company.city.provinceId" (ngModelChange)="changeProvince($event)">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let province of provinces"  [value]="province.id">{{ province.name  }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                <label class="form-control-label">{{ "address.city" | translate }}</label>
-                                <select class="form-control" name="city" [(ngModel)]="company.cityId">
-                                    <option [ngValue]="null"></option>
-                                    <option *ngFor="let city of cities" [ngValue]="city.id">{{ city.postalCode }} {{ city.name }}</option>
-                                </select>
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>{{ "address.city" | translate }}</mat-label>
+                                    <mat-select name="city" [(ngModel)]="company.cityId">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let city of cities"  [value]="city.id">{{ city.postalCode }} {{ city.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                             
                         </div>
@@ -92,7 +115,11 @@
                                     <td>{{ c.phone }}</td>
                                     <td>{{ c.mobile }}</td>
                                     <td>{{ c.vat }}</td>
-                                    <td><i class="fa fa-folder-open cursor" (click)="onShowCompany(c.id)"></i></td>
+                                    <td>
+                                        <a [routerLink]="['/pages/crm/company', c.id]">
+                                            <i class="fa fa-folder-open cursor"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             </ng-container>
                         </tbody>
@@ -101,11 +128,5 @@
         
             </div>
         </div>
-    </div>
-</div>
-
-<div *ngIf="showCompany" class="overlay d-flex justify-content-center">
-    <div class="col-md-9 col-sm-12 align-items-center">
-        <az-company [id]="selectedId" (showCompany)="showCompany=$event"></az-company>
     </div>
 </div>

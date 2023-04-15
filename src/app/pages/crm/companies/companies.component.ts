@@ -20,7 +20,6 @@ export class CompaniesComponent {
   public company: IClient = <IClient>{};
   public selectedId: number = 0;
   
-  public showCompany: boolean = false;
   public advancedSearch: boolean = false;
   
   public countries: Array<ICountry> = [];
@@ -50,16 +49,6 @@ export class CompaniesComponent {
     if(this.company.city.provinceId == null) { delete this.company.city.provinceId; }
     if(this.company.city.provinceId == null) { delete this.company.city.provinceId; }
     this.companyService.findCompany(this.company);
-  }
-
-  onShowCompany(id: number){
-    this.selectedId = id;
-    this.showCompany = true;
-  }
-
-  addCompany() {
-    this.selectedId = 0;
-    this.showCompany = true;
   }
 
   onInputChange(item: string) {
