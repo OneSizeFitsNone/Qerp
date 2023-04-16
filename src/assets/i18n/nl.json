@@ -47,6 +47,10 @@
     "general.advanced": "Geavanceerd",
     "general.images": "Afbeeldingen",
     "general.iban": "IBAN",
+    "general.savedItems": "Bewaarde items",
+    "general.saveitem": "Bewaar item voor later gebruik",
+    "general.goback": "Ga terug",
+    "general.close": "Sluiten",
     
     "address.address": "Adres",
     "address.postalCode": "Postcode",

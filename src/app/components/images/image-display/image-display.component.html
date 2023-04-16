@@ -14,7 +14,7 @@
                 <div *ngFor="let image of images; let i = index;" style="width:100%;height: 100%;" class="carousel-item" [ngClass]="i==0 ? 'active' : '' ">
                     <img class="d-block image" style='width: 100%; object-fit: contain' [ngStyle]="{'height.px': carouselinner.offsetWidth }" src="{{ location + image.imagelink }}">
                 </div>
-                <div class="carousel-caption d-none d-md-block">
+                <div *ngIf="editEnabled" class="carousel-caption d-none d-md-block">
                     <h5><i class="fa fa-edit editIcon cursor" (click)="showEdit = !showEdit"></i></h5>
                 </div>
             </div>

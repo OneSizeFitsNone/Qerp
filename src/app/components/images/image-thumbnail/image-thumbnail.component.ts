@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 
 export class ImageThumbnailComponent {
   @Input() images: Array<IImage> = [];
+  @Input() class: string = ""
 
   public image: IImage;
   public location: string = environment.IMAGE_URL;

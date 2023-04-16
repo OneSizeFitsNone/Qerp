@@ -104,7 +104,7 @@
                         <tbody>
                             <ng-container *ngFor="let c of companies">
                                 <tr>
-                                    <td><az-image-thumbnail [images]="c.images"></az-image-thumbnail></td>
+                                    <td><az-image-thumbnail [images]="c.images" [class]="'tablethumb'"></az-image-thumbnail></td>
                                     <td>{{ c.name }}</td>
                                     <td>
                                         {{ c.address }}

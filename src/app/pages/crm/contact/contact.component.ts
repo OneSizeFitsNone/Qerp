@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { UntypedFormGroup, UntypedFormControl, UntypedFormBuilder, Validators} from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AppTypes } from 'src/app/interfaces/apptypes';
 import { ICity } from 'src/app/interfaces/city';
 import { IContact } from 'src/app/interfaces/contact';
@@ -11,6 +11,8 @@ import { ContactService } from 'src/app/services/crm/contact/contact.service';
 import { CityService } from 'src/app/services/general/city.service';
 import { CountryService } from 'src/app/services/general/country.service';
 import { ProvinceService } from 'src/app/services/general/province.service';
+import { SaveditemService } from 'src/app/services/user/saveditems.service';
+import { ISaveditem } from 'src/app/interfaces/saveditem';
 
 @Component({
   selector: 'az-contact',
@@ -36,13 +38,15 @@ export class ContactComponent {
     private cityService: CityService,
     private ref: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    public routers: Router,
+    private saveditemService: SaveditemService
   ) { 
     
   }
 
   async ngOnInit() {
-
+    
     this.personalForm = this.formBuilder.group({
       //'salutation': ['d'],
       'name': ['', Validators.required],
@@ -84,6 +88,9 @@ export class ContactComponent {
         this.contactService.getContact(this.id);
       }
     });
+
+    
+    
   }
 
   onSubmit() {
@@ -91,7 +98,7 @@ export class ContactComponent {
     this.contactService.saveContact(this.contact);
   }
 
-  close() {
+  goBack() {
     this.location.back();
   }
 
@@ -121,6 +128,15 @@ export class ContactComponent {
 
     this.ref.detectChanges();
     this.personalForm.patchValue(this.contact);
+  }
+
+  public async saveItem(){
+    let oSavedItem: ISaveditem = <ISaveditem>{};
+    oSavedItem.id = 0;
+    oSavedItem.name = this.contact.fullname;
+    oSavedItem.apptypeId = this.appTypes.contact;
+    oSavedItem.routelink = this.routers.url;
+    this.saveditemService.save(oSavedItem);
   }
   
 }

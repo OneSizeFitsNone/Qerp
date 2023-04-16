@@ -16,6 +16,7 @@ export class ImageDisplayComponent {
   
   @Input() appTypeId: number;
   @Input() linkTypeId: number;
+  @Input() editEnabled: boolean = true;
 
 
   public images: Array<IImage> = [];

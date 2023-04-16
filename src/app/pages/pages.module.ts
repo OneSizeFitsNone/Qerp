@@ -15,9 +15,11 @@ import { LoginModule } from './login/login.module';
 import { LoginComponent } from './login/login.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+import { ImageModule } from '../components/images/image.module';
 
 @NgModule({
   imports: [
+    ImageModule,
     CommonModule,
     NgScrollbarModule,  
     DirectivesModule,

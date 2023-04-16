@@ -1,8 +1,14 @@
 <div widget class="card" style="max-height: 100%!important;">
     <div class="card-header">
+        
         <span class="text-uppercase">{{ "contact" | translate }}: {{ contact.name }} {{ contact.surname }}</span>
-        <div class="widget-controls"> 
-            <i class="fa fa-times cursor" (click)="close()"></i>
+        <div class="widget-controls">
+            <i class="fa fa-chevron-left mr-3 cursor" (click)="goBack()" data-toggle="tooltip" data-animation="false"
+            data-placement="bottom" title="{{ 'general.goback' | translate }}"></i>
+            <i *ngIf="contact.id != 0" class="fa fa-chevron-up mr-3 cursor" data-toggle="tooltip" data-animation="false"
+            data-placement="bottom" title="{{ 'general.saveitem' | translate }}" (click)="saveItem()"></i>
+            <i class="fa fa-times cursor" [routerLink]="'/pages/crm/contacts'" data-toggle="tooltip" data-animation="false"
+            data-placement="bottom" title="{{ 'general.close' | translate }}"></i>
         </div>        
     </div>
     <div class="card-body scroll">

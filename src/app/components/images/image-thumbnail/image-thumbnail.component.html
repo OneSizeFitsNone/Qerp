@@ -1,2 +1,2 @@
-<img *ngIf="image" class="thumbnail" src="{{location + image.thumblink}}">
-<img *ngIf="!image" class="thumbnail" src="assets/img/no-image.jpg">
+<img *ngIf="image" [ngClass]="class" src="{{location + image.thumblink}}">
+<img *ngIf="!image" [ngClass]="class" src="assets/img/no-image.jpg">

@@ -85,4 +85,45 @@
         </div>
     </li>
 
+
+    <li class="dropdown task-menu">
+        <a href class="dropdown-toggle task" data-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa fa-folder-open"></i>
+            <span>{{ savedItems.length }}</span>
+            <div class="pulsate"></div>
+        </a>
+        <div class="top-dropdown-menu dropdown-menu">
+            <i class="dropdown-arr"></i>
+            <div class="header clearfix">
+                <span>{{ "general.savedItems" | translate }}</span>
+            </div>
+
+            <div class="col-md-12 " slim-scroll [slimScrollOptions]="{height: 250}">
+                <div class="row transition rowhover" *ngFor="let saveditem of savedItems">
+                    <div class="col-md-12">
+                        <h3>
+                            <span class="cursor" [routerLink]="saveditem.routelink">
+                                <i *ngIf="saveditem.apptypeId == appTypes.client" class="fa fa-building mr-2"></i>
+                                <i *ngIf="saveditem.apptypeId == appTypes.contact" class="fa fa-user mr-2"></i>
+                                {{saveditem.name}}
+                            </span>
+                            <span class="pull-right">
+                                <i class="fa fa-trash cursor" (click)="onDeleteSavedItem(saveditem)"></i>
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+
+
+<!--                     
+                    <div class="progress progress-sm">
+                        <div class="progress-bar bg-{{task.class}}" role="progressbar" [style.width]="task.value"  aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> -->
+
+            </div>
+   
+        </div>
+    </li>
+
+
 </ul>

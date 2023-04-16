@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppTypes } from 'src/app/interfaces/apptypes';
 import { ICity } from 'src/app/interfaces/city';
 import { IClient } from 'src/app/interfaces/client';
@@ -11,6 +11,8 @@ import { CompanyService } from 'src/app/services/crm/company/company.service';
 import { CityService } from 'src/app/services/general/city.service';
 import { CountryService } from 'src/app/services/general/country.service';
 import { ProvinceService } from 'src/app/services/general/province.service';
+import { ISaveditem } from 'src/app/interfaces/saveditem';
+import { SaveditemService } from 'src/app/services/user/saveditems.service';
 
 @Component({
   selector: 'az-company',
@@ -39,7 +41,9 @@ export class CompanyComponent {
     private cityService: CityService,
     private ref: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private saveditemService: SaveditemService,
+    public router: Router
   ) { 
     
   }
@@ -107,7 +111,7 @@ export class CompanyComponent {
     this.companyService.saveCompany(this.company);
   }
 
-  close() {
+  goBack() {
     this.location.back();
   }
   
@@ -159,6 +163,15 @@ export class CompanyComponent {
 
     this.ref.detectChanges();
     this.personalForm.patchValue(this.company);
+  }
+
+  public async saveItem(){
+    let oSavedItem: ISaveditem = <ISaveditem>{};
+    oSavedItem.id = 0;
+    oSavedItem.name = this.company.name;
+    oSavedItem.apptypeId = this.appTypes.client;
+    oSavedItem.routelink = this.router.url;
+    this.saveditemService.save(oSavedItem);
   }
 
 }
