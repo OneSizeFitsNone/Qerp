@@ -4,6 +4,8 @@
     "err" : "ERROR : ",
     "err.badrequest" : "Bad request!",
     "err.user.nocurrent" : "No current user found!",
+    "error.invalidFile" : "Wrong file!",
+    "err.pathNotFound": "Location not found!",
 
     "warn.noresultsfound": "No results found!",
     "warn.user.invalidcredentials" : "Invalid credentials!",
@@ -16,11 +18,16 @@
     "menu.tasks": "Tasks",
     "menu.invoices": "Invoices",
     "menu.invoicesOut": "Outgoing invoices",
+    "menu.settings": "Settings",
+    "menu.settings.contactroles": "Contact roles",
 
     "form.save": "Save",
     "form.undoChanges": "Undo",
     "form.isrequired" : "is required",
     "form.invalid": "invalid",
+    "form.chooseimage": "Choose a picture",
+    "form.fileUploaded": "File uploaded",
+
 
     "login.password.minimumlength" : "needs at least 4 characters",
     "login.signin" : "Sign in",
@@ -29,6 +36,8 @@
     "user.username": "Username",
     "user.password": "Password",
 
+    "general.created": "Created",
+    "general.updated": "Updated",
     "general.add": "Add",    
     "general.email": "Email",
     "general.phone": "Phone",
@@ -36,20 +45,43 @@
     "general.search": "Search",
     "general.description": "Description",
     "general.advanced": "Advanced",
+    "general.images": "Images",
+    "general.iban": "IBAN",
+    "general.savedItems": "Saved items",
+    "general.saveitem": "Save item for later use",
+    "general.goback": "Go back",
+    "general.close": "Close",
     
     "address.address": "Address",
     "address.postalCode": "Postalcode",
     "address.city": "City",
     "address.state": "State",
     "address.country": "Country",
+    "address.invoiceSameAddress": "Invoice address same as main address",
+    "address.invoiceAddress": "Invoice address",
+    "address.invoiceCity": "Invoice city",
+    "address.invoiceState": "Invoice state",
+    "address.invoiceCountry": "Invoice country",
 
     "companies": "Companies",
     "company": "Company",
     "company.name": "Name",
     "company.vat": "VAT",
+    "company.select": "Select a company",
 
     "contacts": "Contacts",
     "contact": "Contact",
     "contact.name" : "Name",
-    "contact.surname": "Surname"
+    "contact.surname": "Surname",
+    "contact.select": "Select a contact",
+    
+    "contactroles": "Contact roles",
+    "contactroles.name": "Name",
+    "contactroles.role": "Role",
+    "contactroles.select": "Select a role",
+
+    "vat.vatnumber": "VAT number",
+
+    "projects": "Projects",
+    "project": "Project"
 }

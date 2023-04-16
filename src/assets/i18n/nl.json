@@ -77,8 +77,8 @@
     
     "contactroles": "Contact rollen",
     "contactroles.name": "Naam",
-    "contactroles.role": "Functie",
-    "contactroles.select": "Selecteer functie",
+    "contactroles.role": "Rol",
+    "contactroles.select": "Selecteer een rol",
 
     "vat.vatnumber": "BTW nummer",
 
