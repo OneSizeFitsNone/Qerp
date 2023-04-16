@@ -7,17 +7,24 @@
     </div>
     <div class="card-body scroll">
         <div class="row">
-            <div class="col-lg-3 col-md-12 col-sm-12">
+            <div class="col-lg-3 col-md-12 col-sm-12 bottom-30">
                 <div class="card border-0 box-shadow mb-4">
                     <az-image-display *ngIf="company?.id" [appTypeId]="appTypes.client" [linkTypeId]="company.id"></az-image-display>
                     <!-- <img class="card-img-top w-100" src="assets/img/users/user-orig.jpg" alt="user"> -->
                   
                   <div class="card-body"> 
-                      <h4 class="card-title text-center mb-4">{{ company.name }}</h4>
+                      <h4 class="card-title text-center mb-4">
+                        {{ company.name }}
+                        <span *ngIf="company.website?.length > 0">
+                            <br><small><a href="{{ company.website }}" target="_blank">{{ company.website }}</a></small>
+                        </span>
+                      </h4>
 
                       <div *ngIf="company.description" class="row mb-4">
                         <div class="col-md-12">
-                            <p class="card-text text-justify mb-4" style="white-space: pre-wrap;">{{ company.description }}</p>
+                            <p class="card-text text-justify mb-4" style="white-space: pre-wrap;">
+                                {{ company.description }}
+                            </p>
                         </div>
                       </div>
                                                         
@@ -91,7 +98,7 @@
                   </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-12 col-sm-12">
+            <div class="col-lg-9 col-md-12 col-sm-12 bottom-30">
                 <div class="card card-info border-0 box-shadow">
                     <div class="card-body bg-white">
                 
@@ -104,6 +111,15 @@
                                     <mat-error *ngIf="personalForm.get('name').touched && personalForm.get('name').hasError('required')">
                                         {{ "company.name" | translate }} {{ "form.isrequired" | translate}}
                                     </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6"></div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.website" | translate }}</mat-label>
+                                    <input matInput formControlName="website" >
                                 </mat-form-field>
                             </div>
 

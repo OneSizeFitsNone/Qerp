@@ -49,6 +49,7 @@ export class CompanyComponent {
     this.personalForm = this.formBuilder.group({
       'name': ['', Validators.required],
       'email': ['', Validators.compose([emailValidator])],
+      'website': [''],
       'phone': [''],
       'mobile': [''],
       'cityId': [''],

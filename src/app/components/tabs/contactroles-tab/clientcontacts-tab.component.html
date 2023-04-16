@@ -12,8 +12,10 @@
 
     <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
         <div class="box">
-            <i class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
-                data-placement="bottom" title="{{ 'general.add' | translate }}" (click)="onCreateClientcontact()"></i>
+            <a href="javascript:void(0);" (click)="onCreateClientcontact()">
+                <i class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
+                    data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
+            </a>
         </div>
     </div> 
 
