@@ -27,15 +27,20 @@ export class ClientcontactsTabComponent {
   public clientContactsSearch: Array<IClientcontact> = [];
   public clientContact: IClientcontact = <IClientcontact>{};
 
-  public contactroles: Array<IContactrole> = [];
+  private contactroles: Array<IContactrole> = [];
+  public contactroleSearch: Array<IContactrole> = [];
+
   public companies: Array<IClient> = [];
   public contacts: Array<IContact> = [];  
 
   public ccSearch: string = "";
+  
   public contactSearch: string = "";
   public companySearch: string = "";
+  public roleSearch: string = "";
 
   public selectedId: number = -1;
+  public hasNew: boolean = false;
 
   constructor(
     private clientcontactService: ClientcontactsService,
@@ -50,17 +55,20 @@ export class ClientcontactsTabComponent {
   ngOnInit() {
     this.clientcontactService.clientcontacts.subscribe(crs => {
       this.clientContacts = crs
-
       this.clientContactsSearch = this.clientContacts.filter(
         cr => this.ccSearch == "" || cr.id == 0 || 
           (this.appTypeId == this.appTypes.client && cr.contact.fullname.startsWith(this.ccSearch)) ||
           (this.appTypeId == this.appTypes.contact && cr.client.name.startsWith(this.ccSearch))
       );
       this.ref.detectChanges();
+      this.hasNew = this.clientContacts.find(cc => cc?.id == 0) ? true : false;
+      this.ref.detectChanges();
     });
     
     this.contactroleService.contactroles.subscribe(cr => {
-      this.contactroles = cr
+      this.contactroles = cr;
+      this.contactroleSearch = this.contactroles.filter(c => c.name.toLowerCase().includes(this.roleSearch.toLowerCase()) || c.id == this.clientContact.contactroleId);
+      this.ref.detectChanges();
     });
 
     this.clientcontactService.clientcontact.subscribe(cr => {
@@ -112,7 +120,10 @@ export class ClientcontactsTabComponent {
     this.clientcontactService.createClientcontact(this.appTypeId, this.linkTypeId);
   }
 
-  public editClientcontact(oClientcontact) {   
+  public editClientcontact(oClientcontact) {
+    if(this.hasNew && this.clientContact?.id == 0) {
+      this.clientcontactService.deleteClientcontact(this.clientContact);
+    }
     this.clientcontactService.getClientcontact(oClientcontact.id);
   }
 
@@ -163,5 +174,18 @@ export class ClientcontactsTabComponent {
       this.companyService.saveFromSelect(this.companySearch);
     }
   }
+
+  public onSearchRole(searchString: string) {
+    this.contactroleSearch = this.contactroles.filter(c => c.name.toLowerCase().includes(searchString.toLowerCase()) || c.id == this.clientContact.contactroleId);
+  }
+
+  public onEnterSearchContactrole() {
+    let oContactrole: IContactrole = <IContactrole>{};
+    oContactrole.id = 0;
+    oContactrole.name = this.roleSearch;
+    this.contactroleService.saveRole(oContactrole);
+  }
+
+
 
 }

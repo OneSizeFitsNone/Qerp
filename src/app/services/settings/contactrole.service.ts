@@ -95,8 +95,15 @@ export class ContactroleService {
             
             let oCr = <IContactrole>result.object;
             let oCrs = this._contactroles.value;
-            let i = oCrs.findIndex(i => i.id == oContactrole.id)
-            oCrs[i]=oCr;
+
+            if(oCrs.find(c => c.id == oContactrole.id)) {
+              let i = oCrs.findIndex(i => i.id == oContactrole.id)
+              oCrs[i]=oCr;
+            }
+            else {
+              oCrs.unshift(oCr);
+            }
+
             oCrs.sort((a,b) => { return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0 });
             this._contactroles.next(oCrs);
             this._contactrole.next(<IContactrole>{});
