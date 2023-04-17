@@ -60,6 +60,10 @@ export const menuItems = [
         title: 'menu.settings.contactroles',
         routerLink: 'settings/contactroles',
       },
+      {
+        title: 'menu.settings.parameters',
+        routerLink: 'settings/parameters',
+      },
     ]
   },
 

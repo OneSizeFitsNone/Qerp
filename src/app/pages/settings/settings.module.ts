@@ -4,11 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContactrolesComponent } from './contactroles/contactroles.component';
+import { ParametersComponent } from './parameters/parameters.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'contactroles', pathMatch: 'full'},
-  { path: 'contactroles', component: ContactrolesComponent, data: { breadcrumb: 'menu.settings.contactroles' } },
+  { path: 'contactroles', component: ContactrolesComponent},
+  { path: 'parameters', component: ParametersComponent},
   //{ path: 'contacts', component: ContactsComponent, data: { breadcrumb: 'menu.contacts' } }
 ];
 
@@ -19,12 +25,18 @@ export const routes: Routes = [
     ReactiveFormsModule,
     TranslateModule,
     RouterModule.forChild(routes),
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCheckboxModule
   ],
     declarations: [
-        ContactrolesComponent
+        ContactrolesComponent,
+        ParametersComponent
     ],
     exports: [ 
-        ContactrolesComponent
+        ContactrolesComponent,
+        ParametersComponent
     ]
 })
 

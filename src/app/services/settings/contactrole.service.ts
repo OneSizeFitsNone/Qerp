@@ -123,6 +123,15 @@ export class ContactroleService {
 
 
     public async deleteRole(oContactrole: IContactrole) {
+      if(oContactrole.id == 0) {
+        let oCrs = this._contactroles.value;
+        let i = oCrs.findIndex(i => i.id == 0)
+        oCrs.splice(i, 1);
+        this._contactroles.next(oCrs);
+        this._contactrole.next(<IContactrole>{})
+        return;
+      }
+
       this.http.delete<IReturnResult>(this.url,{
         headers: new HttpHeaders({
           "Content-Type": "application/json"

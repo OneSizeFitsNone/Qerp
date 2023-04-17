@@ -20,6 +20,7 @@
     "menu.invoicesOut": "Uitgaande facturen",
     "menu.settings": "Instellingen",
     "menu.settings.contactroles": "Contact rollen",
+    "menu.settings.parameters": "Parameters",
 
     "form.save": "Bewaar",
     "form.undoChanges": "Ongedaan maken",
@@ -83,5 +84,20 @@
     "vat.vatnumber": "BTW nummer",
 
     "projects": "Projecten",
-    "project": "Project"
+    "project": "Project",
+
+    "parameters": "Parameters",
+    "parameter": "Parameter",
+    "parameter.parametername": "Parameter naam",
+    "parameter.name": "Naam",
+
+    "parametergroups": "Parameter groepen",
+    "parametergroup": "Parameter groep",
+    "parametergroup.name": "Groep naam",
+
+    "priority": "Prioriteit",
+    "prospecttypes": "Prospect types",
+    "high": "Hoog",
+    "low": "Laag",
+    "medium": "Medium"
 }

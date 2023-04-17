@@ -1,0 +1,125 @@
+<div widget class="card" style="max-height: 100%!important;">
+    <div class="card-header">
+        <span class="text-uppercase">{{ "parameters" | translate }}</span>
+    </div>
+    <div class="card-body scroll">
+
+        <div class="row">
+
+                    
+            <div class="col-lg-3 col-md-12 col-sm-12">
+                
+                <div class="card border-0 box-shadow">             
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-12">
+
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "parametergroup.name" | translate }}</mat-label>
+                                    <input matInput name="groupname" [(ngModel)]="srchGroup" (ngModelChange)="onGroupSearch()" >
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+
+                        <div *ngFor="let group of groupResults" 
+                            class="row rowhover" [ngClass]="selectedGroup?.id == group.id ? 'rowSelected' : ''" style="height: 40px;"
+                            (click)="onGroupSelect(group)"
+                        >
+                            <div  class="col-md-12 d-flex align-items-center cursor">
+                                {{ group.name | translate }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="card card-info border-0 box-shadow">
+                    <div class="card-body bg-white">
+
+                        <div class="row mb-2">
+                            <div class="form-group col-lg-3 col-md-6 col-sm-8">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "parameter.parametername" | translate }}</mat-label>
+                                    <input matInput name="parametername" [(ngModel)]="srchParameter" (ngModelChange)="onParameterSearch()" >
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
+                                <div class="box">
+                                    <a *ngIf="selectedGroup?.canEdit && !hasNew" href="javascript:void(0)" (click)="onCreateParameter()">
+                                        <i class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.add' | translate }}" ></i>
+                                    </a>
+
+                                </div>
+                            </div> 
+                        </div>
+
+
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>{{ "parameter.name" | translate}}</th>
+                                        <th>{{ "general.description" | translate}}</th>
+                                        <th>{{ "general.created" | translate }}</th>
+                                        <th>{{ "general.updated" | translate }}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let para of parameterResults">
+                                        <ng-container *ngIf="parameter?.id != para.id">
+                                            <tr >
+                                                <td>{{ para?.name | translate }}</td>
+                                                <td style="white-space: pre-wrap;">{{ para?.description }}</td>
+                                                <td>{{ para?.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                                                <td>{{ para?.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                                                <td class="text-right">
+                                                    <ng-container *ngIf="selectedGroup?.canEdit && para.companyId != -1">
+                                                        <i class="fa fa-edit cursor mr-2" (click)="onEditParameter(para)"></i>
+                                                        <i class="fa fa-trash-o cursor" (click)="onDeleteParameter(para)"></i>
+                                                    </ng-container>                                                    
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                        <ng-container *ngIf="parameter?.id == para.id">
+                                            <tr>
+                                                <td>
+                                                    <mat-form-field class="mat-field">
+                                                        <mat-label>{{ "parameter.parametername" | translate }}</mat-label>
+                                                        <input matInput name="name" [(ngModel)]="parameter.name">
+                                                    </mat-form-field> 
+                                                </td>
+                                                <td style="white-space: pre-wrap;">
+                                                    <mat-form-field class="mat-field">
+                                                        <mat-label>{{ "general.description" | translate }}</mat-label>
+                                                        <textarea matInput name="description" [(ngModel)]="parameter.description" rows="2"></textarea>
+                                                    </mat-form-field>
+                                                </td>
+                                                <td>{{ oCr?.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                                                <td>{{ oCr?.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                                                <td class="text-right">
+                                                    <i class="fa fa-save cursor mr-2" (click)="onSaveParameter(parameter)"></i>
+                                                    <i class="fa fa-trash-o cursor" (click)="onDeleteParameter(para)"></i>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                    </ng-container>
+                
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

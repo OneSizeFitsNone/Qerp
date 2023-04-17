@@ -20,6 +20,7 @@
     "menu.invoicesOut": "Outgoing invoices",
     "menu.settings": "Settings",
     "menu.settings.contactroles": "Contact roles",
+    "menu.settings.parameters": "Parameters",
 
     "form.save": "Save",
     "form.undoChanges": "Undo",
