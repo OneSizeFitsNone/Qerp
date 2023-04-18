@@ -27,7 +27,7 @@ export class ProvinceService {
         });
 
         let response = await lastValueFrom(getter)
-        if(response.success) {
+        if(response?.success) {
             return response.object;
         }
         else {
