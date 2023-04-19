@@ -8,6 +8,7 @@ import { IReturnResult } from 'src/app/interfaces/returnresult';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -76,6 +77,17 @@ export class LoginService {
           return false;
         }
     }
+
+  public async isLoggedIn() {
+    let getter = this.http.get(this.url + 'IsLoggedIn', {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    });
+    
+    return await lastValueFrom(getter);
+
+  }
 
   public setUser(user:IUser) {
       localStorage.setItem("currentuser", JSON.stringify(user));

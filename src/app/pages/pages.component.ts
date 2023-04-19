@@ -3,13 +3,14 @@ import { Location } from '@angular/common';
 import { AppState } from '../app.state';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { LoginService } from '../services/user/login.service';
 
 @Component({
   selector: 'az-pages',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.scss'],
-  providers: [ AppState ]
+  providers: [ AppState, LoginService ]
 })
 export class PagesComponent implements OnInit {
     public router: Router;
@@ -18,7 +19,8 @@ export class PagesComponent implements OnInit {
     constructor(private _state:AppState,
                 private _router: Router, 
                 private _location:Location,
-                private jwtHelper: JwtHelperService) {
+                private jwtHelper: JwtHelperService,
+                private loginService: LoginService) {
         this.router = _router;
         this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
@@ -61,4 +63,9 @@ export class PagesComponent implements OnInit {
         }
     }
 
+    async changeOfRoutes(){
+        if(!(await this.loginService.isLoggedIn())) {
+          this.router.navigate(["login"]);
+        }
+    }
 }
