@@ -1,0 +1,121 @@
+
+<form class="row">
+
+    <div class="form-group col-lg-3 col-md-6 col-sm-8">
+        <mat-form-field style="width: 100%;">
+            <mat-label>{{ "general.search" | translate }}</mat-label>
+            <input matInput name="crSearch" [(ngModel)]="ccSearch" (ngModelChange)="onInputChange()">
+        </mat-form-field>
+    </div>
+
+    <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
+        <div class="box">
+            <a href="javascript:void(0);" (click)="onCreateApptypecontact()">
+                <i *ngIf="!hasNew"
+                    class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
+                    data-placement="bottom" title="{{ 'general.add' | translate }}"
+                ></i>
+            </a>
+        </div>
+    </div> 
+
+</form>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>{{ "contact" | translate }}</th>
+                <th>{{ "company" | translate }}</th>
+                <th>{{ "contactroles.role" | translate}}</th>
+                <th>{{ "general.description" | translate }}</th>
+                <th>{{ "general.created" | translate }}</th>
+                <th>{{ "general.updated" | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let ocr of apptypecontactSearch">
+
+                <tr>
+
+                    <td>
+                        <span *ngIf="apptypecontact?.id != ocr.id">
+                            {{ ocr.contact?.fullname }}
+                        </span>
+                        <mat-form-field *ngIf="apptypecontact?.id == ocr.id" class="mat-field">
+                            <mat-select placeholder="{{ 'contact.select' | translate}}" [(ngModel)]="apptypecontact.contactId">
+                                <mat-form-field class="mat-field">
+                                    <input #searchcontact matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="contactSearch" 
+                                        (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">
+                                    <a href="javascript:void(0)" (click)="onEnterSearchClientOrContact('contact')">
+                                        <i *ngIf="contactSearch.length > 2" class="fa fa-plus-square cursor"></i>
+                                    </a>                                            
+                                </mat-form-field>
+                                <mat-option hidden [value]="null"></mat-option>
+                                <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <span *ngIf="apptypecontact?.id != ocr.id">
+                            {{ ocr.client?.name }}
+                        </span>
+                        <mat-form-field *ngIf="apptypecontact?.id == ocr.id" class="mat-field">
+                            <mat-select placeholder="{{ 'company.select' | translate}}" [(ngModel)]="apptypecontact.clientId">
+                                <mat-form-field class="mat-field">
+                                    <input matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="companySearch" 
+                                        (input)="onSearchCompany($event.target.value)" (keydown)="$event.stopPropagation()">
+                                    <a href="javascript:void(0)" (click)="onEnterSearchClientOrContact('company')">
+                                        <i *ngIf="companySearch.length > 2" class="fa fa-plus-square cursor"></i>
+                                    </a>                                            
+                                </mat-form-field>
+                                
+                                <mat-option hidden [value]="null"></mat-option>
+                                <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <span *ngIf="apptypecontact?.id != ocr.id">
+                            {{ ocr.contactrole?.name }}
+                        </span>
+                        <mat-form-field *ngIf="apptypecontact?.id == ocr.id" class="mat-field">
+                            <mat-select placeholder="{{ 'contactroles.select' | translate}}" [(ngModel)]="apptypecontact.contactroleId">  
+                                <mat-form-field class="mat-field">
+                                    <input matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="roleSearch" 
+                                        (input)="onSearchRole($event.target.value)" (keydown)="$event.stopPropagation()">
+                                    <a href="javascript:void(0)" (click)="onEnterSearchContactrole()">
+                                        <i *ngIf="roleSearch.length > 2" class="fa fa-plus-square cursor"></i>
+                                    </a>
+                                </mat-form-field>                               
+
+                                <mat-option *ngFor="let roles of contactroleSearch" [value]="roles.id">{{ roles.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+
+                    <td style="white-space: pre-wrap;">
+                        <span *ngIf="apptypecontact?.id != ocr.id">
+                            {{ ocr.description }}
+                        </span>
+                        <mat-form-field *ngIf="apptypecontact?.id == ocr.id" class="mat-field">
+                            <textarea matInput [(ngModel)]="apptypecontact.description" rows="2"></textarea>
+                        </mat-form-field>
+                    </td>
+
+                    <td>{{ ocr.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                    <td>{{ ocr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                    <td>
+                        <i *ngIf="ocr.id!=apptypecontact.id" class="fa fa-edit cursor mr-2" (click)="editApptypecontact(ocr)"></i>
+                        <i *ngIf="ocr.id==apptypecontact.id" class="fa fa-save cursor mr-2" (click)="saveApptypecontact(apptypecontact)"></i>
+                        <i class="fa fa-trash-o cursor" (click)="deleteApptypecontact(ocr)"></i>
+                    </td>
+
+                </tr>
+
+            </ng-container>
+        </tbody>
+    </table>
+</div>

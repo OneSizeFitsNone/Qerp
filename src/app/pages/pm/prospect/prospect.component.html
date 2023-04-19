@@ -148,23 +148,6 @@
 
                             <div class="col-md-6">
                                 <mat-form-field class="mat-field">
-                                    <mat-label>{{ "contact" | translate }}</mat-label>
-                                    <mat-select formControlName="contactId">                                        
-                                        <mat-form-field class="mat-field">
-                                            <input #searchcontact matInput placeholder="{{ 'general.search' | translate }}" 
-                                                (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">
-                                            <a href="javascript:void(0)" (click)="onEnterSearchClientOrContact('contact')">
-                                                <i *ngIf="contactSearch.length > 2" class="fa fa-plus-square cursor"></i>
-                                            </a>                                            
-                                        </mat-form-field>
-                                        <mat-option hidden [value]="null"></mat-option>
-                                        <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-md-6">
-                                <mat-form-field class="mat-field">
                                     <mat-label>{{ "company" | translate }}</mat-label>
                                     <mat-select formControlName="clientId">                                        
                                         <mat-form-field class="mat-field">
@@ -176,6 +159,23 @@
                                         </mat-form-field>
                                         <mat-option hidden [value]="null"></mat-option>
                                         <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "contact" | translate }}</mat-label>
+                                    <mat-select formControlName="contactId">                                        
+                                        <mat-form-field class="mat-field">
+                                            <input #searchcontact matInput placeholder="{{ 'general.search' | translate }}" 
+                                                (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">
+                                            <a href="javascript:void(0)" (click)="onEnterSearchClientOrContact('contact')">
+                                                <i *ngIf="contactSearch.length > 2" class="fa fa-plus-square cursor"></i>
+                                            </a>                                            
+                                        </mat-form-field>
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -212,33 +212,21 @@
             </div>
         </div>
 
-        <div class="row">
-
-            <div class="col-12 bottom-30">
-
-                <div class="clearfix">
-                    <ul class="nav nav-tabs top pull-left w-100p">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#contacts">{{ "contacts" | translate}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#projects">{{ "projects" | translate}}</a>
-                        </li>                      
-                    </ul>
+        <mat-tab-group *ngIf="prospect.id > 0" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+            
+            <mat-tab label="{{ 'contacts' | translate}}">
+                <div class="col-md-12 mt-3">
+                    <az-apptypecontacts [appTypeId]="appTypes.prospect" [linkTypeId]="prospect.id" ></az-apptypecontacts>
                 </div>
-                <div class="tab-content top">
-
-                    <div class="tab-pane active" id="contacts">
-                        <!-- <az-clientcontacts-tab [appTypeId]="appTypes.client" [linkTypeId]="client.id"></az-clientcontacts-tab> -->                        
-                    </div>
-                    <div class="tab-pane" id="projects">
-                        <p>Comming soon!</p>
-                    </div>
-
-                </div>                   
-            </div>
-
-        </div>
+                
+            </mat-tab>
+            <mat-tab label="{{ 'tasks' | translate}}">
+                <div class="col-md-12 mt-3">
+                    comming soon!
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+        
 
     </div>
 </div>

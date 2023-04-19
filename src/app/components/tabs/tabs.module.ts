@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ApptypecontactsComponent } from './apptypecontacts/apptypecontacts.component';
 
 @NgModule({
   imports: [
@@ -27,10 +28,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ], 
     declarations: [
       ClientcontactsTabComponent,
+      ApptypecontactsComponent,
     ],
     exports: [ 
-      ClientcontactsTabComponent
-
+      ClientcontactsTabComponent,
+      ApptypecontactsComponent
     ]
 })
 

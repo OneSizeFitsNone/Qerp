@@ -16,6 +16,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ImageModule } from 'src/app/components/images/image.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { TabsModule } from 'src/app/components/tabs/tabs.module';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full'},
@@ -40,7 +41,8 @@ export const routes: Routes = [
     MatDatepickerModule,
     ImageModule,
     MatTabsModule,
-    CKEditorModule
+    CKEditorModule,
+    TabsModule
   ],
     declarations: [
         ProjectsComponent,

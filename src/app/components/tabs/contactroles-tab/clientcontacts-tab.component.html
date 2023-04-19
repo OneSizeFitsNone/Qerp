@@ -68,8 +68,16 @@
                                 {{ oCr.contactrole.name }}
                             </ng-container>
                             <ng-container *ngIf="oCr.id==clientContact.id">
-                                <mat-form-field class="mat-field">
-                                    <mat-select placeholder="{{ 'contactroles.select' | translate}}" [(ngModel)]="clientContact.contactroleId">                                
+                                <mat-form-field>
+                                    <mat-select placeholder="{{ 'contactroles.select' | translate}}" [(ngModel)]="clientContact.contactroleId">  
+                                        <mat-form-field class="mat-field">
+                                            <input matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="roleSearch" 
+                                            (input)="onSearchRole($event.target.value)" (keydown)="$event.stopPropagation()">
+                                            <a href="javascript:void(0)" (click)="onEnterSearchContactrole()">
+                                                <i *ngIf="roleSearch.length > 2" class="fa fa-plus-square cursor"></i>
+                                            </a>
+                                        </mat-form-field>                               
+
                                         <mat-option *ngFor="let roles of contactroleSearch" [value]="roles.id">{{ roles.name }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
