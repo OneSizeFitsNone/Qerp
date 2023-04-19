@@ -41,7 +41,7 @@
                       <div *ngIf="contact.phone || contact.mobile" class="row mb-4">
                         <div class="col-md-2">
                             <i *ngIf="contact.phone" class="fa fa-phone"></i><br *ngIf="contact.phone && contact.mobile">
-                            <i *ngIf="contact.phone" class="fa fa-mobile"></i>
+                            <i *ngIf="contact.mobile" class="fa fa-mobile"></i>
                         </div>
                         <div class="col-md-10 text-left">
                             <span *ngIf="contact.phone">{{ contact.phone }}</span><br *ngIf="contact.phone && contact.mobile">

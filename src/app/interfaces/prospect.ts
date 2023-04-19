@@ -1,20 +1,29 @@
+import { IClient } from "./client";
+import { ICompany } from "./company";
 import { IContact } from "./contact";
-import { IProject } from "./project";
-import { IProspectgoal } from "./prospectgoal";
-import { ITask } from "./task";
+import { IParameter } from "./parameter";
 
 export interface IProspect { 
+
     id: number;
-    projectId: number;
+    companyId: number;
+    clientId: number;
     contactId: number;
+    prospectTypeId: number;
+    number: string;
     deadline: Date;
     description: string;
     estimatedBudget: number;
     created: Date;
     updated: Date;
 
+    client: IClient;
+    company: ICompany;
     contact: IContact;
-    project: IProject;
-    prospectgoals: Array<IProspectgoal>;
-    tasks: Array<ITask>;
+    prospectType: IParameter;
+
+    forcedId: number;
+    deadlineFrom: Date;
+    deadlineTo: Date;
+
 }

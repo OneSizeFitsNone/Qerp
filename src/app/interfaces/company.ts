@@ -20,6 +20,7 @@ export interface ICompany {
     cityId: number;
     description: string;
     email: string;
+    website:string;
     invoiceAddress: string;
     invoiceCityId: number;
     invoiceEmail: string;

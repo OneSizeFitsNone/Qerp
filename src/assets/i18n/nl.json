@@ -14,6 +14,7 @@
     "menu.crm": "CRM",
     "menu.companies" : "Bedrijven",
     "menu.contacts": "Contacten",
+    "menu.prospects": "Prospecten",
     "menu.projects": "Projecten",
     "menu.tasks": "Taken",
     "menu.invoices": "Facturen",
@@ -52,6 +53,9 @@
     "general.saveitem": "Bewaar item voor later gebruik",
     "general.goback": "Ga terug",
     "general.close": "Sluiten",
+    "general.deadline": "Deadline",
+    "general.deadlineFrom": "Deadline van",
+    "general.deadlineTo": "Deadline tot",
     
     "address.address": "Adres",
     "address.postalCode": "Postcode",
@@ -83,6 +87,14 @@
 
     "vat.vatnumber": "BTW nummer",
 
+    "prospects": "Prospecten",
+    "prospect": "Prospect",
+    "prospect.searchNumber": "Zoek op nummer",
+    "prospect.number": "Nummer",
+    "prospect.type": "Prospect type",
+    "prospect.edtimatedBudget": "Ingeschat budget",
+    "prospect.numberwillbeassigned": "Nummer wordt toegewezen",
+
     "projects": "Projecten",
     "project": "Project",
 
@@ -99,5 +111,6 @@
     "prospecttypes": "Prospect types",
     "high": "Hoog",
     "low": "Laag",
-    "medium": "Medium"
+    "medium": "Medium",
+    "type": "Type"
 }

@@ -1,0 +1,244 @@
+<div widget class="card" style="max-height: 100%!important;">
+    <div class="card-header">
+        <span class="text-uppercase">{{ "prospect" | translate }}: {{ prospect.number }}
+        </span>
+
+        <div class="widget-controls">
+            <i class="fa fa-chevron-left mr-3 cursor" (click)="goBack()" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.goback' | translate }}"></i>
+            <i *ngIf="prospect.id != 0" class="fa fa-chevron-up mr-3 cursor" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.saveitem' | translate }}" (click)="saveItem()"></i>
+            <i class="fa fa-times cursor" [routerLink]="'/pages/pm/prospects'" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.close' | translate }}"></i>
+        </div>  
+
+    </div>
+    <div class="card-body scroll">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-12 col-sm-12 bottom-30">
+
+                <mat-tab-group dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+                    <mat-tab label="{{ 'company' | translate}}">
+                        <div class="col-12">
+
+                            <az-image-display *ngIf="prospect.client?.id" [appTypeId]="appTypes.client" [linkTypeId]="prospect.client?.id" [showEdit]="false"></az-image-display>
+
+                            <h4 class="card-title text-center mb-4">
+                                <span>
+                                    <a href="javascript:void(0)" class="cursor" [routerLink]="'/pages/crm/company/'+prospect.client?.id">
+                                        {{ prospect.client?.name }}
+                                    </a>
+                                </span>
+                                <span *ngIf="prospect.client?.website?.length > 0">
+                                    <br><small><a href="{{ prospect.client.website }}" target="_blank">{{ prospect.client.website }}</a></small>
+                                </span>
+                            </h4>                                                      
+        
+                            <div *ngIf="prospect.client?.address || prospect.client?.city" class="row mb-4">
+                                <div class="col-md-2">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <div class="col-md-10 text-left" style="white-space: pre-wrap;">
+                                    <span *ngIf="prospect.client.address">{{ prospect.client.address }}</span><br *ngIf="prospect.client.address && prospect.client.city?.name">
+                                    <span *ngIf="prospect.client.city?.postalCode">{{ prospect.client.city.postalCode }}</span><span *ngIf="prospect.client.city?.name"> {{ prospect.client.city.name }}</span><br *ngIf="prospect.client.address && prospect.client.city?.name">
+                                    <span *ngIf="prospect.client.city?.name">{{ prospect.client.city.province.name }}, {{ prospect.client.city.province.country.nicename }}</span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="prospect.client?.phone || prospect.client?.mobile" class="row mb-4">
+                                <div class="col-md-2">
+                                    <i *ngIf="prospect.client?.phone" class="fa fa-phone"></i><br *ngIf="prospect.client.phone && prospect.client.mobile">
+                                    <i *ngIf="prospect.client?.mobile" class="fa fa-mobile"></i>
+                                </div>
+                                <div class="col-md-10 text-left">
+                                    <span *ngIf="prospect.client?.phone">{{ prospect.client.phone }}</span><br *ngIf="prospect.client.phone && prospect.client.mobile">
+                                    <span *ngIf="prospect.client?.mobile">{{ prospect.client.mobile }}</span>
+                                </div>
+                            </div>
+        
+                            <div *ngIf="prospect.client?.email" class="row mb-4">
+                                <div class="col-md-2">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <div class="col-md-10 text-left">
+                                    {{ prospect.client.email }}
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </mat-tab>
+
+                    <mat-tab label="{{ 'contact' | translate}}">
+                        <div class="col-12">
+
+                            <az-image-display *ngIf="prospect.contact?.id" [appTypeId]="appTypes.contact" [linkTypeId]="prospect.contact?.id" [showEdit]="false"></az-image-display>
+                            
+                            <h4 class="card-title text-center mb-4">
+                                <span>
+                                    <a href="javascript:void(0)" class="cursor" [routerLink]="'/pages/crm/contact/'+prospect.contact?.id">
+                                        {{ prospect.contact?.fullname }}
+                                    </a>
+                                </span>
+                            </h4>                                                           
+      
+                            <div *ngIf="prospect.contact?.address || prospect.contact?.city" class="row mb-4">
+                              <div class="col-md-2">
+                                  <i class="fa fa-home"></i>
+                              </div>
+                              <div class="col-md-10 text-left" style="white-space: pre-wrap;">
+                                  <span *ngIf="prospect.contact?.address">{{ prospect.contact?.address }}</span><br *ngIf="prospect.contact?.address && prospect.contact?.city?.name">
+                                  <span *ngIf="prospect.contact?.city?.postalCode">{{ prospect.contact?.city.postalCode }}</span><span *ngIf="prospect.contact?.city?.name"> {{ prospect.contact?.city.name }}</span><br *ngIf="prospect.contact?.address && prospect.contact?.city?.name">
+                                  <span *ngIf="prospect.contact?.city?.name">{{ prospect.contact?.city.province.name }}, {{ prospect.contact?.city.province.country.nicename }}</span>
+                              </div>
+                            </div>
+                            
+                            <div *ngIf="prospect.contact?.phone || prospect.contact?.mobile" class="row mb-4">
+                              <div class="col-md-2">
+                                  <i *ngIf="prospect.contact?.phone" class="fa fa-phone"></i><br *ngIf="prospect.contact?.phone && prospect.contact?.mobile">
+                                  <i *ngIf="prospect.contact?.mobile" class="fa fa-mobile"></i>
+                              </div>
+                              <div class="col-md-10 text-left">
+                                  <span *ngIf="prospect.contact?.phone">{{ prospect.contact?.phone }}</span><br *ngIf="prospect.contact?.phone && prospect.contact?.mobile">
+                                  <span *ngIf="prospect.contact?.mobile">{{ prospect.contact?.mobile }}</span>
+                              </div>
+                            </div>
+      
+                            <div *ngIf="prospect.contact?.email" class="row mb-4">
+                              <div class="col-md-2">
+                                  <i class="fa fa-envelope"></i>
+                              </div>
+                              <div class="col-md-10 text-left">
+                                  {{ prospect.contact?.email }}
+                              </div>
+                            </div>
+
+                        </div>
+                        
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+
+            <div class="col-lg-9 col-md-12 col-sm-12 bottom-30">
+                <div class="card card-info border-0 box-shadow">
+                    <div class="card-body bg-white">
+                        <form [formGroup]="prospectForm" class="row">
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label *ngIf="this.id != 0">{{ "prospect.number" | translate }}</mat-label>
+                                    <mat-label *ngIf="this.id == 0">{{ "prospect.numberwillbeassigned" | translate }}</mat-label>
+                                    <input matInput formControlName="number" [readonly]="id == 0">
+                                    <mat-error *ngIf="prospectForm.get('number').touched && prospectForm.get('number').hasError('required')">
+                                        {{ "prospect.number" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "prospect.type" | translate }}</mat-label>
+                                    <mat-select formControlName="prospectTypeId">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let prospectType of prospectTypes" [value]="prospectType.id">{{ prospectType.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "contact" | translate }}</mat-label>
+                                    <mat-select formControlName="contactId">                                        
+                                        <mat-form-field class="mat-field">
+                                            <input #searchcontact matInput placeholder="{{ 'general.search' | translate }}" 
+                                                (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">
+                                            <a href="javascript:void(0)" (click)="onEnterSearchClientOrContact('contact')">
+                                                <i *ngIf="contactSearch.length > 2" class="fa fa-plus-square cursor"></i>
+                                            </a>                                            
+                                        </mat-form-field>
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "company" | translate }}</mat-label>
+                                    <mat-select formControlName="clientId">                                        
+                                        <mat-form-field class="mat-field">
+                                            <input #searchcompany matInput placeholder="{{ 'general.search' | translate }}" 
+                                                (input)="onSearchCompany($event.target.value)" (keydown)="$event.stopPropagation()">
+                                            <a href="javascript:void(0)" (click)="onEnterSearchClientOrContact('company')">
+                                                <i *ngIf="companySearch.length > 2" class="fa fa-plus-square cursor"></i>
+                                            </a>                                            
+                                        </mat-form-field>
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.deadline" | translate }}</mat-label>
+                                    <input matInput type="datetime-local" formControlName="deadline">
+                                </mat-form-field>
+                            </div>                           
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "prospect.edtimatedBudget" | translate }}</mat-label>
+                                    <input matInput type="number" formControlName="estimatedBudget">
+                                </mat-form-field>
+                            </div> 
+
+                            <div class="col-md-12">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.description" | translate }}</mat-label>
+                                    <textarea matInput formControlName="description" rows="5"></textarea>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group col-12 pt-3 text-right">
+                                <button [disabled]="!prospectForm.dirty" class="btn btn-success cursor" (click)="undoChanges()" type="reset">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!prospectForm.valid" class="btn btn-success cursor" (click)="onSubmit()" type="button">{{ "form.save" | translate }}</button>
+                            </div>
+
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-12 bottom-30">
+
+                <div class="clearfix">
+                    <ul class="nav nav-tabs top pull-left w-100p">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#contacts">{{ "contacts" | translate}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#projects">{{ "projects" | translate}}</a>
+                        </li>                      
+                    </ul>
+                </div>
+                <div class="tab-content top">
+
+                    <div class="tab-pane active" id="contacts">
+                        <!-- <az-clientcontacts-tab [appTypeId]="appTypes.client" [linkTypeId]="client.id"></az-clientcontacts-tab> -->                        
+                    </div>
+                    <div class="tab-pane" id="projects">
+                        <p>Comming soon!</p>
+                    </div>
+
+                </div>                   
+            </div>
+
+        </div>
+
+    </div>
+</div>

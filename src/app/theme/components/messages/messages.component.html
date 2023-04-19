@@ -1,7 +1,7 @@
 
 <ul class="notifications"> 
  
-    <li class="dropdown message-menu">
+<!--     <li class="dropdown message-menu">
         <a href class="dropdown-toggle message" data-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-envelope-o"></i>
             <span>7</span>
@@ -56,9 +56,9 @@
                 <a href="javascript:void(0);" class="transition">View all notifications</a>
             </div> 
         </div> 
-    </li>
+    </li> -->
 
-    <li class="dropdown task-menu">
+<!--     <li class="dropdown task-menu">
         <a href class="dropdown-toggle task" data-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-tasks"></i>
             <span>6</span>
@@ -83,7 +83,7 @@
                 <a href="javascript:void(0);" class="transition">View all tasks</a>
             </div>     
         </div>
-    </li>
+    </li> -->
 
 
     <li class="dropdown task-menu">
@@ -105,6 +105,7 @@
                             <span class="cursor" [routerLink]="saveditem.routelink">
                                 <i *ngIf="saveditem.apptypeId == appTypes.client" class="fa fa-building mr-2"></i>
                                 <i *ngIf="saveditem.apptypeId == appTypes.contact" class="fa fa-user mr-2"></i>
+                                <i *ngIf="saveditem.appTypeId == appTypes.prospect" class="fa fa-briefcase mr-2"></i>
                                 {{saveditem.name}}
                             </span>
                             <span class="pull-right">

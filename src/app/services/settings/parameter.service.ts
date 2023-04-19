@@ -117,6 +117,22 @@ export class ParameterService {
         });
     }
 
+    public async getByGroupSystemCode(systemcode: string) {
+        let getter = this.http.get<IReturnResult>(this.url + `getByGroupSystemCode?syscode=${systemcode}`, {
+            headers: new HttpHeaders({
+                "Content-Type": "application/json"
+            })
+        })
+
+        let response = await lastValueFrom(getter)
+        if(response?.success) {
+            return response.object;
+        }
+        else {
+            return [];
+        }
+    }
+
     public async save(oParameter: IParameter) {
         this.http.post(this.url, oParameter, {
             headers: new HttpHeaders({

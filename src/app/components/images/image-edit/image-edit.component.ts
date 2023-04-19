@@ -32,14 +32,19 @@ export class ImageEditComponent {
     private ref: ChangeDetectorRef
   ) { 
 
+
+  }
+
+  ngOnInit() {
     this.imageService.images.subscribe(i => {
       this.images = i;
       this.ref.detectChanges();
     });
-    this.imageService.isUploading.subscribe(iu => this.isUploading = iu)
-  }
+    this.imageService.isUploading.subscribe(iu => {
+      this.isUploading = iu;
+      this.ref.detectChanges();
+    });
 
-  ngOnInit() {
     this.sub = this.dragula
     .drop("bag")
     .subscribe(value => {

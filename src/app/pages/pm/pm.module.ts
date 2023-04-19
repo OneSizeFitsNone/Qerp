@@ -5,11 +5,25 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectsComponent } from './projects/projects.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { ProspectsComponent } from './prospects/prospects.component';
+import { ProspectComponent } from './prospect/prospect.component';
+import { ProjectComponent } from './project/project.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ImageModule } from 'src/app/components/images/image.module';
+import {MatTabsModule} from '@angular/material/tabs';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full'},
-  { path: 'projects', component: ProjectsComponent, data: { breadcrumb: 'menu.projects' } },
-  { path: 'tasks', component: TasksComponent, data: { breadcrumb: 'menu.tasks' } },
+  { path: 'prospects', component: ProspectsComponent},
+  { path: 'prospect/:id', component: ProspectComponent},
+  { path: 'projects', component: ProjectsComponent },
+  { path: 'project/:id', component: ProjectsComponent },
+  { path: 'tasks', component: TasksComponent },
 ];
 
 @NgModule({
@@ -18,11 +32,22 @@ export const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    ImageModule,
+    MatTabsModule,
+    CKEditorModule
   ],
     declarations: [
         ProjectsComponent,
-        TasksComponent
+        TasksComponent,
+        ProspectsComponent,
+        ProspectComponent,
+        ProjectComponent
     ],
     exports: [ 
     ]

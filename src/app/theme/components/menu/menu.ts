@@ -24,12 +24,20 @@ export const menuItems = [
     order: 200
   },
   {
+    title: 'menu.prospects',
+    routerLink: 'pm/prospects',
+    icon: 'fa-briefcase',
+    selected: false,
+    expanded: false,
+    order: 300
+  },  
+  {
     title: 'menu.projects',
     routerLink: 'pm/projects',
     icon: 'fa-folder-open',
     selected: false,
     expanded: false,
-    order: 300
+    order: 350
   },
   {
     title: 'menu.tasks',

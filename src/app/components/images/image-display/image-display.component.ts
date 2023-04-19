@@ -1,6 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { link } from 'fs';
-import { element } from 'protractor';
+import { ChangeDetectorRef, Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { IImage } from 'src/app/interfaces/image';
 import { ImageService } from 'src/app/services/general/image.service';
 import { environment } from 'src/environments/environment';
@@ -18,20 +16,21 @@ export class ImageDisplayComponent {
   @Input() linkTypeId: number;
   @Input() editEnabled: boolean = true;
 
-
   public images: Array<IImage> = [];
   public location: string = environment.IMAGE_URL;
   public showEdit = false;
 
+  public imgWidth: number = 0;
+
   constructor(
-    private imageService: ImageService
+    private imageService: ImageService,
+    private ref: ChangeDetectorRef
   ) { 
     this.imageService.images.subscribe(i => this.images = i);
   }
 
   ngOnInit() {
-    
-
+      
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -46,4 +45,5 @@ export class ImageDisplayComponent {
     this.imageService.GetByAppType(this.appTypeId, this.linkTypeId);
     this.showEdit = value;
   }
+
 }
