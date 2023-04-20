@@ -100,8 +100,8 @@ export class ApptypecontactsComponent {
   public onInputChange() {
     this.apptypecontactSearch = this.apptypecontacts.filter(
       cr => this.ccSearch == "" || cr.id == 0 || 
-        cr.contact?.fullname?.startsWith(this.ccSearch) ||
-        cr.client?.name?.startsWith(this.ccSearch)
+        cr.contact?.fullname?.toLowerCase().startsWith(this.ccSearch.toLowerCase()) ||
+        cr.client?.name?.toLowerCase().startsWith(this.ccSearch.toLowerCase())
     );
   }
 

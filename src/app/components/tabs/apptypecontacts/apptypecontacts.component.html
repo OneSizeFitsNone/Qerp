@@ -41,7 +41,7 @@
 
                     <td>
                         <span *ngIf="apptypecontact?.id != ocr.id">
-                            {{ ocr.contact?.fullname }}
+                            <a [routerLink]="['/pages/crm/contact', ocr.contactId]" href="javascript:void(0)">{{ ocr.contact?.fullname }}</a>
                         </span>
                         <mat-form-field *ngIf="apptypecontact?.id == ocr.id" class="mat-field">
                             <mat-select placeholder="{{ 'contact.select' | translate}}" [(ngModel)]="apptypecontact.contactId">
@@ -59,7 +59,7 @@
                     </td>
                     <td>
                         <span *ngIf="apptypecontact?.id != ocr.id">
-                            {{ ocr.client?.name }}
+                            <a [routerLink]="['/pages/crm/company', ocr.clientId]" href="javascript:void(0)">{{ ocr.client?.name }}</a>
                         </span>
                         <mat-form-field *ngIf="apptypecontact?.id == ocr.id" class="mat-field">
                             <mat-select placeholder="{{ 'company.select' | translate}}" [(ngModel)]="apptypecontact.clientId">

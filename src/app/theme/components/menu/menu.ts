@@ -61,9 +61,13 @@ export const menuItems = [
     routerLink: 'settings',
     icon: 'fa-gear',
     selected: false, 
-    expanded: false,
+    expanded: false, 
     order: 99999,
     subMenu: [
+      {
+        title: 'menu.settings.mycompany',
+        routerLink: 'settings/mycompany',
+      },
       {
         title: 'menu.settings.contactroles',
         routerLink: 'settings/contactroles',

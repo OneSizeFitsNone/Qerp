@@ -1,22 +1,13 @@
 <div widget class="card" style="max-height: 100%!important;">
     <div class="card-header">
         <span class="text-uppercase">{{ "company" | translate }}: {{ company.name }}
-        </span>
-        <div class="widget-controls">
-            <i class="fa fa-chevron-left mr-3 cursor" (click)="goBack()" data-toggle="tooltip" data-animation="false"
-            data-placement="bottom" title="{{ 'general.goback' | translate }}"></i>
-            <i *ngIf="company.id != 0" class="fa fa-chevron-up mr-3 cursor" data-toggle="tooltip" data-animation="false"
-            data-placement="bottom" title="{{ 'general.saveitem' | translate }}" (click)="saveItem()"></i>
-            <i class="fa fa-times cursor" [routerLink]="'/pages/crm/companies'" data-toggle="tooltip" data-animation="false"
-            data-placement="bottom" title="{{ 'general.close' | translate }}"></i>
-        </div>        
+        </span>    
     </div>
     <div class="card-body scroll">
         <div class="row">
             <div class="col-lg-3 col-md-12 col-sm-12 bottom-30">
                 <div class="card border-0 box-shadow mb-4">
-                    <az-image-display *ngIf="company?.id" [appTypeId]="appTypes.client" [linkTypeId]="company.id"></az-image-display>
-                    <!-- <img class="card-img-top w-100" src="assets/img/users/user-orig.jpg" alt="user"> -->
+                  <az-image-display *ngIf="company?.id" [appTypeId]="appTypes.company" [linkTypeId]="company.id"></az-image-display>
                   
                   <div class="card-body"> 
                       <h4 class="card-title text-center mb-4">
@@ -264,6 +255,40 @@
                                     <textarea matInput formControlName="description" rows="5"></textarea>
                                 </mat-form-field>
                             </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "prospect.prospectprefix" | translate }}</mat-label>
+                                    <input matInput formControlName="prospectPrefix" >
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "prospect.prospectnumber" | translate }}</mat-label>
+                                    <input matInput formControlName="prospectNumber" >
+                                    <mat-error *ngIf="personalForm.get('prospectNumber').touched && personalForm.get('prospectNumber').hasError('required')">
+                                        {{ "prospect.prospectnumber" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "project.projectprefix" | translate }}</mat-label>
+                                    <input matInput formControlName="projectPrefix" >
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "project.projectnumber" | translate }}</mat-label>
+                                    <input matInput formControlName="projectNumber" >
+                                    <mat-error *ngIf="personalForm.get('projectNumber').touched && personalForm.get('projectNumber').hasError('required')">
+                                        {{ "project.projectnumber" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
                             
                             <div class="form-group col-12 pt-3 text-right">
                                 <button [disabled]="!personalForm.dirty" class="btn btn-success cursor" (click)="undoChanges()" type="reset">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!personalForm.valid" class="btn btn-success cursor" (click)="onSubmit()" type="button">{{ "form.save" | translate }}</button>
@@ -275,24 +300,4 @@
             </div>
         </div>
 
-        <div class="row">
-
-            <div class="col-md-12">
-                <mat-tab-group dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
-                    <mat-tab label="{{ 'contacts' | translate}}">
-                        <div class="col-md-12 mt-3">
-                            <az-clientcontacts-tab [appTypeId]="appTypes.client" [linkTypeId]="company.id"></az-clientcontacts-tab>      
-                        </div>
-                        
-                    </mat-tab>
-                    <mat-tab label="{{ 'prospects' | translate}}">
-                    </mat-tab>
-                    <mat-tab label="{{ 'projects' | translate}}">
-                    </mat-tab>
-                </mat-tab-group>
-            </div>
-
-        </div>
-
-    </div>
 </div>

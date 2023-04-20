@@ -20,6 +20,7 @@
     "menu.invoices": "Facturen",
     "menu.invoicesOut": "Uitgaande facturen",
     "menu.settings": "Instellingen",
+    "menu.settings.mycompany": "Mijn bedrijf",
     "menu.settings.contactroles": "Contact rollen",
     "menu.settings.parameters": "Parameters",
 
@@ -94,9 +95,13 @@
     "prospect.type": "Prospect type",
     "prospect.edtimatedBudget": "Ingeschat budget",
     "prospect.numberwillbeassigned": "Nummer wordt toegewezen",
-
+    "prospect.prospectprefix": "Prospect prefix",
+    "prospect.prospectnumber": "Prospect nummer",
+    
     "projects": "Projecten",
     "project": "Project",
+    "project.projectprefix": "Project prefix",
+    "project.projectnumber": "Project nummer",
 
     "parameters": "Parameters",
     "parameter": "Parameter",

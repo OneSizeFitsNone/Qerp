@@ -44,7 +44,7 @@
                     <tr >
                         <td>
                             <ng-container *ngIf="oCr.id!=clientContact.id">
-                                <a [routerLink]="['/pages/crm/contact', oCr.contactId]">{{ oCr.contact.fullname }}</a>
+                                <a [routerLink]="['/pages/crm/contact', oCr.contactId]" href="javascript:void(0);">{{ oCr.contact.fullname }}</a>
                             </ng-container>
                             <ng-container *ngIf="oCr.id==clientContact.id">
                                 <mat-form-field class="mat-field">
@@ -117,7 +117,7 @@
                     <tr class="font-weight-normal">
                         <td>
                             <ng-container *ngIf="oCr.id!=clientContact.id">
-                                <a [routerLink]="['/pages/crm/company', oCr.clientId]">{{ oCr.client.name }}</a>
+                                <a [routerLink]="['/pages/crm/company', oCr.clientId]" href="javascript:void(0)">{{ oCr.client.name }}</a>
                             </ng-container>
                             <ng-container *ngIf="oCr.id==clientContact.id">
                                 <mat-form-field>

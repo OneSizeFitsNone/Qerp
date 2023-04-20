@@ -202,30 +202,20 @@
         </div>
 
         <div class="row">
-
-            <div class="col-12 bottom-30">
-                <div class="clearfix">
-                    <ul class="nav nav-tabs top pull-left w-100p">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#companies">{{ "companies" | translate}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#projects">{{ "projects" | translate}}</a>
-                        </li>                      
-                    </ul>
-                </div>
-                <div class="tab-content top">
-
-                    <div class="tab-pane active" id="companies">
-                        <az-clientcontacts-tab [appTypeId]="appTypes.contact" [linkTypeId]="contact.id"></az-clientcontacts-tab>                        
-                    </div>
-                    <div class="tab-pane" id="projects">
-                        <p>Comming soon!</p>
-                    </div>
-
-                </div>                   
+            <div class="col-md-12">
+                <mat-tab-group dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+                    <mat-tab label="{{ 'companies' | translate}}">
+                        <div class="col-md-12 mt-3">
+                            <az-clientcontacts-tab [appTypeId]="appTypes.contact" [linkTypeId]="contact.id"></az-clientcontacts-tab> 
+                        </div>
+                        
+                    </mat-tab>
+                    <mat-tab label="{{ 'prospects' | translate}}">
+                    </mat-tab>
+                    <mat-tab label="{{ 'projects' | translate}}">
+                    </mat-tab>
+                </mat-tab-group>
             </div>
-
         </div>
 
     </div>

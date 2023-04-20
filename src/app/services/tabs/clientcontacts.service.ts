@@ -76,6 +76,9 @@ export class ClientcontactsService {
         }).subscribe({
             next: (result: IReturnResult) => {
               if(result.success) { 
+                result.object.sort((a,b) => { 
+                  return (a.client.name < b.client.name) ? -1 : (a.client.name > b.client.name) ? 1 : 0 
+                });
                 this._clientcontacts.next(result.object);
                 if(result.message.length > 0) {
                     this.toastr.warning(this.translate.instant(result.message));
@@ -99,7 +102,11 @@ export class ClientcontactsService {
             })
         }).subscribe({
             next: (result: IReturnResult) => {
-              if(result.success) { 
+              if(result.success) {
+                result.object.sort((a,b) => { 
+                  return (a.contact.name < b.contact.name) ? -1 : (a.contact.name > b.contact.name) ? 1 : 0 
+
+                });
                 this._clientcontacts.next(result.object);
                 if(result.message.length > 0) {
                     this.toastr.warning(this.translate.instant(result.message));
@@ -152,7 +159,6 @@ export class ClientcontactsService {
         }
       });
     }
-
 
     public async deleteClientcontact(oClientcontact: IClientcontact) {
       if(oClientcontact.id == 0) {

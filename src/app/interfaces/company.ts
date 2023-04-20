@@ -21,6 +21,7 @@ export interface ICompany {
     description: string;
     email: string;
     website:string;
+    invoiceSameAddress: boolean;
     invoiceAddress: string;
     invoiceCityId: number;
     invoiceEmail: string;
@@ -30,19 +31,12 @@ export interface ICompany {
     iban: string;
     created: string;
     updated: string;
+    ProspectPrefix: string;
+    ProspectNumber: number;
+    ProjectPrefix: string;
+    ProjectNumber: number;
+
     city: ICity; 
     invoiceCity: ICity;
 
-    cities: Array<ICity>;
-    clients: Array<IClient>;
-    contactroles: Array<IContactrole>;
-    contacts: Array<IContact>;
-    images: Array<IImage>;
-    invoicelines: Array<IInvoiceline>;
-    invoices: Array<IInvoice>;
-    projects: Array<IProject>;
-    provinces: Array<IProvince>;
-    tasks: Array<ITask>;
-    users: Array<IUser>;
-    vats: Array<IVat>;
 }
