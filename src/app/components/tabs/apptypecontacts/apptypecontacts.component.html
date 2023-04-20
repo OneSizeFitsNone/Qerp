@@ -10,7 +10,7 @@
 
     <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
         <div class="box">
-            <a href="javascript:void(0);" (click)="onCreateApptypecontact()">
+            <a *ngIf="sourceAppTypeId == null" href="javascript:void(0);" (click)="onCreateApptypecontact()">
                 <i *ngIf="!hasNew"
                     class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
                     data-placement="bottom" title="{{ 'general.add' | translate }}"
@@ -25,9 +25,13 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>{{ "contact" | translate }}</th>
-                <th>{{ "company" | translate }}</th>
-                <th>{{ "contactroles.role" | translate}}</th>
+                <th *ngIf="sourceAppTypeId != null">
+                    <ng-container *ngIf="appTypeId == appTypes.prospect">{{ "prospect" | translate }}</ng-container>
+                    <ng-container *ngIf="appTypeId == appTypes.project">{{ "project" | translate }}</ng-container>
+                </th>
+                <th *ngIf="sourceAppTypeId != appTypes.contact">{{ "contact" | translate }}</th>
+                <th *ngIf="sourceAppTypeId != appTypes.client">{{ "company" | translate }}</th>
+                <th>{{ "contactroles.role" | translate }}</th>
                 <th>{{ "general.description" | translate }}</th>
                 <th>{{ "general.created" | translate }}</th>
                 <th>{{ "general.updated" | translate }}</th>
@@ -39,7 +43,19 @@
 
                 <tr>
 
-                    <td>
+                    <td *ngIf="sourceAppTypeId != null">
+                        <span *ngIf="appTypeId == appTypes.prospect">
+                            <a [routerLink]="['/pages/pm/prospect', ocr.linkedId]" href="javascript:void(0)">
+                                {{ ocr.prospect?.number }}
+                            </a>
+                        </span>
+                        <span *ngIf="appTypeId == appTypes.project">
+                            <a [routerLink]="['/pages/crm/project', ocr.linkedId]" href="javascript:void(0)">
+                                {{ ocr.project?.number }}
+                            </a>
+                        </span>
+                    </td>
+                    <td *ngIf="sourceAppTypeId != appTypes.contact">
                         <span *ngIf="apptypecontact?.id != ocr.id">
                             <a [routerLink]="['/pages/crm/contact', ocr.contactId]" href="javascript:void(0)">{{ ocr.contact?.fullname }}</a>
                         </span>
@@ -57,7 +73,7 @@
                             </mat-select>
                         </mat-form-field>
                     </td>
-                    <td>
+                    <td *ngIf="sourceAppTypeId != appTypes.client">
                         <span *ngIf="apptypecontact?.id != ocr.id">
                             <a [routerLink]="['/pages/crm/company', ocr.clientId]" href="javascript:void(0)">{{ ocr.client?.name }}</a>
                         </span>

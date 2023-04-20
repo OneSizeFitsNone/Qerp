@@ -64,6 +64,30 @@ export class ApptypecontactsService {
         });
     }
 
+    public async getBySource(apptypeId: number, linkTypeId: number, requestedType: number) {
+      this.http.get<IReturnResult>(this.url + `SelectBySource?apptypeId=${apptypeId}&linkedId=${linkTypeId}&requestedType=${requestedType}`, {
+          headers: new HttpHeaders({
+              "Content-Type": "application/json"
+          })
+      }).subscribe({
+          next: (result: IReturnResult) => {
+            if(result.success) { 
+              this._apptypecontacts.next(result.object);
+              if(result.message.length > 0) {
+                  this.toastr.warning(this.translate.instant(result.message));
+              }
+            }
+            else {
+              this._apptypecontacts.next([]);
+              this.toastr.warning(this.translate.instant(result.message));
+            }
+          },
+          error: err => {
+            this.toastr.error(this.translate.instant("err") + err);
+          }
+        });
+  }
+
     public async getByApptypeLinkedId(apptypeId: number, linkTypeId: number) {
         this.http.get<IReturnResult>(this.url + `SelectByApptypeLinkedId?apptypeId=${apptypeId}&linkedId=${linkTypeId}`, {
             headers: new HttpHeaders({

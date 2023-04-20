@@ -3,6 +3,7 @@ import { ICompany } from "./company";
 import { IContact } from "./contact";
 import { IContactrole } from "./contactrole";
 import { IProject } from "./project";
+import { IProspect } from "./prospect";
 import { ITask } from "./task";
 
 export interface IAppTypeContact { 
@@ -22,5 +23,6 @@ export interface IAppTypeContact {
     contact: IContact,
     contactrole: IContactrole,
     project: IProject,
+    prospect: IProspect,
     task: ITask
 }

@@ -201,7 +201,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div *ngIf="contact.id && contact.id > 0" class="row">
             <div class="col-md-12">
                 <mat-tab-group dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
                     <mat-tab label="{{ 'companies' | translate}}">
@@ -211,8 +211,14 @@
                         
                     </mat-tab>
                     <mat-tab label="{{ 'prospects' | translate}}">
+                        <div class="col-md-12 mt-3">
+                            <az-apptypecontacts [appTypeId]="appTypes.prospect" [sourceAppTypeId]="appTypes.contact" [sourceLinkTypeId]="contact.id" ></az-apptypecontacts>
+                        </div>
                     </mat-tab>
                     <mat-tab label="{{ 'projects' | translate}}">
+                        <div class="col-md-12 mt-3">
+                            <az-apptypecontacts [appTypeId]="appTypes.project" [sourceAppTypeId]="appTypes.contact" [sourceLinkTypeId]="contact.id" ></az-apptypecontacts>
+                        </div>                        
                     </mat-tab>
                 </mat-tab-group>
             </div>

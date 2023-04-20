@@ -19,7 +19,9 @@ import { ApptypecontactsService } from 'src/app/services/tabs/apptypecontacts.se
 
 export class ApptypecontactsComponent {
   @Input() appTypeId: number = null;
-  @Input() linkTypeId: number = null; 
+  @Input() linkTypeId: number = null;
+  @Input() sourceAppTypeId: number = null;
+  @Input() sourceLinkTypeId: number = null;
 
   public apptypecontacts: Array<IAppTypeContact> = [];
   public apptypecontactSearch: Array<IAppTypeContact> = [];
@@ -45,7 +47,7 @@ export class ApptypecontactsComponent {
     private contactroleService: ContactroleService,
     private contactService: ContactService,
     private companyService: CompanyService,
-    private appTypes: AppTypes,
+    public appTypes: AppTypes,
     private ref: ChangeDetectorRef
   ) {    
   }
@@ -83,17 +85,16 @@ export class ApptypecontactsComponent {
       this.ref.detectChanges();
     });
 
-    this.apptypecontactService.getByApptypeLinkedId(this.appTypeId, this.linkTypeId)
+    //this.apptypecontactService.getByApptypeLinkedId(this.appTypeId, this.linkTypeId)
     this.contactroleService.getContactroles();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes["appTypeId"] || changes["linkTypeId"]) {
-      if(this.appTypeId && this.linkTypeId) {
-        if(this.appTypeId == this.appTypes.contact) {
-          this.apptypecontactService.getByApptypeLinkedId(this.appTypeId, this.linkTypeId);
-        }
-      }
+    if(changes["sourceAppTypeId"]  != null && changes["sourceLinkTypeId"] != null && changes["appTypeId"] != null) {
+      this.apptypecontactService.getBySource(this.sourceAppTypeId, this.sourceLinkTypeId, this.appTypeId);
+    }
+    else if(changes["appTypeId"] != null || changes["linkTypeId"] != null) {
+      this.apptypecontactService.getByApptypeLinkedId(this.appTypeId, this.linkTypeId);
     }
   }
 
@@ -101,7 +102,8 @@ export class ApptypecontactsComponent {
     this.apptypecontactSearch = this.apptypecontacts.filter(
       cr => this.ccSearch == "" || cr.id == 0 || 
         cr.contact?.fullname?.toLowerCase().startsWith(this.ccSearch.toLowerCase()) ||
-        cr.client?.name?.toLowerCase().startsWith(this.ccSearch.toLowerCase())
+        cr.client?.name?.toLowerCase().startsWith(this.ccSearch.toLowerCase()) ||
+        cr.prospect?.number.toLowerCase().startsWith(this.ccSearch.toLowerCase())
     );
   }
 

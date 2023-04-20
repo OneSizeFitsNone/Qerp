@@ -73,9 +73,9 @@ export class MycompanyComponent {
       'iban' : [''],
       'description' : [''],
       'prospectPrefix': [''],
-      'prospectNumber': [''],
+      'prospectNumber': ['', Validators.required],
       'projectPrefix': [''],
-      'projectNumber': ['']
+      'projectNumber': ['', Validators.required]
     });
 
     this.myCompanyService.company.subscribe(async c => {
