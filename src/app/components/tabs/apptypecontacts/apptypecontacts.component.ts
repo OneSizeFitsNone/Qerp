@@ -31,7 +31,7 @@ export class ApptypecontactsComponent {
   public contactroleSearch: Array<IContactrole> = [];
 
   public companies: Array<IClient> = [];
-  public contacts: Array<IContact> = [];  
+  public contacts: Array<IContact> = [];
 
   public ccSearch: string = "";
   
@@ -152,7 +152,7 @@ export class ApptypecontactsComponent {
     this.contactService.findContact(oContact);
   }
 
-  public onEnterSearchClientOrContact(type:string) {
+  public onEnterSearch(type:string) {
     if(type=='contact') {
       this.contactService.saveFromSelect(this.contactSearch);
     }

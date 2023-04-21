@@ -96,6 +96,7 @@ export class ContactService {
             if(result.message.length > 0) {
                 this.toastr.warning(this.translate.instant(result.message));
             }
+            this.toastr.success(this.translate.instant('contact.saved'));
           }
           else {
             this._contact.next(<IContact>{});
@@ -126,6 +127,7 @@ export class ContactService {
             if(result.message.length > 0) {
                 this.toastr.warning(this.translate.instant(result.message));
             }
+            this.toastr.success(this.translate.instant('contact.created'));
           }
           else {
             this._contact.next(<IContact>{});

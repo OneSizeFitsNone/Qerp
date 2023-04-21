@@ -74,12 +74,16 @@
     "company.name": "Naam",
     "company.vat": "BTW",
     "company.select": "Selecteer een bedrijf",
+    "company.saved": "Bedrijf bewaard",
+    "company.created": "Bedrijf aangemaakt",
 
     "contacts": "Contacten",
     "contact": "Contact",
     "contact.name" : "Naam",
     "contact.surname": "Familienaam",
     "contact.select": "Selecteer een contact",
+    "contact.saved": "Contact bewaard",
+    "contact.created": "Contact aangemaakt",
     
     "contactroles": "Contact rollen",
     "contactroles.name": "Naam",
@@ -97,11 +101,15 @@
     "prospect.numberwillbeassigned": "Nummer wordt toegewezen",
     "prospect.prospectprefix": "Prospect prefix",
     "prospect.prospectnumber": "Prospect nummer",
+    "prospect.saved": "Prospect bewaard",
+    "prospect.created": "Prospect aangemaakt",
+    "prospect.select": "Selecteer prospect",
     
     "projects": "Projecten",
     "project": "Project",
     "project.projectprefix": "Project prefix",
     "project.projectnumber": "Project nummer",
+    "project.select": "Selecteer project",
 
     "parameters": "Parameters",
     "parameter": "Parameter",

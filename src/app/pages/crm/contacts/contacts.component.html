@@ -109,14 +109,21 @@
                                 <th>{{ "general.email" | translate }}</th>
                                 <th>{{ "general.phone" | translate }}</th>
                                 <th>{{ "general.mobile" | translate }}</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let c of contacts">
                                 <tr>
-                                    <td><az-image-thumbnail [images]="c.images" [class]="'tablethumb'"></az-image-thumbnail></td>
-                                    <td>{{ c.name }} {{ c.surname }}</td>
+                                    <td>
+                                        <a href="javascript:void(0)" [routerLink]="['/pages/crm/contact', c.id]">
+                                            <az-image-thumbnail [images]="c.images" [class]="'tablethumb'"></az-image-thumbnail>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0)" [routerLink]="['/pages/crm/contact', c.id]">
+                                            {{ c.fullname }}
+                                        </a>
+                                    </td>
                                     <td>
                                         {{ c.address }}
                                         <span *ngIf="c.city"><br>{{ c.city.postalCode }} {{ c.city.name }}</span>
@@ -125,12 +132,6 @@
                                     <td>{{ c.email }}</td>
                                     <td>{{ c.phone }}</td>
                                     <td>{{ c.mobile }}</td>
-                                    <td>
-                                        <a [routerLink]="['/pages/crm/contact', c.id]">
-                                            <i class="fa fa-folder-open cursor"></i>    
-                                        </a>
-                                        
-                                    </td>
                                 </tr>
                             </ng-container>
                         </tbody>

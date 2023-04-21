@@ -117,22 +117,23 @@
                                 <th>{{ "general.deadline" | translate }}</th>
                                 <th>{{ "general.created" | translate }}</th>
                                 <th>{{ "general.updated" | translate }}</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
 
                             <ng-container *ngFor="let c of prospects">
                                 <tr>
-                                    <td>{{ c.number }}</td>
+                                    <td>
+                                        <a href="javascript:void(0)" [routerLink]="['/pages/pm/prospect', c.id]">{{ c.number }}</a>
+                                    </td>
                                     <td>
                                         <span *ngIf="c.client">
-                                            {{ c.client?.name }}
+                                            <a href="javascript:void(0)" [routerLink]="['/pages/crm/company', c.clientId]">{{ c.client?.name }}</a>
                                         </span>
                                     </td>
                                     <td>
                                         <span *ngIf="c.contact">
-                                            {{ c.contact?.fullname }}
+                                            <a href="javascript:void(0)" [routerLink]="['/pages/crm/contact', c.contactId]">{{ c.contact?.fullname }}</a>
                                         </span>
                                     </td>
                                     <td>
@@ -143,11 +144,6 @@
                                     <td>{{ c.deadline }}</td>
                                     <td>{{ c.created | date:"yyyy/MM/dd HH:mm" }}</td>
                                     <td>{{ c.updated | date:"yyyy/MM/dd HH:mm" }}</td>
-                                    <td>
-                                        <a [routerLink]="['/pages/pm/prospect', c.id]">
-                                            <i class="fa fa-folder-open cursor"></i>
-                                        </a>
-                                    </td>
                                 </tr>
                             </ng-container>
                         </tbody>

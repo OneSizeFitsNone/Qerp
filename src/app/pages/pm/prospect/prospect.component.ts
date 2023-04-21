@@ -37,6 +37,9 @@ export class ProspectComponent {
   public contactSearch: string = "";
   public companySearch: string = "";
 
+  private st: number = null;
+  private sl: number = null;
+
   constructor(
     private prospectService: ProspectService,
     private companyService: CompanyService,
@@ -53,16 +56,22 @@ export class ProspectComponent {
   }
 
   async ngOnInit() {
+    
+    this.route.queryParams.subscribe(params => {
+      this.st = params['st'];
+      this.sl = params['sl'];
+    });
+
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       if(this.id == 0) {
-        this.prospectService.createProspect();
+          this.prospectService.createProspect(this.st, this.sl);       
       }
       else {
         this.prospectService.getProspect(this.id);
       }
     });
-    
+
     this.prospectForm = this.formBuilder.group({
       'clientId': ['', Validators.required],
       'contactId': ['', Validators.required],
@@ -72,30 +81,31 @@ export class ProspectComponent {
       'deadline': [''],
       'estimatedBudget': [''] 
     });
-
+    
     this.prospectService.prospect.subscribe(async c => {
-
       this.prospect = c;
-      if(this.prospect?.id) {
-        this.companyService.findCompany(<IClient>{forcedId: this.prospect.clientId })
-        this.contactService.findContact(<IContact>{forcedId: this.prospect.contactId })
-        if(this.id == 0 && this.prospect.id > 0) {
-          this.router.navigateByUrl("/pages/pm/prospect/"+this.prospect.id);
-        }
+
+      this.prospect.clientId ? this.companyService.findCompany(<IClient>{forcedId: this.prospect.clientId }) : null;
+      this.prospect.contactId ? this.contactService.findContact(<IContact>{forcedId: this.prospect.contactId }) : null;
+
+      if(this.id == 0 && this.prospect.id > 0) {
+        this.router.navigateByUrl("/pages/pm/prospect/"+this.prospect.id);
       }
 
-      
       this.ref.detectChanges();
       this.prospectForm.patchValue(this.prospect);
-
+      this.ref.detectChanges();
+    });
+    
+    this.companyService.companies.subscribe(c => {
+      this.companies = c;
+    });
+    
+    this.contactService.contacts.subscribe(c => {
+      this.contacts = c;
     });
 
-    this.companyService.companies.subscribe(c => this.companies = c);
-    this.contactService.contacts.subscribe(c => this.contacts = c);
-
     this.prospectTypes = await this.parameterService.getByGroupSystemCode('prospecttypes');
-
-
   }
 
   onSubmit() {
@@ -108,6 +118,7 @@ export class ProspectComponent {
     this.contactService.findContact(<IContact>{forcedId: this.prospect.contactId })
     this.ref.detectChanges();
     this.prospectForm.patchValue(this.prospect);
+    this.ref.detectChanges();
   }
 
   goBack() {
@@ -155,12 +166,11 @@ export class ProspectComponent {
     }
     else if(type == "company") {
       this.companyService.saveFromSelect(this.companySearch);
-    }
-    
+    } 
   }
 
 }
 
 export function numberValidator(id) { 
-  return id == 0 ? Validators.nullValidator : Validators.required;
+  return id == 0 || id==null || id==undefined ? Validators.nullValidator : Validators.required;
 }

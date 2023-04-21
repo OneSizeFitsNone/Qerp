@@ -192,7 +192,7 @@
                             </div>
                             
                             <div class="form-group col-12 pt-3 text-right">
-                                <button [disabled]="!personalForm.dirty" class="btn btn-success cursor" (click)="undoChanges()" type="reset">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!personalForm.valid" class="btn btn-success cursor" (click)="onSubmit()" type="button">{{ "form.save" | translate }}</button>
+                                <button *ngIf="id > 0" [disabled]="!personalForm.dirty" class="btn btn-success cursor" (click)="undoChanges()">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!personalForm.valid" class="btn btn-success cursor" (click)="onSubmit()">{{ "form.save" | translate }}</button>
                             </div>
                         </form>
                 

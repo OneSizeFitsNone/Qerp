@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { AppTypes } from 'src/app/interfaces/apptypes';
 import { IProspect } from 'src/app/interfaces/prospect';
 import { IReturnResult } from 'src/app/interfaces/returnresult';
 import { environment } from 'src/environments/environment';
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class ProspectService { 
     private url = environment.API_URL + '/Prospect/';
 
+    private apptypes: AppTypes = new AppTypes;
     constructor(
         private http: HttpClient,
         private toastr: ToastrService,
@@ -54,9 +56,11 @@ export class ProspectService {
         });
     }
 
-    public createProspect() {
+    public createProspect(st : number = null, sl: number = null) {
       let oProspect : IProspect = <IProspect>{};
       oProspect.id = 0;
+      oProspect.contactId = (st == this.apptypes.contact) ? sl : null;
+      oProspect.clientId = (st == this.apptypes.client) ? sl : null;
 
       this._prospect.next(oProspect);
     }
@@ -97,6 +101,7 @@ export class ProspectService {
             if(result.message.length > 0) {
                 this.toastr.warning(this.translate.instant(result.message));
             }
+            this.toastr.success(this.translate.instant('prospect.saved'));
           }
           else {
             this._prospect.next(<IProspect>{});
@@ -127,6 +132,7 @@ export class ProspectService {
             if(result.message.length > 0) {
                 this.toastr.warning(this.translate.instant(result.message));
             }
+            this.toastr.success(this.translate.instant('prospect.created'));
           }
           else {
             this._prospect.next(<IProspect>{});

@@ -98,14 +98,19 @@
                                 <th>{{ "general.phone" | translate }}</th>
                                 <th>{{ "general.mobile" | translate }}</th>
                                 <th>{{ "company.vat" | translate }}</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let c of companies">
                                 <tr>
-                                    <td><az-image-thumbnail [images]="c.images" [class]="'tablethumb'"></az-image-thumbnail></td>
-                                    <td>{{ c.name }}</td>
+                                    <td>
+                                        <a href="javascript:void(0)" [routerLink]="['/pages/crm/company', c.id]">
+                                            <az-image-thumbnail [images]="c.images" [class]="'tablethumb'"></az-image-thumbnail>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0)" [routerLink]="['/pages/crm/company', c.id]">{{ c.name }}</a>
+                                    </td>
                                     <td>
                                         {{ c.address }}
                                         <span *ngIf="c.city"><br>{{ c.city.postalCode }} {{ c.city.name }}</span>
@@ -115,11 +120,6 @@
                                     <td>{{ c.phone }}</td>
                                     <td>{{ c.mobile }}</td>
                                     <td>{{ c.vat }}</td>
-                                    <td>
-                                        <a [routerLink]="['/pages/crm/company', c.id]">
-                                            <i class="fa fa-folder-open cursor"></i>
-                                        </a>
-                                    </td>
                                 </tr>
                             </ng-container>
                         </tbody>

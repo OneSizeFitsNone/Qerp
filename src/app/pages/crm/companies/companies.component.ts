@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { AppTypes } from 'src/app/interfaces/apptypes';
 import { ICity } from 'src/app/interfaces/city';
 import { IClient } from 'src/app/interfaces/client';
 import { ICountry } from 'src/app/interfaces/country';
@@ -7,6 +8,7 @@ import { CompanyService } from 'src/app/services/crm/company/company.service';
 import { CityService } from 'src/app/services/general/city.service';
 import { CountryService } from 'src/app/services/general/country.service';
 import { ProvinceService } from 'src/app/services/general/province.service';
+import { SearchhistoryService } from 'src/app/services/user/searchhistory.service';
 
 @Component({
   selector: 'az-companies',
@@ -26,12 +28,15 @@ export class CompaniesComponent {
   public provinces: Array<IProvince> = [];
   public cities: Array<ICity> = [];
   
+  public apptypes: AppTypes = new AppTypes;
+
   constructor(
     private companyService: CompanyService,
     private countryService: CountryService,
     private provinceService: ProvinceService,
     private cityService: CityService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private searchHistory: SearchhistoryService,
   ){
 
   }
@@ -43,12 +48,18 @@ export class CompaniesComponent {
     this.companyService.companies.subscribe(c => {
       this.companies = c;
     });
+    let oHistory = this.searchHistory.getHistory(this.apptypes.client);
+    if(oHistory) {
+      this.company = <IClient>oHistory;
+      this.onSearch();
+    }
   }
 
   onSearch() {
     if(this.company.city.provinceId == null) { delete this.company.city.provinceId; }
     if(this.company.city.provinceId == null) { delete this.company.city.provinceId; }
     this.companyService.findCompany(this.company);
+    this.searchHistory.addHistory(this.apptypes.client, this.company);
   }
 
   onInputChange(item: string) {
@@ -76,6 +87,7 @@ export class CompaniesComponent {
       if(this.company.city.provinceId == null) { delete this.company.city.provinceId; }
       if(this.company.city.provinceId == null) { delete this.company.city.provinceId; }
       this.companyService.findCompany(this.company);
+      this.searchHistory.addHistory(this.apptypes.client, this.company);
     }
 
   }

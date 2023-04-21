@@ -16,6 +16,20 @@
                     data-placement="bottom" title="{{ 'general.add' | translate }}"
                 ></i>
             </a>
+            <a *ngIf="sourceAppTypeId != null && appTypeId == appTypes.prospect " href="javascript:void(0);" 
+                [routerLink]="['/pages/pm/prospect', 0]" [queryParams]="{st: sourceAppTypeId, sl: sourceLinkTypeId}">
+                <i *ngIf="!hasNew"
+                    class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
+                    data-placement="bottom" title="{{ 'general.add' | translate }}"
+                ></i>
+            </a>
+            <a *ngIf="sourceAppTypeId != null && appTypeId == appTypes.project " href="javascript:void(0);" 
+                [routerLink]="['/pages/pm/project', 0]" [queryParams]="{st: sourceAppTypeId, sl: sourceLinkTypeId}">
+                <i *ngIf="!hasNew"
+                    class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
+                    data-placement="bottom" title="{{ 'general.add' | translate }}"
+                ></i>
+            </a>
         </div>
     </div> 
 
@@ -44,11 +58,13 @@
                 <tr>
 
                     <td *ngIf="sourceAppTypeId != null">
+
                         <span *ngIf="appTypeId == appTypes.prospect">
                             <a [routerLink]="['/pages/pm/prospect', ocr.linkedId]" href="javascript:void(0)">
                                 {{ ocr.prospect?.number }}
                             </a>
                         </span>
+
                         <span *ngIf="appTypeId == appTypes.project">
                             <a [routerLink]="['/pages/crm/project', ocr.linkedId]" href="javascript:void(0)">
                                 {{ ocr.project?.number }}
@@ -64,7 +80,7 @@
                                 <mat-form-field class="mat-field">
                                     <input #searchcontact matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="contactSearch" 
                                         (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">
-                                    <a href="javascript:void(0)" (click)="onEnterSearchClientOrContact('contact')">
+                                    <a href="javascript:void(0)" (click)="onEnterSearch('contact')">
                                         <i *ngIf="contactSearch.length > 2" class="fa fa-plus-square cursor"></i>
                                     </a>                                            
                                 </mat-form-field>
@@ -82,7 +98,7 @@
                                 <mat-form-field class="mat-field">
                                     <input matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="companySearch" 
                                         (input)="onSearchCompany($event.target.value)" (keydown)="$event.stopPropagation()">
-                                    <a href="javascript:void(0)" (click)="onEnterSearchClientOrContact('company')">
+                                    <a href="javascript:void(0)" (click)="onEnterSearch('company')">
                                         <i *ngIf="companySearch.length > 2" class="fa fa-plus-square cursor"></i>
                                     </a>                                            
                                 </mat-form-field>

@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { AppTypes } from 'src/app/interfaces/apptypes';
 import { ICity } from 'src/app/interfaces/city';
 import { IClient } from 'src/app/interfaces/client';
 import { IContact } from 'src/app/interfaces/contact';
@@ -8,6 +9,7 @@ import { CompanyService } from 'src/app/services/crm/company/company.service';
 import { ContactService } from 'src/app/services/crm/contact/contact.service';
 import { ProspectService } from 'src/app/services/pm/prospect/prospect.service';
 import { ParameterService } from 'src/app/services/settings/parameter.service';
+import { SearchhistoryService } from 'src/app/services/user/searchhistory.service';
 
 @Component({
   selector: 'az-prospects',
@@ -29,12 +31,15 @@ export class ProspectsComponent {
 
   public advancedSearch: boolean = false;
 
+  public apptypes: AppTypes = new AppTypes;
+  
   constructor(
     private prospectService: ProspectService,
     private contactService: ContactService,
     private companyService: CompanyService,
     private parameterService: ParameterService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private searchHistory: SearchhistoryService,
   ){
 
   }
@@ -49,11 +54,17 @@ export class ProspectsComponent {
     this.companyService.companies.subscribe(c => {
       this.companies = c;
     });
-    this.prospectTypes = await this.parameterService.getByGroupSystemCode("prospecttypes")
+    this.prospectTypes = await this.parameterService.getByGroupSystemCode("prospecttypes");
+    let oHistory = this.searchHistory.getHistory(this.apptypes.prospect);
+    if(oHistory) {
+      this.prospect = <IProspect>oHistory;
+      this.onSearch();
+    }
   }
 
   onSearch() {
     this.prospectService.findProspect(this.prospect);
+    this.searchHistory.addHistory(this.apptypes.prospect, this.prospect);
   }
 
   onInputChange(item: string) {
@@ -76,6 +87,7 @@ export class ProspectsComponent {
 
     if(search) {
       this.prospectService.findProspect(this.prospect);
+      this.searchHistory.addHistory(this.apptypes.prospect, this.prospect);
     }
   }
 

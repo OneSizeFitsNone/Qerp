@@ -96,6 +96,7 @@ export class CompanyService {
             if(result.message.length > 0) {
                 this.toastr.warning(this.translate.instant(result.message));
             }
+            this.toastr.success(this.translate.instant('company.saved'));
           }
           else {
             this._company.next(<IClient>{});
@@ -127,6 +128,7 @@ export class CompanyService {
             if(result.message.length > 0) {
                 this.toastr.warning(this.translate.instant(result.message));
             }
+            this.toastr.success(this.translate.instant('company.created'));
           }
           else {
             this._company.next(<IClient>{});

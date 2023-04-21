@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { AppTypes } from 'src/app/interfaces/apptypes';
 import { ICity } from 'src/app/interfaces/city';
 import { IContact } from 'src/app/interfaces/contact';
 import { ICountry } from 'src/app/interfaces/country';
@@ -7,6 +8,7 @@ import { ContactService } from 'src/app/services/crm/contact/contact.service';
 import { CityService } from 'src/app/services/general/city.service';
 import { CountryService } from 'src/app/services/general/country.service';
 import { ProvinceService } from 'src/app/services/general/province.service';
+import { SearchhistoryService } from 'src/app/services/user/searchhistory.service';
 
 @Component({
   selector: 'az-contacts',
@@ -26,12 +28,15 @@ export class ContactsComponent {
   public provinces: Array<IProvince> = [];
   public cities: Array<ICity> = [];
   
+  public apptypes: AppTypes = new AppTypes;
+  
   constructor(
     private contactService: ContactService,
     private countryService: CountryService,
     private provinceService: ProvinceService,
     private cityService: CityService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private searchHistory: SearchhistoryService,
   ){
 
   }
@@ -42,12 +47,18 @@ export class ContactsComponent {
     this.contactService.contacts.subscribe(c => {
       this.contacts = c;
     });
+    let oHistory = this.searchHistory.getHistory(this.apptypes.contact);
+    if(oHistory) {
+      this.contact = <IContact>oHistory;
+      this.onSearch();
+    }
   }
 
   onSearch() {
     if(this.contact.city.provinceId == null) { delete this.contact.city.provinceId; }
     if(this.contact.city.countryId == null) { delete this.contact.city.countryId; }
     this.contactService.findContact(this.contact);
+    this.searchHistory.addHistory(this.apptypes.contact, this.contact);
   }
 
   addContact() {
@@ -80,6 +91,7 @@ export class ContactsComponent {
       if(this.contact.city.provinceId == null) { delete this.contact.city.provinceId; }
       if(this.contact.city.provinceId == null) { delete this.contact.city.provinceId; }
       this.contactService.findContact(this.contact);
+      this.searchHistory.addHistory(this.apptypes.contact, this.contact);
     }
 
   }

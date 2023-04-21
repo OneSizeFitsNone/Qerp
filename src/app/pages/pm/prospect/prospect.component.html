@@ -164,6 +164,12 @@
                             </div>
                             
                             <div class="col-md-6">
+<!--                                 <select formControlName="contactId">
+                                    <option *ngFor="let contact of contacts" value="contact.id">
+                                        {{ contact.fullname }}
+                                    </option>
+                            
+                                </select> -->
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "contact" | translate }}</mat-label>
                                     <mat-select formControlName="contactId">                                        
@@ -174,7 +180,7 @@
                                                 <i *ngIf="contactSearch.length > 2" class="fa fa-plus-square cursor"></i>
                                             </a>                                            
                                         </mat-form-field>
-                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option [value]="null" hidden></mat-option>
                                         <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -202,7 +208,7 @@
                             </div>
 
                             <div class="form-group col-12 pt-3 text-right">
-                                <button [disabled]="!prospectForm.dirty" class="btn btn-success cursor" (click)="undoChanges()" type="reset">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!prospectForm.valid" class="btn btn-success cursor" (click)="onSubmit()" type="button">{{ "form.save" | translate }}</button>
+                                <button *ngIf="id > 0" [disabled]="!prospectForm.dirty" class="btn btn-success cursor" (click)="undoChanges()">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!prospectForm.valid" class="btn btn-success cursor" (click)="onSubmit()">{{ "form.save" | translate }}</button>
                             </div>
 
                         </form>

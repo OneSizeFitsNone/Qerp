@@ -128,6 +128,7 @@ export class ContactComponent {
 
     this.ref.detectChanges();
     this.personalForm.patchValue(this.contact);
+    this.ref.detectChanges();
   }
 
   public async saveItem(){
