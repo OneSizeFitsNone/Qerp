@@ -19,7 +19,8 @@
     "menu.invoices": "Invoices",
     "menu.invoicesOut": "Outgoing invoices",
     "menu.settings": "Settings",
-    "menu.settings.contactroles": "Contact roles",
+    "menu.settings.mycompany": "My company",
+    "menu.settings.contactroles": "Contact rollen",
     "menu.settings.parameters": "Parameters",
 
     "form.save": "Save",
@@ -52,6 +53,9 @@
     "general.saveitem": "Save item for later use",
     "general.goback": "Go back",
     "general.close": "Close",
+    "general.deadline": "Deadline",
+    "general.deadlineFrom": "Deadline from",
+    "general.deadlineTo": "Deadline to",
     
     "address.address": "Address",
     "address.postalCode": "Postalcode",
@@ -69,12 +73,16 @@
     "company.name": "Name",
     "company.vat": "VAT",
     "company.select": "Select a company",
+    "company.saved": "Bedrijf saved",
+    "company.created": "Bedrijf created",
 
     "contacts": "Contacts",
     "contact": "Contact",
     "contact.name" : "Name",
     "contact.surname": "Surname",
     "contact.select": "Select a contact",
+    "contact.saved": "Contact saved",
+    "contact.created": "Contact created",
     
     "contactroles": "Contact roles",
     "contactroles.name": "Name",
@@ -83,6 +91,38 @@
 
     "vat.vatnumber": "VAT number",
 
+    "prospects": "Prospects",
+    "prospect": "Prospect",
+    "prospect.searchNumber": "Search by number",
+    "prospect.number": "Number",
+    "prospect.type": "Prospect type",
+    "prospect.edtimatedBudget": "Estimated budget",
+    "prospect.numberwillbeassigned": "Number will be assigned",
+    "prospect.prospectprefix": "Prospect prefix",
+    "prospect.prospectnumber": "Prospect number",
+    "prospect.saved": "Prospect saved",
+    "prospect.created": "Prospect created",
+    "prospect.select": "Select prospect",
+    
     "projects": "Projects",
-    "project": "Project"
+    "project": "Project",
+    "project.projectprefix": "Project prefix",
+    "project.projectnumber": "Project number",
+    "project.select": "Select project",
+
+    "parameters": "Parameters",
+    "parameter": "Parameter",
+    "parameter.parametername": "Parameter name",
+    "parameter.name": "Name",
+
+    "parametergroups": "Parameter groups",
+    "parametergroup": "Parameter group",
+    "parametergroup.name": "Group name",
+
+    "priority": "Priority",
+    "prospecttypes": "Prospect types",
+    "high": "High",
+    "low": "Low",
+    "medium": "Medium",
+    "type": "Type"
 }
