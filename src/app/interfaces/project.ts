@@ -1,8 +1,10 @@
 import { IClient } from "./client";
 import { ICompany } from "./company";
+import { IContact } from "./contact";
 import { IImage } from "./image";
 import { IInvoice } from "./invoice";
 import { IInvoiceline } from "./invoiceline";
+import { IParameter } from "./parameter";
 import { IProjectcontact } from "./projectcontact";
 import { IProspect } from "./prospect";
 import { ITask } from "./task";
@@ -12,19 +14,21 @@ export interface IProject {
     apptypeId: number;
     companyId: number;
     clientId: number;
-    isProspect: boolean;
-    number: number;
+    contactId: number;
+    projectTypeId: number;
+    prospectId: number;
+    number: string;
     name: string;
     description: string;
+    deadline: Date;
     created: Date;
     updated: Date;
 
     client: IClient;
     company: ICompany;
-    images: Array<IImage>;
-    invoiceLines: Array<IInvoiceline>;
-    invoices: Array<IInvoice>;
-    projectcontacts: Array<IProjectcontact>;
-    prospects: Array<IProspect>;
-    tasks: Array<ITask>;
+    contact: IContact;
+    projectType: IParameter;
+    Prospect: IProspect;
+    
+
 }

@@ -76,7 +76,7 @@
                             <a [routerLink]="['/pages/crm/contact', ocr.contactId]" href="javascript:void(0)">{{ ocr.contact?.fullname }}</a>
                         </span>
                         <mat-form-field *ngIf="apptypecontact?.id == ocr.id" class="mat-field">
-                            <mat-select placeholder="{{ 'contact.select' | translate}}" [(ngModel)]="apptypecontact.contactId">
+                            <mat-select placeholder="{{ 'contact.select' | translate}}" [(ngModel)]="apptypecontact.contactId" (openedChange)="searchcontact.focus()">
                                 <mat-form-field class="mat-field">
                                     <input #searchcontact matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="contactSearch" 
                                         (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">
@@ -94,9 +94,9 @@
                             <a [routerLink]="['/pages/crm/company', ocr.clientId]" href="javascript:void(0)">{{ ocr.client?.name }}</a>
                         </span>
                         <mat-form-field *ngIf="apptypecontact?.id == ocr.id" class="mat-field">
-                            <mat-select placeholder="{{ 'company.select' | translate}}" [(ngModel)]="apptypecontact.clientId">
+                            <mat-select placeholder="{{ 'company.select' | translate}}" [(ngModel)]="apptypecontact.clientId" (openedChange)="searchcompany.focus()">
                                 <mat-form-field class="mat-field">
-                                    <input matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="companySearch" 
+                                    <input #searchcompany matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="companySearch" 
                                         (input)="onSearchCompany($event.target.value)" (keydown)="$event.stopPropagation()">
                                     <a href="javascript:void(0)" (click)="onEnterSearch('company')">
                                         <i *ngIf="companySearch.length > 2" class="fa fa-plus-square cursor"></i>
@@ -114,9 +114,9 @@
                             {{ ocr.contactrole?.name }}
                         </span>
                         <mat-form-field *ngIf="apptypecontact?.id == ocr.id" class="mat-field">
-                            <mat-select placeholder="{{ 'contactroles.select' | translate}}" [(ngModel)]="apptypecontact.contactroleId">  
+                            <mat-select placeholder="{{ 'contactroles.select' | translate}}" [(ngModel)]="apptypecontact.contactroleId" (openedChange)="searchrole.focus()">  
                                 <mat-form-field class="mat-field">
-                                    <input matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="roleSearch" 
+                                    <input #searchrole matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="roleSearch" 
                                         (input)="onSearchRole($event.target.value)" (keydown)="$event.stopPropagation()">
                                     <a href="javascript:void(0)" (click)="onEnterSearchContactrole()">
                                         <i *ngIf="roleSearch.length > 2" class="fa fa-plus-square cursor"></i>

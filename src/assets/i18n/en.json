@@ -106,8 +106,14 @@
     
     "projects": "Projects",
     "project": "Project",
+    "project.searchNumber": "Search by number",
+    "project.number": "Number",
+    "project.type": "Project type",
+    "project.numberwillbeassigned": "Number will be assigned",
     "project.projectprefix": "Project prefix",
     "project.projectnumber": "Project number",
+    "project.saved": "Project saved",
+    "project.created": "Project created",
     "project.select": "Select project",
 
     "parameters": "Parameters",
@@ -121,6 +127,7 @@
 
     "priority": "Priority",
     "prospecttypes": "Prospect types",
+    "projecttypes": "Project types",
     "high": "High",
     "low": "Low",
     "medium": "Medium",

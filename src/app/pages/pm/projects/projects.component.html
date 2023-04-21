@@ -1,1 +1,156 @@
-<p>projects works!</p>
+<div class="row bottom-30">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span class="text-uppercase">{{ "projects" | translate }}</span>      
+            </div>
+            <div class="card-body">
+
+                <form class="row">
+                    <div class="form-group col-lg-3 col-md-6 col-sm-8">
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>{{ "project.searchNumber" | translate }}</mat-label>
+                            <input matInput name="number" [(ngModel)]="project.number" (ngModelChange)="onInputChange('number')">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
+                        <div class="box">
+                                <a href="javascript:void(0)" (click)="onSearch()">
+                                    <i class="fa fa-search searchformicon" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.search' | translate }}"></i>
+                                </a>
+                                &nbsp;
+                                <a href="javascript:void(0)" (click)="advancedSearch = !advancedSearch">
+                                    <i class="fa fa-search-plus searchformicon" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.advanced' | translate }}"></i>
+                                </a>
+                                &nbsp;
+                                <a [routerLink]="['/pages/pm/project', 0]">
+                                    <i class="fa fa-plus-square  searchformicon" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
+                                </a>
+                        </div>
+                    </div>
+                    <div *ngIf="advancedSearch" class="form-group col-md-12">
+
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "contact" | translate }}</mat-label>
+                                    <mat-select name="contactId" [(ngModel)]="project.contactId" (openedChange)="searchcontact.focus()">
+                                        <mat-form-field class="mat-field">
+                                            <input #searchcontact name="searchcontact" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="contactSearch" 
+                                            (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">                                        
+                                        </mat-form-field>
+
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "company" | translate }}</mat-label>
+                                    <mat-select name="clientId" [(ngModel)]="project.clientId" (openedChange)="searchcompany.focus()">
+                                        <mat-form-field class="mat-field">
+                                            <input #searchcompany name="searchcompany" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="companySearch" 
+                                            (input)="onSearchCompany($event.target.value)" (keydown)="$event.stopPropagation()">                                        
+                                        </mat-form-field>
+                                        
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "project.type" | translate }}</mat-label>
+                                    <mat-select name="projectTypeId" [(ngModel)]="project.projectTypeId" (ngModelChange)="onInputChange('projectTypeId')">                                      
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let projectType of projectTypes" [value]="projectType.id">{{ projectType.name | translate }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.description" | translate }}</mat-label>
+                                    <input matInput name="description" [(ngModel)]="project.description" (ngModelChange)="onInputChange('description')">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.deadlineFrom" | translate }}</mat-label>
+                                    <input matInput name="deadlineFrom" type="datetime-local" [(ngModel)]="project.deadlineFrom" (keyup.enter)="onInputChange('deadlineFrom')">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.deadlineTo" | translate }}</mat-label>
+                                    <input matInput name="deadlineTo" type="datetime-local" [(ngModel)]="project.deadlineTo" (keyup.enter)="onInputChange('deadlineTo')">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+                <p></p>
+        
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ "project.number" | translate}}</th>
+                                <th>{{ "company" | translate}}</th>
+                                <th>{{ "contact" | translate }}</th>
+                                <th>{{ "type" | translate }}</th>
+                                <th>{{ "general.deadline" | translate }}</th>
+                                <th>{{ "general.created" | translate }}</th>
+                                <th>{{ "general.updated" | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <ng-container *ngFor="let c of projects">
+                                <tr>
+                                    <td>
+                                        <a href="javascript:void(0)" [routerLink]="['/pages/pm/project', c.id]">{{ c.number }}</a>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="c.client">
+                                            <a href="javascript:void(0)" [routerLink]="['/pages/crm/company', c.clientId]">{{ c.client?.name }}</a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="c.contact">
+                                            <a href="javascript:void(0)" [routerLink]="['/pages/crm/contact', c.contactId]">{{ c.contact?.fullname }}</a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="c.projectType">
+                                            {{ c.projectType?.name | translate }}
+                                        </span>
+                                    </td>
+                                    <td>{{ c.deadline }}</td>
+                                    <td>{{ c.created | date:"yyyy/MM/dd HH:mm" }}</td>
+                                    <td>{{ c.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+</div>

@@ -149,7 +149,7 @@
                             <div class="col-md-6">
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "company" | translate }}</mat-label>
-                                    <mat-select formControlName="clientId">                                        
+                                    <mat-select formControlName="clientId" (openedChange)="searchcompany.focus()">                                        
                                         <mat-form-field class="mat-field">
                                             <input #searchcompany matInput placeholder="{{ 'general.search' | translate }}" 
                                                 (input)="onSearchCompany($event.target.value)" (keydown)="$event.stopPropagation()">
@@ -164,15 +164,9 @@
                             </div>
                             
                             <div class="col-md-6">
-<!--                                 <select formControlName="contactId">
-                                    <option *ngFor="let contact of contacts" value="contact.id">
-                                        {{ contact.fullname }}
-                                    </option>
-                            
-                                </select> -->
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "contact" | translate }}</mat-label>
-                                    <mat-select formControlName="contactId">                                        
+                                    <mat-select formControlName="contactId" (openedChange)="searchcontact.focus()">                                        
                                         <mat-form-field class="mat-field">
                                             <input #searchcontact matInput placeholder="{{ 'general.search' | translate }}" 
                                                 (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">

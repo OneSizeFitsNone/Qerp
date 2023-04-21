@@ -107,8 +107,14 @@
     
     "projects": "Projecten",
     "project": "Project",
+    "project.searchNumber": "Zoek op nummer",
+    "project.number": "Nummer",
+    "project.type": "Project type",
+    "project.numberwillbeassigned": "Nummer wordt toegewezen",
     "project.projectprefix": "Project prefix",
     "project.projectnumber": "Project nummer",
+    "project.saved": "Project bewaard",
+    "project.created": "Project aangemaakt",
     "project.select": "Selecteer project",
 
     "parameters": "Parameters",
@@ -122,6 +128,7 @@
 
     "priority": "Prioriteit",
     "prospecttypes": "Prospect types",
+    "projecttypes": "Project types",
     "high": "Hoog",
     "low": "Laag",
     "medium": "Medium",

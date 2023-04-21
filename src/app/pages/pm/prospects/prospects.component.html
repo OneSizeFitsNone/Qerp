@@ -38,9 +38,9 @@
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "contact" | translate }}</mat-label>
-                                    <mat-select name="contactId" [(ngModel)]="prospect.contactId">
+                                    <mat-select name="contactId" [(ngModel)]="prospect.contactId" (openedChange)="searchcontact.focus()">
                                         <mat-form-field class="mat-field">
-                                            <input name="searchcontact" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="contactSearch" 
+                                            <input #searchcontact name="searchcontact" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="contactSearch" 
                                             (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">                                        
                                         </mat-form-field>
 
@@ -53,9 +53,9 @@
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "company" | translate }}</mat-label>
-                                    <mat-select name="clientId" [(ngModel)]="prospect.clientId">
+                                    <mat-select name="clientId" [(ngModel)]="prospect.clientId" (openedChange)="searchcompany.focus()">
                                         <mat-form-field class="mat-field">
-                                            <input name="searchcompany" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="companySearch" 
+                                            <input #searchcompany name="searchcompany" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="companySearch" 
                                             (input)="onSearchCompany($event.target.value)" (keydown)="$event.stopPropagation()">                                        
                                         </mat-form-field>
                                         
