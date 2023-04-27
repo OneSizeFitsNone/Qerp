@@ -23,6 +23,7 @@
     "menu.settings.mycompany": "Mijn bedrijf",
     "menu.settings.contactroles": "Contact rollen",
     "menu.settings.parameters": "Parameters",
+    "menu.milestones": "Mijlpalen",
 
     "form.save": "Bewaar",
     "form.undoChanges": "Ongedaan maken",
@@ -128,9 +129,12 @@
 
     "milestone": "Mijlpaal",
     "milestones": "Mijlpalen",
+    "milestone.searchName": "Zoek op naam",
     "milestone.name": "Naam",
     "milestone.tasks": "Taken",
     "milestone.completed": "Voltooid",
+    "milestone.type": "Type",
+    "milestone.typenumber": "Number",
 
     "priority": "Prioriteit",
     "prospecttypes": "Prospect types",

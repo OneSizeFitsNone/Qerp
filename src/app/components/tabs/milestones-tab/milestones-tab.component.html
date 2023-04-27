@@ -32,6 +32,8 @@
                 <th>{{ "general.deadline" | translate }}</th>
                 <th>{{ "milestone.tasks" | translate }}</th>
                 <th>{{ "milestone.completed" | translate }}</th>
+                <th>{{ "general.created" | translate }}</th>
+                <th>{{ "general.updated" | translate }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -41,7 +43,7 @@
 
                     <td>
                         <span *ngIf="milestone.id != oCr.id">
-                            {{ oCr.name }}
+                            <a href="javascript:void(0)" [routerLink]="['/pages/pm/milestone', oCr.id]">{{ oCr.name }}</a>
                         </span>
                         <mat-form-field *ngIf="milestone.id == oCr.id" class="mat-field">
                             <mat-label>{{ "milestone.name" | translate }}</mat-label>
@@ -74,7 +76,9 @@
 
                             <h6 style="margin: 0px">{{ oCr.tasksCompleted }}/{{ oCr.taskCount }} <span class="pull-right badge badge-pill badge-primary">{{ oCr.percentageCompleted }}%</span></h6>
                             <div class="progress" style="max-height: 5px;">
-                                <div progress-animate class="progress-bar bg-primary" [style.width.%]="oCr.percentageCompleted" role="progressbar" aria-valuenow="{{ oCr.percentageCompleted }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div progress-animate class="progress-bar bg-primary" [style.width.%]="oCr.percentageCompleted"
+                                    [ngClass]="oCr.percentageCompleted == 100 ? 'bg-success' : oCr.percentageCompleted > 50 ? 'bg-warning' : 'bg-danger' "
+                                    role="progressbar" aria-valuenow="{{ oCr.percentageCompleted }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             
                         </div>
@@ -83,8 +87,8 @@
 
                     <td>
                         <span *ngIf="milestone.id != oCr.id">
-                            <i *ngIf="oCr.percentageCompleted == 100" class="text-success fa fa-check"></i>
-                            <i *ngIf="oCr.percentageCompleted < 100" class="text-danger fa fa-remove"></i>
+                            <i *ngIf="oCr.percentageCompleted == 100 || oCr.completed" class="text-success fa fa-check"></i>
+                            <i *ngIf="oCr.percentageCompleted < 100 && !oCr.completed" class="text-danger fa fa-remove"></i>
                         </span>
                         <span *ngIf="milestone.id == oCr.id">
                             <section class="mat-check">
@@ -94,10 +98,20 @@
                     </td>
 
                     <td>
+                        {{ oCr.created | date:"yyyy/MM/dd HH:mm" }}
+                    </td>
+
+                    <td>
+                        {{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}
+                    </td>
+
+                    <td>
                         <i *ngIf="oCr.id!=milestone.id" class="fa fa-edit cursor mr-2" (click)="editMilestone(oCr)"></i>
                         <i *ngIf="oCr.id==milestone.id" class="fa fa-save cursor mr-2" (click)="saveMilestone(milestone)"></i>
                         <i class="fa fa-trash-o cursor" (click)="deleteMilestone(oCr)"></i>
                     </td>
+
+
 
                 </tr>
             </ng-container>

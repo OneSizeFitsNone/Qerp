@@ -29,6 +29,7 @@ export interface IProject {
     contact: IContact;
     projectType: IParameter;
     Prospect: IProspect;
-    
+
+    forcedId: number;    
 
 }

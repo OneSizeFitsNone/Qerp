@@ -12,6 +12,8 @@ export interface IMilestone {
     description: string;
     deadline: Date;
     completed: boolean;
+    created: Date;
+    updated: Date;
 
     company: ICompany;
     project: IProject;
@@ -23,4 +25,5 @@ export interface IMilestone {
 
     deadlineFrom: Date;
     deadlineTo: Date;
+    typeNumber: string;
 }

@@ -17,6 +17,9 @@ import { ImageModule } from 'src/app/components/images/image.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { TabsModule } from 'src/app/components/tabs/tabs.module';
+import { MilestoneComponent } from './milestone/milestone.component';
+import { MilestonesComponent } from './milestones/milestones.component';
+import { TaskComponent } from './task/task.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full'},
@@ -24,7 +27,10 @@ export const routes: Routes = [
   { path: 'prospect/:id', component: ProspectComponent},
   { path: 'projects', component: ProjectsComponent },
   { path: 'project/:id', component: ProjectComponent },
+  { path: 'milestones', component: MilestonesComponent },
+  { path: 'milestone/:id', component: MilestoneComponent },
   { path: 'tasks', component: TasksComponent },
+  { path: 'task/:id', component: TaskComponent },
 ];
 
 @NgModule({
@@ -45,11 +51,14 @@ export const routes: Routes = [
     TabsModule
   ],
     declarations: [
-        ProjectsComponent,
-        TasksComponent,
         ProspectsComponent,
         ProspectComponent,
-        ProjectComponent
+        ProjectsComponent,
+        ProjectComponent,
+        MilestoneComponent,
+        MilestonesComponent,
+        TasksComponent,
+        TaskComponent
     ],
     exports: [ 
     ]

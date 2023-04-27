@@ -1,0 +1,190 @@
+<div class="row bottom-30">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span class="text-uppercase">{{ "prospects" | translate }}</span>      
+            </div>
+            <div class="card-body">
+
+                <form class="row">
+                    <div class="form-group col-lg-3 col-md-6 col-sm-8">
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>{{ "milestone.searchName" | translate }}</mat-label>
+                            <input matInput name="name" [(ngModel)]="milestone.name" (ngModelChange)="onInputChange('name')">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
+                        <div class="box">
+                                <a href="javascript:void(0)" (click)="onSearch()">
+                                    <i class="fa fa-search searchformicon" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.search' | translate }}"></i>
+                                </a>
+                                &nbsp;
+                                <a href="javascript:void(0)" (click)="advancedSearch = !advancedSearch">
+                                    <i class="fa fa-search-plus searchformicon" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.advanced' | translate }}"></i>
+                                </a>
+                                &nbsp;
+                                <a [routerLink]="['/pages/pm/milestone', 0]">
+                                    <i class="fa fa-plus-square  searchformicon" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
+                                </a>
+                        </div>
+                    </div>
+                    <div *ngIf="advancedSearch" class="form-group col-md-12">
+                        
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "milestone.type" | translate }}</mat-label>
+                                    <mat-select name="linkedapptypeId" [(ngModel)]="milestone.linkedapptypeId">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option [value]="apptypes.prospect">{{ "prospect" | translate }}</mat-option>
+                                        <mat-option [value]="apptypes.project">{{ "project" | translate }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="milestone.linkedapptypeId == apptypes.prospect" class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "prospect" | translate }}</mat-label>
+                                    <mat-select name="linkedtypeId" [(ngModel)]="milestone.linkedtypeId" (openedChange)="searchProspect.focus()">
+                                        <mat-form-field class="mat-field">
+                                            <input #searchProspect name="searchProspect" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="prospectSearch" 
+                                            (input)="onSearchProspect($event.target.value)" (keydown)="$event.stopPropagation()">                                        
+                                        </mat-form-field>
+                                        
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let prospect of prospects" [value]="prospect.id">{{ prospect.number }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="milestone.linkedapptypeId == apptypes.project" class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "project" | translate }}</mat-label>
+                                    <mat-select name="linkedtypeId" [(ngModel)]="milestone.linkedtypeId" (openedChange)="searchProject.focus()">
+                                        <mat-form-field class="mat-field">
+                                            <input #searchProject name="searchProject" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="projectSearch" 
+                                            (input)="onSearchProject($event.target.value)" (keydown)="$event.stopPropagation()">                                        
+                                        </mat-form-field>
+                                        
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let project of projects" [value]="project.id">{{ project.number }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>{{ "general.description" | translate }}</mat-label>
+                                    <input matInput name="description" [(ngModel)]="milestone.description" (ngModelChange)="onInputChange('description')">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                    <section class="mat-check">
+                                        <mat-checkbox name="completed" [(ngModel)]="milestone.completed">{{ "milestone.completed" | translate }}</mat-checkbox>
+                                    </section>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.deadlineFrom" | translate }}</mat-label>
+                                    <input matInput name="deadlineFrom" type="datetime-local" [(ngModel)]="milestone.deadlineFrom" (keyup.enter)="onInputChange('deadlineFrom')">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.deadlineTo" | translate }}</mat-label>
+                                    <input matInput name="deadlineTo" type="datetime-local" [(ngModel)]="milestone.deadlineTo" (keyup.enter)="onInputChange('deadlineTo')">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+                <p></p>
+        
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ "milestone.name" | translate}}</th>
+                                <th>{{ "milestone.type" | translate}}</th>
+                                <th>{{ "milestone.typenumber" | translate}}</th>
+                                <th>{{ "general.deadline" | translate }}</th>
+                                <th>{{ "milestone.tasks" | translate }}</th>
+                                <th>{{ "milestone.completed" | translate }}</th>
+                                <th>{{ "general.created" | translate }}</th>
+                                <th>{{ "general.updated" | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <ng-container *ngFor="let c of milestones">
+                                <tr>
+                                    <td>
+                                        <a href="javascript:void(0)" [routerLink]="['/pages/pm/milestone', c.id]">{{ c.name }}</a>
+                                    </td>
+
+                                    <td>
+                                        <span *ngIf="c.linkedapptypeId == apptypes.prospect">
+                                            {{ "prospect" | translate }}
+                                        </span>
+                                        <span *ngIf="c.linkedapptypeId == apptypes.project">
+                                            {{ "project" | translate }}
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span *ngIf="c.linkedapptypeId == apptypes.prospect">
+                                            <a href="javascript:void(0)" [routerLink]="['/pages/pm/prospect', c.linkedtypeId]">{{ c.prospect?.number }}</a>
+                                        </span>
+                                        <span *ngIf="c.linkedapptypeId == apptypes.project">
+                                            <a href="javascript:void(0)" [routerLink]="['/pages/pm/project', c.linkedtypeId]">{{ c.project?.number }}</a>
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        {{ c.deadline | date:"yyyy/MM/dd HH:mm" }}
+                                    </td>
+
+                                    <td>
+                                            <h6 style="margin: 0px">{{ c.tasksCompleted }}/{{ c.taskCount }} <span class="pull-right badge badge-pill badge-primary">{{ c.percentageCompleted }}%</span></h6>
+                                            <div class="progress" style="max-height: 5px;">
+                                                <div progress-animate class="progress-bar bg-primary" [style.width.%]="c.percentageCompleted"
+                                                    [ngClass]="c.percentageCompleted == 100 ? 'bg-success' : c.percentageCompleted > 50 ? 'bg-warning' : 'bg-danger' "
+                                                    role="progressbar" aria-valuenow="{{ c.percentageCompleted }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                    </td>
+
+                                    <td>
+                                        <i *ngIf="c.percentageCompleted == 100 || c.completed" class="text-success fa fa-check"></i>
+                                        <i *ngIf="c.percentageCompleted < 100 && !c.completed" class="text-danger fa fa-remove"></i>
+                                    </td>
+
+                                    <td>
+                                        {{ c.created | date:"yyyy/MM/dd HH:mm" }}
+                                    </td>
+                
+                                    <td>
+                                        {{ c.updated | date:"yyyy/MM/dd HH:mm" }}
+                                    </td>
+
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+</div>

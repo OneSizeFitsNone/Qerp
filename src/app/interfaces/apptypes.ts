@@ -6,4 +6,5 @@ export class AppTypes {
     public prospect: number = 45000;
     public project: number  = 50000;
     public task: number     = 60000;
+    public milestone: number = 70000;
 }

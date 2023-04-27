@@ -40,6 +40,14 @@ export const menuItems = [
     order: 350
   },
   {
+    title: 'menu.milestones',
+    routerLink: 'pm/milestones',
+    icon: ' fa-flag',
+    selected: false,
+    expanded: false,
+    order: 375
+  },
+  {
     title: 'menu.tasks',
     routerLink: 'pm/tasks',
     icon: 'fa-tasks',

@@ -101,11 +101,14 @@
             <div class="col-md-12 " slim-scroll [slimScrollOptions]="{height: 250}">
                 <div class="row transition rowhover" *ngFor="let saveditem of savedItems">
                     <div class="col-md-12">
-                        <h3>
+                        <h3 style="margin: 0px;">
                             <span class="cursor" [routerLink]="saveditem.routelink">
                                 <i *ngIf="saveditem.apptypeId == appTypes.client" class="fa fa-building mr-2"></i>
                                 <i *ngIf="saveditem.apptypeId == appTypes.contact" class="fa fa-user mr-2"></i>
-                                <i *ngIf="saveditem.appTypeId == appTypes.prospect" class="fa fa-briefcase mr-2"></i>
+                                <i *ngIf="saveditem.apptypeId == appTypes.prospect" class="fa fa-briefcase mr-2"></i>
+                                <i *ngIf="saveditem.apptypeId == appTypes.project" class="fa fa-folder-open mr-2"></i>
+                                <i *ngIf="saveditem.apptypeId == appTypes.milestone" class="fa fa-flag mr-2"></i>
+                                <i *ngIf="saveditem.apptypeId == appTypes.task" class="fa fa-tasks mr-2"></i>
                                 {{saveditem.name}}
                             </span>
                             <span class="pull-right">

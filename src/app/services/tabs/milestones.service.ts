@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, Subscription, lastValueFrom } from 'rxjs';
 import { AppTypes } from 'src/app/interfaces/apptypes';
 import { IMilestone } from 'src/app/interfaces/milestone';
 
@@ -29,6 +29,34 @@ export class MilestonesService {
     private _milestone: BehaviorSubject<IMilestone> = new BehaviorSubject(<IMilestone>{});
     public milestone = this._milestone.asObservable();
 
+    private searchRequest: Subscription;
+
+    public async findMilestone(oMilestone: IMilestone) {
+      if(this.searchRequest) { this.searchRequest.unsubscribe() }
+
+      this.searchRequest = this.http.post<IReturnResult>(this.url + 'Search/', JSON.stringify(oMilestone), {
+          headers: new HttpHeaders({
+            "Content-Type": "application/json"
+          })
+        }).subscribe({
+          next: (result: IReturnResult) => {
+            if(result.success) { 
+              this._milestones.next(result.object);
+              if(result.message.length > 0) {
+                  this.toastr.warning(this.translate.instant(result.message));
+              }
+            }
+            else {
+              this._milestones.next([]);
+              this.toastr.warning(this.translate.instant(result.message));
+            }
+          },
+          error: err => {
+            this.toastr.error(this.translate.instant("err") + err);
+          }
+        });
+    }
+    
     public async createMilestone(appTypeId: number, linkTypeId: number) {
         let oMilestone = <IMilestone>{};
         oMilestone.id = 0;
