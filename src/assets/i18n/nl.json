@@ -126,6 +126,12 @@
     "parametergroup": "Parameter groep",
     "parametergroup.name": "Groep naam",
 
+    "milestone": "Mijlpaal",
+    "milestones": "Mijlpalen",
+    "milestone.name": "Naam",
+    "milestone.tasks": "Taken",
+    "milestone.completed": "Voltooid",
+
     "priority": "Prioriteit",
     "prospecttypes": "Prospect types",
     "projecttypes": "Project types",

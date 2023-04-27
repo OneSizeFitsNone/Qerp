@@ -5,7 +5,6 @@ import { IImage } from "./image";
 import { IInvoiceline } from "./invoiceline";
 import { IProject } from "./project";
 import { IProspect } from "./prospect";
-import { IProspectgoal } from "./prospectgoal";
 
 export interface ITask { 
     id: number;
@@ -31,7 +30,6 @@ export interface ITask {
     contact: IContact;
     project: IProject;
     prospect: IProspect;
-    prospectGoal: IProspectgoal;
     images: Array<IImage>;
     invoiceLines: Array<IInvoiceline>;
 

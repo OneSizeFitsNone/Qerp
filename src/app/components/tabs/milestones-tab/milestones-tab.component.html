@@ -1,0 +1,107 @@
+
+<form class="row">
+
+    <div class="form-group col-lg-3 col-md-6 col-sm-8">
+        <mat-form-field style="width: 100%;">
+            <mat-label>{{ "general.search" | translate }}</mat-label>
+            <input matInput name="crSearch" [(ngModel)]="ccSearch" (ngModelChange)="onInputChange()">
+        </mat-form-field>
+
+
+    </div>
+
+    <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
+        <div class="box">
+            <a href="javascript:void(0);" (click)="onCreateMilestone()">
+                <i *ngIf="!hasNew"
+                    class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
+                    data-placement="bottom" title="{{ 'general.add' | translate }}"
+                ></i>
+            </a>
+        </div>
+    </div> 
+
+</form>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>{{ "milestone.name" | translate}}</th>
+                <th>{{ "general.description" | translate}}</th>
+                <th>{{ "general.deadline" | translate }}</th>
+                <th>{{ "milestone.tasks" | translate }}</th>
+                <th>{{ "milestone.completed" | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let oCr of milestonesSearch">
+                <tr>
+
+                    <td>
+                        <span *ngIf="milestone.id != oCr.id">
+                            {{ oCr.name }}
+                        </span>
+                        <mat-form-field *ngIf="milestone.id == oCr.id" class="mat-field">
+                            <mat-label>{{ "milestone.name" | translate }}</mat-label>
+                            <input matInput name="name" [(ngModel)]="milestone.name">
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <span *ngIf="milestone.id != oCr.id">
+                            {{ oCr.description }}
+                        </span>
+                        <mat-form-field *ngIf="milestone.id == oCr.id" class="mat-field">
+                            <mat-label>{{ "general.description" | translate }}</mat-label>
+                            <textarea matInput name="description" [(ngModel)]="milestone.description" rows="2"></textarea>
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <span *ngIf="milestone.id != oCr.id">
+                            {{ oCr.deadline | date:"yyyy/MM/dd HH:mm" }}
+                        </span>
+                        <mat-form-field *ngIf="milestone.id == oCr.id" class="mat-field">
+                            <mat-label>{{ "general.deadline" | translate }}</mat-label>
+                            <input matInput type="datetime-local" [(ngModel)]="milestone.deadline">
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <div *ngIf="milestone.id != oCr.id">
+
+                            <h6 style="margin: 0px">{{ oCr.tasksCompleted }}/{{ oCr.taskCount }} <span class="pull-right badge badge-pill badge-primary">{{ oCr.percentageCompleted }}%</span></h6>
+                            <div class="progress" style="max-height: 5px;">
+                                <div progress-animate class="progress-bar bg-primary" [style.width.%]="oCr.percentageCompleted" role="progressbar" aria-valuenow="{{ oCr.percentageCompleted }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <span *ngIf="milestone.id != oCr.id">
+                            <i *ngIf="oCr.percentageCompleted == 100" class="text-success fa fa-check"></i>
+                            <i *ngIf="oCr.percentageCompleted < 100" class="text-danger fa fa-remove"></i>
+                        </span>
+                        <span *ngIf="milestone.id == oCr.id">
+                            <section class="mat-check">
+                                <mat-checkbox name="completed" [(ngModel)]="milestone.completed">{{ "milestone.completed" | translate }}</mat-checkbox>
+                            </section>
+                        </span>
+                    </td>
+
+                    <td>
+                        <i *ngIf="oCr.id!=milestone.id" class="fa fa-edit cursor mr-2" (click)="editMilestone(oCr)"></i>
+                        <i *ngIf="oCr.id==milestone.id" class="fa fa-save cursor mr-2" (click)="saveMilestone(milestone)"></i>
+                        <i class="fa fa-trash-o cursor" (click)="deleteMilestone(oCr)"></i>
+                    </td>
+
+                </tr>
+            </ng-container>
+
+        </tbody>
+    </table>
+</div>

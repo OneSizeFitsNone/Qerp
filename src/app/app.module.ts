@@ -24,7 +24,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorComponent,    
+    ErrorComponent,
   ],
   imports: [
     DragulaModule,

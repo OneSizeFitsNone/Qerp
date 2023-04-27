@@ -158,7 +158,7 @@
                                             </a>                                            
                                         </mat-form-field>
                                         <mat-option hidden [value]="null"></mat-option>
-                                        <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
+                                        <mat-option *ngFor="let company of companies" [value]="company.id" value="{{company.id}}">{{ company.name }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -175,7 +175,7 @@
                                             </a>                                            
                                         </mat-form-field>
                                         <mat-option [value]="null" hidden></mat-option>
-                                        <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
+                                        <mat-option *ngFor="let contact of contacts" [value]="contact.id"  value="{{contact.id}}">{{ contact.fullname }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -218,8 +218,14 @@
                 <div class="col-md-12 mt-3">
                     <az-apptypecontacts [appTypeId]="appTypes.prospect" [linkTypeId]="prospect.id" ></az-apptypecontacts>
                 </div>
-                
             </mat-tab>
+
+            <mat-tab label="{{ 'milestones' | translate}}">
+                <div class="col-md-12 mt-3">
+                    <az-milestones-tab [appTypeId]="appTypes.prospect" [linkTypeId]="prospect.id"></az-milestones-tab>
+                </div>
+            </mat-tab>
+
             <mat-tab label="{{ 'tasks' | translate}}">
                 <div class="col-md-12 mt-3">
                     comming soon!

@@ -6,7 +6,7 @@ import { ITask } from "./task";
 
 export interface IImage {
     id: number;
-    apptypeId: number;
+    linkedapptypeId: number;
     linkedtypeId: number;
     description: string;
     extension: string;

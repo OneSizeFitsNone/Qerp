@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApptypecontactsComponent } from './apptypecontacts/apptypecontacts.component';
+import { MilestonesTabComponent } from './milestones-tab/milestones-tab.component';
 
 @NgModule({
   imports: [
@@ -29,10 +30,12 @@ import { ApptypecontactsComponent } from './apptypecontacts/apptypecontacts.comp
     declarations: [
       ClientcontactsTabComponent,
       ApptypecontactsComponent,
+      MilestonesTabComponent,
     ],
     exports: [ 
       ClientcontactsTabComponent,
-      ApptypecontactsComponent
+      ApptypecontactsComponent,
+      MilestonesTabComponent,
     ]
 })
 

@@ -67,7 +67,7 @@ export class ImageService {
                 }
                 let oImage: IImage = <IImage>{};
                 oImage.id = 0;
-                oImage.apptypeId = appTypeId;
+                oImage.linkedapptypeId = appTypeId;
                 oImage.linkedtypeId = linkTypeId;
                 oImage.extension = file.name.split('.').pop();
                 oImage.filename = file.name;
