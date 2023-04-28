@@ -1,1 +1,231 @@
-<p>milestone works!</p>
+<div widget class="card" style="max-height: 100%!important;">
+    <div class="card-header">
+        <span class="text-uppercase">{{ "milestone" | translate }}: {{ milestone.name }}
+        </span>
+
+        <div class="widget-controls">
+            <i class="fa fa-chevron-left mr-3 cursor" (click)="goBack()" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.goback' | translate }}"></i>
+            <i *ngIf="milestone.id != 0" class="fa fa-chevron-up mr-3 cursor" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.saveitem' | translate }}" (click)="saveItem()"></i>
+            <i class="fa fa-times cursor" [routerLink]="'/pages/pm/milestones'" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.close' | translate }}"></i>
+        </div>  
+
+    </div>
+    <div class="card-body scroll">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-12 col-sm-12 bottom-30">
+                <mat-tab-group dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+
+                    <mat-tab *ngIf="milestone.linkedapptypeId == apptypes.prospect" label="{{ 'prospect' | translate}}">
+                        <div class="col-12 mt-4">
+                            <!-- prospect region -->
+                            <a href="javascript:void(0);" [routerLink]="['/pages/pm/prospect', milestone.linkedtypeId]">
+                                <h4 class="card-title text-center mb-4">{{ milestone.prospect.number }}</h4>
+                            </a>
+
+                            <div *ngIf="milestone.prospect.description" class="row mb-4">
+                                <div class="col-md-12">
+                                    <p class="card-text text-justify mb-4" style="white-space: pre-wrap;">
+                                        {{ milestone.prospect.description.substring(0, 150) }}
+                                        <span *ngIf="milestone.prospect.description.length > 150">...</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div *ngIf="milestone.prospect.deadline" class="row mb-4">
+                                <div class="col-md-2">
+                                    <i class="fa fa-clock-o" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.deadline' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    {{ milestone.prospect.deadline | date:"yyyy/MM/dd HH:mm" }}
+                                </div>
+                            </div>
+                            <!-- end prospect region -->
+
+                            <!-- contact region -->
+                            <div *ngIf="milestone.prospect.contact" class="row">
+                                <div class="col-md-2">
+                                    <i class="fa fa-user" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'contact' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <a href="javascript:void(0)" [routerLink]="['/pages/crm/contact', milestone.prospect.contactId]">
+                                        {{ milestone.prospect.contact.fullname }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div *ngIf="milestone.prospect.contact.phone" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ milestone.prospect.contact.phone }}
+                                </div>
+                            </div>
+                            <div *ngIf="milestone.prospect.contact.mobile" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ milestone.prospect.contact.mobile }}
+                                </div>
+                            </div>
+                            <div *ngIf="milestone.prospect.contact.email" class="row mb-4">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ milestone.prospect.contact.email }}
+                                </div>
+                            </div>
+                            <!-- end contact region -->
+                            
+                            <!-- client region -->
+                            <div *ngIf="milestone.prospect.client" class="row">
+                                <div class="col-md-2">
+                                    <i class="fa fa-building" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'company' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <a href="javascript:void(0)" [routerLink]="['/pages/crm/company', milestone.prospect.clientId]">{{ milestone.prospect.client.name }}</a>
+                                </div>
+                            </div>
+                            <div *ngIf="milestone.prospect.client.phone" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ milestone.prospect.client.phone }}
+                                </div>
+                            </div>
+                            <div *ngIf="milestone.prospect.client.mobile" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ milestone.prospect.client.mobile }}
+                                </div>
+                            </div>
+                            <div *ngIf="milestone.prospect.client.email" class="row mb-4">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ milestone.prospect.client.email }}
+                                </div>
+                            </div>
+                            <!-- end client region -->
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab *ngIf="milestone.linkedapptypeId == apptypes.project" label="{{ 'project' | translate}}">
+                        <div class="col-12">
+
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+            </div>
+
+            <div class="col-lg-9 col-md-12 col-sm-12 bottom-30">
+                <div class="card card-info border-0 box-shadow">
+                    <div class="card-body bg-white">
+                        <form [formGroup]="milestoneForm" class="row">
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "milestone.name" | translate }}</mat-label>
+                                    <input matInput formControlName="name">
+                                    <mat-error *ngIf="milestoneForm.get('name').touched && milestoneForm.get('name').hasError('required')">
+                                        {{ "milestone.name" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h3 style="margin: 0px">{{ milestone.tasksCompleted ?? 0 }}/{{ milestone.taskCount ?? 0 }} <span class="pull-right badge badge-pill badge-primary">{{ milestone.percentageCompleted ?? 0 }}%</span></h3>
+                                <div class="progress" style="max-height: 15px;">
+                                    <div progress-animate class="progress-bar bg-primary" [style.width.%]="milestone.percentageCompleted ?? 0"
+                                        [ngClass]="milestone.percentageCompleted == 100 ? 'bg-success' : milestone.percentageCompleted > 50 ? 'bg-warning' : 'bg-danger' "
+                                        role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "milestone.type" | translate }}</mat-label>
+                                    <mat-select formControlName="linkedapptypeId" (selectionChange)="onTypeChange()">                                        
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option [value]="apptypes.prospect" >{{ "prospect" | translate }}</mat-option>
+                                        <mat-option [value]="apptypes.project" >{{ "project" | translate }}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="milestoneForm.get('linkedapptypeId').touched && milestoneForm.get('linkedapptypeId').hasError('required')">
+                                        {{ "milestone.type" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="milestoneForm.get('linkedapptypeId').value == apptypes.prospect" class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "prospect" | translate }}</mat-label>
+                                    <mat-select formControlName="linkedtypeId" (openedChange)="searchprospect.focus()">                                        
+                                        <mat-form-field class="mat-field">
+                                            <input #searchprospect matInput placeholder="{{ 'general.search' | translate }}" 
+                                                (input)="onSearchProspect($event.target.value)" (keydown)="$event.stopPropagation()">                                         
+                                        </mat-form-field>
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let prospect of prospects" [value]="prospect.id">{{ prospect.number }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="milestoneForm.get('linkedapptypeId').value == apptypes.project" class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "project" | translate }}</mat-label>
+                                    <mat-select formControlName="linkedtypeId" (openedChange)="searchproject.focus()">                                        
+                                        <mat-form-field class="mat-field">
+                                            <input #searchproject matInput placeholder="{{ 'general.search' | translate }}" 
+                                                (input)="onSearchProject($event.target.value)" (keydown)="$event.stopPropagation()">                                          
+                                        </mat-form-field>
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let project of projects" [value]="project.id">{{ project.number }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.deadline" | translate }}</mat-label>
+                                    <input matInput type="datetime-local" formControlName="deadline">
+                                </mat-form-field>
+                            </div> 
+
+                            <div class="col-md-12">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.description" | translate }}</mat-label>
+                                    <textarea matInput formControlName="description" rows="5"></textarea>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group col-12 pt-3 text-right">
+                                <button *ngIf="id > 0" [disabled]="!milestoneForm.dirty" class="btn btn-success cursor" (click)="undoChanges()">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!milestoneForm.valid" class="btn btn-success cursor" (click)="onSubmit()">{{ "form.save" | translate }}</button>
+                            </div>
+
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-tab-group *ngIf="milestone.id > 0" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+            
+            <mat-tab label="{{ 'tasks' | translate}}">
+                <div class="col-md-12 mt-3">
+                    comming soon!
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+        
+
+    </div>
+</div>

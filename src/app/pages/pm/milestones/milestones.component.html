@@ -39,7 +39,6 @@
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "milestone.type" | translate }}</mat-label>
                                     <mat-select name="linkedapptypeId" [(ngModel)]="milestone.linkedapptypeId">
-                                        <mat-option [value]="null"></mat-option>
                                         <mat-option [value]="apptypes.prospect">{{ "prospect" | translate }}</mat-option>
                                         <mat-option [value]="apptypes.project">{{ "project" | translate }}</mat-option>
                                     </mat-select>
@@ -54,8 +53,6 @@
                                             <input #searchProspect name="searchProspect" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="prospectSearch" 
                                             (input)="onSearchProspect($event.target.value)" (keydown)="$event.stopPropagation()">                                        
                                         </mat-form-field>
-                                        
-                                        <mat-option [value]="null"></mat-option>
                                         <mat-option *ngFor="let prospect of prospects" [value]="prospect.id">{{ prospect.number }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -69,8 +66,6 @@
                                             <input #searchProject name="searchProject" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="projectSearch" 
                                             (input)="onSearchProject($event.target.value)" (keydown)="$event.stopPropagation()">                                        
                                         </mat-form-field>
-                                        
-                                        <mat-option [value]="null"></mat-option>
                                         <mat-option *ngFor="let project of projects" [value]="project.id">{{ project.number }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>

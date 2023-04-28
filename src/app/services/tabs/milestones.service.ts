@@ -57,11 +57,11 @@ export class MilestonesService {
         });
     }
     
-    public async createMilestone(appTypeId: number, linkTypeId: number) {
+    public async createMilestone(appTypeId: number = null, linkTypeId: number = null) {
         let oMilestone = <IMilestone>{};
         oMilestone.id = 0;
         oMilestone.name = "";
-        oMilestone.linkedapptypeId = appTypeId;
+        oMilestone.linkedapptypeId = appTypeId ?? this.appTypes.prospect;
         oMilestone.linkedtypeId = linkTypeId;
         oMilestone.completed = false;
           
