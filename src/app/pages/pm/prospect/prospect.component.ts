@@ -40,6 +40,8 @@ export class ProspectComponent {
   private st: number = null;
   private sl: number = null;
 
+  public reloadChildren: boolean = false;
+
   constructor(
     private prospectService: ProspectService,
     private companyService: CompanyService,
@@ -90,6 +92,9 @@ export class ProspectComponent {
 
       if(this.id == 0 && this.prospect.id > 0) {
         this.router.navigateByUrl("/pages/pm/prospect/"+this.prospect.id);
+      }
+      else {
+        this.reloadChildren = !this.reloadChildren;
       }
 
       this.ref.detectChanges();

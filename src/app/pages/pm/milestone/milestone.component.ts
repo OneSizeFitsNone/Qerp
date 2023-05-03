@@ -146,5 +146,9 @@ export class MilestoneComponent {
     this.projectService.findProject(oProject);
   }
 
+  public onUpdateTasks(event: any){
+    this.milestonesService.getMilestone(this.id);
+  }
+
 
 }

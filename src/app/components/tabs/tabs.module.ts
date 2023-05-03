@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApptypecontactsComponent } from './apptypecontacts/apptypecontacts.component';
 import { MilestonesTabComponent } from './milestones-tab/milestones-tab.component';
+import { TasksTabComponent } from './tasks-tab/tasks-tab.component';
 
 @NgModule({
   imports: [
@@ -31,11 +32,13 @@ import { MilestonesTabComponent } from './milestones-tab/milestones-tab.componen
       ClientcontactsTabComponent,
       ApptypecontactsComponent,
       MilestonesTabComponent,
+      TasksTabComponent,
     ],
     exports: [ 
       ClientcontactsTabComponent,
       ApptypecontactsComponent,
       MilestonesTabComponent,
+      TasksTabComponent
     ]
 })
 

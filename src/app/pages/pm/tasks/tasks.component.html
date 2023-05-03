@@ -1,1 +1,245 @@
-<p>tasks works!</p>
+<div class="row bottom-30">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span class="text-uppercase">{{ "tasks" | translate }}</span>
+                <div class="widget-controls">
+
+                    <a href="javascript:void(0)" (click)="onSearch()">
+                        <i class="fa fa-search mr-3 cursor" data-toggle="tooltip" data-animation="false"
+                            data-placement="bottom" title="{{ 'general.search' | translate }}"></i>
+                    </a>
+                    &nbsp;
+                    <a href="javascript:void(0)" (click)="advancedSearch = !advancedSearch">
+                        <i class="fa fa-search-plus mr-3 cursor" data-toggle="tooltip" data-animation="false"
+                            data-placement="bottom" title="{{ 'general.advanced' | translate }}"></i>
+                    </a>
+                    &nbsp;
+                    <a [routerLink]="['/pages/pm/task', 0]">
+                        <i class="fa fa-plus-square  mr-3 cursor" data-toggle="tooltip" data-animation="false"
+                            data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
+                    </a>
+
+                </div>   
+            </div>
+            <div class="card-body">
+
+                <form class="row">
+                    <div class="form-group col-md-12">
+                        
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "task.executor" | translate }}</mat-label>
+                                    <mat-select name="contactId" [(ngModel)]="task.contactId" (openedChange)="searchContact.focus()">
+                                        <mat-form-field class="mat-field">
+                                            <input #searchContact name="searchContact" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="contactSearch" 
+                                            (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">                                        
+                                        </mat-form-field>
+                                        <mat-option [value]="0"></mat-option>
+                                        <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>{{ "task.title" | translate }}</mat-label>
+                                    <input matInput name="title" [(ngModel)]="task.title" (ngModelChange)="onInputChange('title')">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "task.source" | translate }}</mat-label>
+                                    <mat-select name="source" [(ngModel)]="task.searchAppType" (ngModelChange)="onTypeChange()">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option [value]="apptypes.prospect">{{ "prospect" | translate }}</mat-option>
+                                        <mat-option [value]="apptypes.project">{{ "project" | translate }}</mat-option>
+                                        <mat-option [value]="apptypes.milestone">{{ "milestone" | translate }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="task.searchAppType == apptypes.prospect" class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "prospect" | translate }}</mat-label>
+                                    <mat-select name="linkedtypeId" [(ngModel)]="task.linkedtypeId" (openedChange)="searchProspect.focus()">
+                                        <mat-form-field class="mat-field">
+                                            <input #searchProspect name="searchProspect" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="prospectSearch" 
+                                            (input)="onSearchProspect($event.target.value)" (keydown)="$event.stopPropagation()">                                        
+                                        </mat-form-field>
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let prospect of prospects" [value]="prospect.id">{{ prospect.number }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="task.searchAppType == apptypes.project" class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "project" | translate }}</mat-label>
+                                    <mat-select name="linkedtypeId" [(ngModel)]="task.linkedtypeId" (openedChange)="searchProject.focus()">
+                                        <mat-form-field class="mat-field">
+                                            <input #searchProject name="searchProject" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="projectSearch" 
+                                            (input)="onSearchProject($event.target.value)" (keydown)="$event.stopPropagation()">                                        
+                                        </mat-form-field>
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let project of projects" [value]="project.id">{{ project.number }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="task.searchAppType == apptypes.milestone" class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "milestone" | translate }}</mat-label>
+                                    <mat-select name="milestoneId" [(ngModel)]="task.milestoneId" (openedChange)="searchMilestone.focus()">
+                                        <mat-form-field class="mat-field">
+                                            <input #searchMilestone name="searchMilestone" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="milestoneSearch" 
+                                            (input)="onSearchMilestone($event.target.value)" (keydown)="$event.stopPropagation()">                                        
+                                        </mat-form-field>
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let milestone of milestones" [value]="milestone.id">{{ milestone.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.deadlineFrom" | translate }}</mat-label>
+                                    <input matInput name="deadlineFrom" type="datetime-local" [ngModel]="task.deadlineFrom | date: 'yyyy-MM-ddTHH:mm'" (ngModelChange)="task.deadlineFrom = $event" (keyup.enter)="onInputChange('deadlineFrom')">
+                                </mat-form-field>
+                                <br>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.deadlineTo" | translate }}</mat-label>
+                                    <input matInput name="deadlineTo" type="datetime-local" [ngModel]="task.deadlineTo  | date: 'yyyy-MM-ddTHH:mm'" (ngModelChange)="task.deadlineTo = $event" (keyup.enter)="onInputChange('deadlineTo')">
+                                </mat-form-field>
+                            </div>
+                            
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "task.completed" | translate }}</mat-label>
+                                    <mat-select name="completed" [(ngModel)]="task.completed">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option [value]="true">{{ "yes" | translate }}</mat-option>
+                                        <mat-option [value]="false">{{ "no" | translate }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div *ngIf="advancedSearch" class="form-group col-md-12">
+                        
+                        <div class="row">
+
+
+
+
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>{{ "general.description" | translate }}</mat-label>
+                                    <input matInput name="description" [(ngModel)]="task.description" (ngModelChange)="onInputChange('description')">
+                                </mat-form-field>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </form>
+
+                <p></p>
+        
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ "task.title" | translate}}</th>
+                                <th>{{ "task.executor" | translate }}</th>
+                                <th>{{ "task.source" | translate}}</th>
+                                <th>{{ "task.sourceNumber" | translate}}</th>
+                                <th>{{ "milestone" | translate }}</th>
+                                <th>{{ "general.deadline" | translate }}</th>
+                                <th>{{ "task.completed" | translate }}</th>
+                                <th>{{ "general.created" | translate }}</th>
+                                <th>{{ "general.updated" | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <ng-container *ngFor="let c of tasks">
+                                <tr>
+
+                                    <td>
+                                        <a href="javascript:void(0)" [routerLink]="['/pages/pm/task', c.id]">{{ c.title }}</a>
+                                    </td>
+                                    
+                                    <td>
+                                        <a href="javascript:void(0)" [routerLink]="['/pages/crm/contact', c.contactId]">{{ c.contact?.fullname }}</a>
+                                    </td>
+
+                                    <td>
+                                        <span *ngIf="c.prospectId != null">
+                                            {{ "prospect" | translate }}
+                                        </span>
+                                        <span *ngIf="c.projectId != null">
+                                            {{ "project" | translate }}
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span *ngIf="c.prospectId != null">
+                                            <a href="javascript:void(0)" [routerLink]="['/pages/pm/prospect', c.prospectId]">{{ c.prospect?.number }}</a>
+                                        </span>
+                                        <span *ngIf="c.projectId != null">
+                                            <a href="javascript:void(0)" [routerLink]="['/pages/pm/project', c.projectId]">{{ c.project?.number }}</a>
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <a *ngIf="c.milestoneId != null" href="javascript:void(0)" [routerLink]="['/pages/pm/milestone', c.milestoneId]">{{ c.milestone?.name }}</a>
+                                    </td>
+
+                                    <td>
+                                        <span [ngClass]="getDateClass(c)">{{ c.deadline | date:"yyyy/MM/dd HH:mm" }}</span>
+                                    </td>
+
+                                    <td>
+                                        <i *ngIf="c.completed" class="text-success fa fa-check"></i>
+                                        <i *ngIf="!c.completed" class="text-danger fa fa-remove"></i>
+                                    </td>
+
+                                    <td>
+                                        {{ c.created | date:"yyyy/MM/dd HH:mm" }}
+                                    </td>
+                
+                                    <td>
+                                        {{ c.updated | date:"yyyy/MM/dd HH:mm" }}
+                                    </td>
+
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+</div>

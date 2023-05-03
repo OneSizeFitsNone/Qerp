@@ -26,4 +26,5 @@ export interface IMilestone {
     deadlineFrom: Date;
     deadlineTo: Date;
     typeNumber: string;
+    forcedId: number;
 }

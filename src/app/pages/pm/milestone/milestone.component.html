@@ -18,9 +18,12 @@
 
             <div class="col-lg-3 col-md-12 col-sm-12 bottom-30">
                 <mat-tab-group dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+                    <mat-tab *ngIf="milestone.linkedtypeId == null">
 
-                    <mat-tab *ngIf="milestone.linkedapptypeId == apptypes.prospect" label="{{ 'prospect' | translate}}">
-                        <div class="col-12 mt-4">
+                    </mat-tab>
+
+                    <mat-tab *ngIf="milestone.linkedapptypeId == apptypes.prospect && milestone.linkedtypeId != null" label="{{ 'prospect' | translate}}">
+                        <div class="col-12 mt-4 mb-5">
                             <!-- prospect region -->
                             <a href="javascript:void(0);" [routerLink]="['/pages/pm/prospect', milestone.linkedtypeId]">
                                 <h4 class="card-title text-center mb-4">{{ milestone.prospect.number }}</h4>
@@ -116,7 +119,7 @@
                         </div>
                     </mat-tab>
 
-                    <mat-tab *ngIf="milestone.linkedapptypeId == apptypes.project" label="{{ 'project' | translate}}">
+                    <mat-tab *ngIf="milestone.linkedapptypeId == apptypes.project && milestone.linkedtypeId != null" label="{{ 'project' | translate}}">
                         <div class="col-12">
 
                         </div>
@@ -141,7 +144,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <h3 style="margin: 0px">{{ milestone.tasksCompleted ?? 0 }}/{{ milestone.taskCount ?? 0 }} <span class="pull-right badge badge-pill badge-primary">{{ milestone.percentageCompleted ?? 0 }}%</span></h3>
+                                <h3 style="margin: 0px">{{ "tasks" | translate }}: {{ milestone.tasksCompleted ?? 0 }}/{{ milestone.taskCount ?? 0 }} <span class="pull-right badge badge-pill badge-primary">{{ milestone.percentageCompleted ?? 0 }}%</span></h3>
                                 <div class="progress" style="max-height: 15px;">
                                     <div progress-animate class="progress-bar bg-primary" [style.width.%]="milestone.percentageCompleted ?? 0"
                                         [ngClass]="milestone.percentageCompleted == 100 ? 'bg-success' : milestone.percentageCompleted > 50 ? 'bg-warning' : 'bg-danger' "
@@ -220,7 +223,7 @@
             
             <mat-tab label="{{ 'tasks' | translate}}">
                 <div class="col-md-12 mt-3">
-                    comming soon!
+                    <az-tasks-tab [appTypeId]="apptypes.milestone" [linkTypeId]="milestone.id" (onUpdateTasks)="onUpdateTasks($event)"></az-tasks-tab>
                 </div>
             </mat-tab>
 

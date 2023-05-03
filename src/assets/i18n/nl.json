@@ -6,6 +6,7 @@
     "err.user.nocurrent" : "Geen huidige gebruiker gevonden!",
     "error.invalidFile" : "Foutief bestand!",
     "err.pathNotFound": "Locatie niet gevonden!",
+    "err.milestonehandler": "Fout in mijlpaal bewerker",
 
     "warn.noresultsfound": "Geen resultaten gevonden!",
     "warn.user.invalidcredentials" : "Ongeldige inloggegevens!",
@@ -134,7 +135,21 @@
     "milestone.tasks": "Taken",
     "milestone.completed": "Voltooid",
     "milestone.type": "Type",
-    "milestone.typenumber": "Number",
+    "milestone.typenumber": "Nummer",
+    "milestone.saved": "Mijlpaal bewaard",
+    "milestone.created": "Mijlpaal aangemaakt",
+
+    "task": "Taak",
+    "tasks": "Taken",
+    "task.saved": "Taak bewaard",
+    "task.created": "Taak aangemaakt",
+    "task.title": "Titel",
+    "task.time": "Tijd",
+    "task.toinvoice": "Te factureren",
+    "task.completed": "Voltooid",
+    "task.executor": "Uitvoerder",
+    "task.source": "Bron",
+    "task.sourceNumber": "Nummer",
 
     "priority": "Prioriteit",
     "prospecttypes": "Prospect types",
@@ -142,5 +157,7 @@
     "high": "Hoog",
     "low": "Laag",
     "medium": "Medium",
-    "type": "Type"
+    "type": "Type",
+    "yes": "Ja",
+    "no": "Neen"
 }

@@ -1,0 +1,148 @@
+
+<form class="row">
+
+    <div class="form-group col-lg-3 col-md-6 col-sm-8">
+<!--         <mat-form-field style="width: 100%;">
+            <input matInput type="time" id="appt" name="appt" min="00:00" max="23:59" [(ngModel)]="time" (ngModelChange)="log($event)">
+        </mat-form-field> -->
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>{{ "general.search" | translate }}</mat-label>
+            <input matInput name="crSearch" [(ngModel)]="ccSearch" (ngModelChange)="onInputChange()">
+        </mat-form-field>
+
+
+    </div>
+
+    <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
+        <div class="box">
+            <a href="javascript:void(0);" (click)="onCreateTask()">
+                <i *ngIf="!hasNew"
+                    class="fa fa-plus-square searchformicon cursor" data-toggle="tooltip" data-animation="false"
+                    data-placement="bottom" title="{{ 'general.add' | translate }}"
+                ></i>
+            </a>
+        </div>
+    </div> 
+
+</form>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>{{ "task.title" | translate}}</th>
+                <th>{{ "general.description" | translate}}</th>
+                <th>{{ "task.executor" | translate }}</th>
+                <th>{{ "general.deadline" | translate }}</th>
+                <th>{{ "task.time" | translate }}</th>
+                <th>{{ "task.toinvoice" | translate }}</th>
+                <th>{{ "task.completed" | translate }}</th>
+                <th>{{ "general.created" | translate }}</th>
+                <th>{{ "general.updated" | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let oCr of tasksSearch">
+                <tr>
+
+                    <td>
+                        <span *ngIf="task.id != oCr.id">
+                            <a href="javascript:void(0)" [routerLink]="['/pages/pm/task', oCr.id]">{{ oCr.title }}</a>
+                        </span>
+                        <mat-form-field *ngIf="task.id == oCr.id" class="mat-field">
+                            <mat-label>{{ "task.title" | translate }}</mat-label>
+                            <input matInput name="title" [(ngModel)]="task.title">
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <span *ngIf="task.id != oCr.id">
+                            {{ oCr.description }}
+                        </span>
+                        <mat-form-field *ngIf="task.id == oCr.id" class="mat-field">
+                            <mat-label>{{ "general.description" | translate }}</mat-label>
+                            <textarea matInput name="description" [(ngModel)]="task.description" rows="2"></textarea>
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <span *ngIf="task.id != oCr.id">
+                            {{ oCr.contact?.fullname }}
+                        </span>
+                        <mat-form-field *ngIf="task.id == oCr.id" class="mat-field">
+                            <mat-select placeholder="{{ 'contact.select' | translate}}" [(ngModel)]="task.contactId" (openedChange)="searchcontact.focus()">
+                                <mat-form-field class="mat-field">
+                                    <input #searchcontact matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="contactSearch" 
+                                        (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">
+                                    <a href="javascript:void(0)" (click)="onEnterSearch('contact')">
+                                        <i *ngIf="contactSearch.length > 2" class="fa fa-plus-square cursor"></i>
+                                    </a>                                            
+                                </mat-form-field>
+                                <mat-option hidden [value]="null"></mat-option>
+                                <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <span *ngIf="task.id != oCr.id">
+                            {{ oCr.deadline | date:"yyyy/MM/dd HH:mm" }}
+                        </span>
+                        <mat-form-field *ngIf="task.id == oCr.id" class="mat-field">
+                            <mat-label>{{ "general.deadline" | translate }}</mat-label>
+                            <input matInput type="datetime-local" [(ngModel)]="task.deadline">
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        todo
+                    </td>
+
+                    <td>
+                        <span *ngIf="task.id != oCr.id">
+                            <i *ngIf="oCr.toInvoice" class="text-success fa fa-check"></i>
+                            <i *ngIf="!oCr.toInvoice" class="text-danger fa fa-remove"></i>
+                        </span>
+                        <span *ngIf="task.id == oCr.id">
+                            <section class="mat-check">
+                                <mat-checkbox name="toInvoice" [(ngModel)]="task.toInvoice"></mat-checkbox>
+                            </section>
+                        </span>
+                    </td>
+
+                    <td>
+                        <span *ngIf="task.id != oCr.id">
+                            <i *ngIf="oCr.completed" class="text-success fa fa-check"></i>
+                            <i *ngIf="!oCr.completed" class="text-danger fa fa-remove"></i>
+                        </span>
+                        <span *ngIf="task.id == oCr.id">
+                            <section class="mat-check">
+                                <mat-checkbox name="completed" [(ngModel)]="task.completed"></mat-checkbox>
+                            </section>
+                        </span>
+                    </td>
+
+                    <td>
+                        {{ oCr.created | date:"yyyy/MM/dd HH:mm" }}
+                    </td>
+
+                    <td>
+                        {{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}
+                    </td>
+
+                    <td>
+                        <i *ngIf="oCr.id!=task.id" class="fa fa-edit cursor mr-2" (click)="editTask(oCr)"></i>
+                        <i *ngIf="oCr.id==task.id" class="fa fa-save cursor mr-2" (click)="saveTask(task)"></i>
+                        <i class="fa fa-trash-o cursor" (click)="deleteTask(oCr)"></i>
+                    </td> 
+
+
+
+                </tr>
+            </ng-container>
+
+        </tbody>
+    </table>
+</div>

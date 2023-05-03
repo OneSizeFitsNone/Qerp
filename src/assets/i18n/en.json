@@ -6,6 +6,7 @@
     "err.user.nocurrent" : "No current user found!",
     "error.invalidFile" : "Wrong file!",
     "err.pathNotFound": "Location not found!",
+    "err.milestonehandler": "Error on milestone handler",
 
     "warn.noresultsfound": "No results found!",
     "warn.user.invalidcredentials" : "Invalid credentials!",
@@ -22,6 +23,7 @@
     "menu.settings.mycompany": "My company",
     "menu.settings.contactroles": "Contact rollen",
     "menu.settings.parameters": "Parameters",
+    "menu.milestones": "Milestones",
 
     "form.save": "Save",
     "form.undoChanges": "Undo",
@@ -89,6 +91,7 @@
     "contactroles.role": "Role",
     "contactroles.select": "Select a role",
 
+
     "vat.vatnumber": "VAT number",
 
     "prospects": "Prospects",
@@ -125,11 +128,37 @@
     "parametergroup": "Parameter group",
     "parametergroup.name": "Group name",
 
+    "milestone": "Milestone",
+    "milestones": "Milestones",
+    "milestone.searchName": "Search by name",
+    "milestone.name": "Name",
+    "milestone.tasks": "Tasks",
+    "milestone.completed": "Completed",
+    "milestone.type": "Type",
+    "milestone.typenumber": "Number",
+    "milestone.saved": "Milestone saved",
+    "milestone.created": "Milestone created",
+
+    "task": "Task",
+    "tasks": "Tasks",
+    "task.saved": "Task saved",
+    "task.created": "Task created",
+    "task.title": "Title",
+    "task.time": "Time",
+    "task.toinvoice": "To invoice",
+    "task.completed": "Completed",
+    "task.executor": "Executor",
+    "task.source": "Source",
+    "task.sourceNumber": "Number",
+
+
     "priority": "Priority",
     "prospecttypes": "Prospect types",
     "projecttypes": "Project types",
     "high": "High",
     "low": "Low",
     "medium": "Medium",
-    "type": "Type"
+    "type": "Type",
+    "yes": "Yes",
+    "no": "No"
 }

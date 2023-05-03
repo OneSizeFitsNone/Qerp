@@ -3,6 +3,7 @@ import { ICompany } from "./company";
 import { IContact } from "./contact";
 import { IImage } from "./image";
 import { IInvoiceline } from "./invoiceline";
+import { IMilestone } from "./milestone";
 import { IProject } from "./project";
 import { IProspect } from "./prospect";
 
@@ -13,12 +14,11 @@ export interface ITask {
     clientId: number;
     projectId: number;
     prospectId: number;
-    prospectGoalId: number;
+    milestoneId: number;
     contactId: number;
     title: string;
     description: string;
     deadline: Date;
-    timer: number;
     maxTime: number;
     toInvoice: boolean;
     completed: boolean;
@@ -28,9 +28,13 @@ export interface ITask {
     client: IClient;
     company: ICompany;
     contact: IContact;
+    milestone: IMilestone;
     project: IProject;
     prospect: IProspect;
-    images: Array<IImage>;
-    invoiceLines: Array<IInvoiceline>;
+
+    deadlineFrom: any;
+    deadlineTo: any;
+    forcedId: number;
+    searchAppType: number;
 
 }

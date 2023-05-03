@@ -3,6 +3,10 @@
     z-index: 9999999999;
 }
 
+.mat-mdc-checkbox label {
+    margin-bottom: 9px !important;
+}
+
 .rowhover:hover {
     background-color: aliceblue;
 }

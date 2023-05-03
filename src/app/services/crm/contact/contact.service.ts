@@ -54,6 +54,31 @@ export class ContactService {
           });
     }
 
+    public findUser(searchContact: IContact) {
+      if(this.searchRequest) { this.searchRequest.unsubscribe() }
+      this.searchRequest = this.http.post<IReturnResult>(this.url + 'searchUser/', JSON.stringify(searchContact), {
+            headers: new HttpHeaders({
+              "Content-Type": "application/json"
+            })
+          }).subscribe({
+            next: (result: IReturnResult) => {
+              if(result.success) { 
+                this._contacts.next(result.object);
+                if(result.message.length > 0) {
+                    this.toastr.warning(this.translate.instant(result.message));
+                }
+              }
+              else {
+                this._contacts.next([]);
+                this.toastr.warning(this.translate.instant(result.message));
+              }
+            },
+            error: err => {
+              this.toastr.error(this.translate.instant("err") + err);
+            }
+          });
+    }
+
     public createContact() {
       let oContact : IContact = <IContact>{};
       oContact.id = 0;
