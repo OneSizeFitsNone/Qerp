@@ -36,5 +36,6 @@ export interface ITask {
     deadlineTo: any;
     forcedId: number;
     searchAppType: number;
+    sourceId: number;
 
 }

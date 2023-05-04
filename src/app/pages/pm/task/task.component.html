@@ -1,1 +1,453 @@
-<p>task works!</p>
+<div widget class="card" style="max-height: 100%!important;">
+    <div class="card-header">
+        <span class="text-uppercase">{{ "task" | translate }}: {{ task.title }}
+        </span>
+
+        <div class="widget-controls">
+            <i class="fa fa-chevron-left mr-3 cursor" (click)="goBack()" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.goback' | translate }}"></i>
+            <i *ngIf="task.id != 0" class="fa fa-chevron-up mr-3 cursor" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.saveitem' | translate }}" (click)="saveItem()"></i>
+            <i class="fa fa-times cursor" [routerLink]="'/pages/pm/tasks'" data-toggle="tooltip" data-animation="false"
+                data-placement="bottom" title="{{ 'general.close' | translate }}"></i>
+        </div>  
+
+    </div>
+    <div class="card-body scroll">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-12 col-sm-12 bottom-30">
+                <mat-tab-group dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+                    <mat-tab *ngIf="task.id == 0">
+                        &nbsp;
+                    </mat-tab>
+
+                    <mat-tab *ngIf="task.prospectId > 0" label="{{ 'prospect' | translate}}">
+                        <div class="col-12 mt-4 mb-5">
+                            <!-- prospect region -->
+                            <a href="javascript:void(0);" [routerLink]="['/pages/pm/prospect', task.prospectId]">
+                                <h4 class="card-title text-center mb-4">{{ task.prospect.number }}</h4>
+                            </a>
+
+                            <div *ngIf="task.prospect.description" class="row mb-4">
+                                <div class="col-md-12">
+                                    <p class="card-text text-justify mb-4" style="white-space: pre-wrap;">
+                                        {{ task.prospect.description.substring(0, 150) }}
+                                        <span *ngIf="task.prospect.description.length > 150">...</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div *ngIf="task.prospect.deadline" class="row mb-4">
+                                <div class="col-md-2">
+                                    <i class="fa fa-clock-o" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.deadline' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.prospect.deadline | date:"yyyy/MM/dd HH:mm" }}
+                                </div>
+                            </div>
+                            <!-- end prospect region -->
+
+                            <!-- contact region -->
+                            <div *ngIf="task.prospect.contact" class="row">
+                                <div class="col-md-2">
+                                    <i class="fa fa-user" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'contact' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <a href="javascript:void(0)" [routerLink]="['/pages/crm/contact', task.prospect.contactId]">
+                                        {{ task.prospect.contact.fullname }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div *ngIf="task.prospect.contact.phone" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.prospect.contact.phone }}
+                                </div>
+                            </div>
+                            <div *ngIf="task.prospect.contact.mobile" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.prospect.contact.mobile }}
+                                </div>
+                            </div>
+                            <div *ngIf="task.prospect.contact.email" class="row mb-4">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.prospect.contact.email }}
+                                </div>
+                            </div>
+                            <!-- end contact region -->
+                            
+                            <!-- client region -->
+                            <div *ngIf="task.prospect.client" class="row">
+                                <div class="col-md-2">
+                                    <i class="fa fa-building" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'company' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <a href="javascript:void(0)" [routerLink]="['/pages/crm/company', task.prospect.clientId]">{{ task.prospect.client.name }}</a>
+                                </div>
+                            </div>
+                            <div *ngIf="task.prospect.client.phone" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.prospect.client.phone }}
+                                </div>
+                            </div>
+                            <div *ngIf="task.prospect.client.mobile" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.prospect.client.mobile }}
+                                </div>
+                            </div>
+                            <div *ngIf="task.prospect.client.email" class="row mb-4">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.prospect.client.email }}
+                                </div>
+                            </div>
+                            <!-- end client region -->
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab *ngIf="task.projectId > 0" label="{{ 'project' | translate}}">
+                        <div class="col-12 mt-4 mb-5">
+                            <!-- project region -->
+                            <a href="javascript:void(0);" [routerLink]="['/pages/pm/project', task.projectId]">
+                                <h4 class="card-title text-center mb-4">{{ task.project.number }}</h4>
+                            </a>
+
+                            <div *ngIf="task.project.description" class="row mb-4">
+                                <div class="col-md-12">
+                                    <p class="card-text text-justify mb-4" style="white-space: pre-wrap;">
+                                        {{ task.project.description.substring(0, 150) }}
+                                        <span *ngIf="task.project.description.length > 150">...</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div *ngIf="task.project.deadline" class="row mb-4">
+                                <div class="col-md-2">
+                                    <i class="fa fa-clock-o" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.deadline' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.project.deadline | date:"yyyy/MM/dd HH:mm" }}
+                                </div>
+                            </div>
+                            <!-- end prospect region -->
+
+                            <!-- contact region -->
+                            <div *ngIf="task.project.contact" class="row">
+                                <div class="col-md-2">
+                                    <i class="fa fa-user" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'contact' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <a href="javascript:void(0)" [routerLink]="['/pages/crm/contact', task.project.contactId]">
+                                        {{ task.project.contact.fullname }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div *ngIf="task.project.contact.phone" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.project.contact.phone }}
+                                </div>
+                            </div>
+                            <div *ngIf="task.project.contact.mobile" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.project.contact.mobile }}
+                                </div>
+                            </div>
+                            <div *ngIf="task.project.contact.email" class="row mb-4">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.project.contact.email }}
+                                </div>
+                            </div>
+                            <!-- end contact region -->
+                            
+                            <!-- client region -->
+                            <div *ngIf="task.project.client" class="row">
+                                <div class="col-md-2">
+                                    <i class="fa fa-building" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'company' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <a href="javascript:void(0)" [routerLink]="['/pages/crm/company', task.project.clientId]">{{ task.project.client.name }}</a>
+                                </div>
+                            </div>
+                            <div *ngIf="task.project.client.phone" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.project.client.phone }}
+                                </div>
+                            </div>
+                            <div *ngIf="task.project.client.mobile" class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.project.client.mobile }}
+                                </div>
+                            </div>
+                            <div *ngIf="task.project.client.email" class="row mb-4">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.project.client.email }}
+                                </div>
+                            </div>
+                            <!-- end client region -->
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab *ngIf="task.milestoneId > 0" label="{{ 'milestone' | translate}}">
+                        <div class="col-12 mt-4 mb-5">
+                            <!-- project region -->
+                            <a href="javascript:void(0);" [routerLink]="['/pages/pm/milestone', task.milestoneId]">
+                                <h4 class="card-title text-center mb-4">{{ task.milestone?.name }}</h4>
+                            </a>
+
+                            <div *ngIf="task.milestone.description" class="row mb-4">
+                                <div class="col-md-12">
+                                    <p class="card-text text-justify mb-4" style="white-space: pre-wrap;">
+                                        {{ task.milestone.description.substring(0, 150) }}
+                                        <span *ngIf="task.milestone.description.length > 150">...</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div *ngIf="task.milestone.deadline" class="row mb-4">
+                                <div class="col-md-2">
+                                    <i class="fa fa-clock-o" data-toggle="tooltip" data-animation="false"
+                                        data-placement="bottom" title="{{ 'general.deadline' | translate }}"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    {{ task.milestone.deadline | date:"yyyy/MM/dd HH:mm" }}
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <span style="margin: 0px">{{ "tasks" | translate }}: {{ task.milestone.tasksCompleted ?? 0 }}/{{ task.milestone.taskCount ?? 0 }} <span class="pull-right badge badge-pill badge-primary">{{ task.milestone.percentageCompleted ?? 0 }}%</span></span>
+                                    <div class="progress" style="max-height: 15px;">
+                                        <div progress-animate class="progress-bar bg-primary" [style.width.%]="task.milestone.percentageCompleted ?? 0"
+                                            [ngClass]="task.milestone.percentageCompleted == 100 ? 'bg-success' : task.milestone.percentageCompleted > 50 ? 'bg-warning' : 'bg-danger' "
+                                            role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end prospect region -->
+
+                            
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab *ngIf="task.contactId > 0" label="{{ 'task.executor' | translate}}">
+                        <div class="col-12">
+
+                            <az-image-display *ngIf="task.contact?.id" [appTypeId]="apptypes.contact" [linkTypeId]="task.contact?.id" [showEdit]="false"></az-image-display>
+                            
+                            <h4 class="card-title text-center mb-4">
+                                <span>
+                                    <a href="javascript:void(0)" class="cursor" [routerLink]="'/pages/crm/contact/'+task.contact?.id">
+                                        {{ task.contact?.fullname }}
+                                    </a>
+                                </span>
+                            </h4>                                                           
+                                  
+                            <div *ngIf="task.contact?.phone || task.contact?.mobile" class="row mb-4">
+                              <div class="col-md-2">
+                                  <i *ngIf="task.contact?.phone" class="fa fa-phone"></i><br *ngIf="task.contact?.phone && task.contact?.mobile">
+                                  <i *ngIf="task.contact?.mobile" class="fa fa-mobile"></i>
+                              </div>
+                              <div class="col-md-10 text-left">
+                                  <span *ngIf="task.contact?.phone">{{ task.contact?.phone }}</span><br *ngIf="task.contact?.phone && task.contact?.mobile">
+                                  <span *ngIf="task.contact?.mobile">{{ task.contact?.mobile }}</span>
+                              </div>
+                            </div>
+      
+                            <div *ngIf="task.contact?.email" class="row mb-4">
+                              <div class="col-md-2">
+                                  <i class="fa fa-envelope"></i>
+                              </div>
+                              <div class="col-md-10 text-left">
+                                  {{ task.contact?.email }}
+                              </div>
+                            </div>
+
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+            </div>
+
+            <div class="col-lg-9 col-md-12 col-sm-12 bottom-30">
+                <div class="card card-info border-0 box-shadow">
+                    <div class="card-body bg-white">
+                        <form [formGroup]="taskForm" class="row">
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "task.title" | translate }}</mat-label>
+                                    <input matInput formControlName="title">
+                                    <mat-error *ngIf="taskForm.get('title').touched && taskForm.get('title').hasError('required')">
+                                        {{ "task.title" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <section class="mat-check">
+                                    <mat-checkbox formControlName="completed">{{ 'task.completed' | translate }}</mat-checkbox>
+                                </section>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "task.source" | translate }}</mat-label>
+                                    <mat-select formControlName="sourceId" (selectionChange)="onSourceChange()">                                        
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option [value]="apptypes.prospect" >{{ "prospect" | translate }}</mat-option>
+                                        <mat-option [value]="apptypes.project" >{{ "project" | translate }}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="taskForm.get('sourceId').touched && taskForm.get('sourceId').hasError('required')">
+                                        {{ "task.source" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="taskForm.get('sourceId').value == null" class="col-md-6">
+                                &nbsp;
+                            </div>
+
+                            <div *ngIf="taskForm.get('sourceId').value == apptypes.prospect" class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "prospect" | translate }}</mat-label>
+                                    <mat-select formControlName="prospectId" (openedChange)="searchprospect.focus()" (selectionChange)="onProspectProjectChange()">                                        
+                                        <mat-form-field class="mat-field">
+                                            <input #searchprospect matInput placeholder="{{ 'general.search' | translate }}" 
+                                                (input)="onSearchProspect($event.target.value)" (keydown)="$event.stopPropagation()">                                         
+                                        </mat-form-field>
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let prospect of prospects" [value]="prospect.id">{{ prospect.number }}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="taskForm.get('prospectId').touched && taskForm.get('prospectId').hasError('required')">
+                                        {{ "task.prospect" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="taskForm.get('sourceId').value == apptypes.project" class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "project" | translate }}</mat-label>
+                                    <mat-select formControlName="projectId" (openedChange)="searchproject.focus()" (selectionChange)="onProspectProjectChange()">                                        
+                                        <mat-form-field class="mat-field">
+                                            <input #searchproject matInput placeholder="{{ 'general.search' | translate }}" 
+                                                (input)="onSearchProject($event.target.value)" (keydown)="$event.stopPropagation()">                                          
+                                        </mat-form-field>
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let project of projects" [value]="project.id">{{ project.number }}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="taskForm.get('projectId').touched && taskForm.get('projectId').hasError('required')">
+                                        {{ "task.project" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "milestone" | translate }}</mat-label>
+                                    <mat-select formControlName="milestoneId" (openedChange)="searchmilestone.focus()">                                        
+                                        <mat-form-field class="mat-field">
+                                            <input #searchmilestone matInput placeholder="{{ 'general.search' | translate }}" 
+                                                (input)="onSearchMilestone($event.target.value)" (keydown)="$event.stopPropagation()">                                          
+                                        </mat-form-field>
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let milestone of milestones" [value]="milestone.id">{{ milestone.name }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "task.executor" | translate }}</mat-label>
+                                    <mat-select formControlName="contactId" (openedChange)="searchcontact.focus()">                                        
+                                        <mat-form-field class="mat-field">
+                                            <input #searchcontact matInput placeholder="{{ 'general.search' | translate }}" 
+                                                (input)="onSearchContact($event.target.value)" (keydown)="$event.stopPropagation()">                                          
+                                        </mat-form-field>
+                                        <mat-option hidden [value]="null"></mat-option>
+                                        <mat-option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.fullname }}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="taskForm.get('contactId').touched && taskForm.get('contactId').hasError('required')">
+                                        {{ "task.executor" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.deadline" | translate }}</mat-label>
+                                    <input matInput type="datetime-local" formControlName="deadline">
+                                    <mat-error *ngIf="taskForm.get('deadline').touched && taskForm.get('deadline').hasError('required')">
+                                        {{ "general.deadline" | translate }} {{ "form.isrequired" | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div> 
+
+                            <div class="col-md-6">
+                                <section class="mat-check">
+                                    <mat-checkbox formControlName="toInvoice">{{ 'task.toinvoice' | translate }}</mat-checkbox>
+                                </section>
+                            </div>
+
+                            <div class="col-md-12">
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.description" | translate }}</mat-label>
+                                    <textarea matInput formControlName="description" rows="5"></textarea>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group col-12 pt-3 text-right">
+                                <button *ngIf="id > 0" [disabled]="!taskForm.dirty" class="btn btn-success cursor" (click)="undoChanges()">{{ "form.undoChanges" | translate }}</button>&nbsp;<button [disabled]="!taskForm.valid" class="btn btn-success cursor" (click)="onSubmit()">{{ "form.save" | translate }}</button>
+                            </div>
+
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-tab-group *ngIf="task.id > 0" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+            
+            <mat-tab label="{{ 'contacts' | translate}}">
+                <div class="col-md-12 mt-3">
+                    <az-apptypecontacts *ngIf="this.taskForm.controls['sourceId'].value == apptypes.prospect" 
+                        [appTypeId]="apptypes.prospect" [linkTypeId]="task.prospectId" ></az-apptypecontacts>
+                    <az-apptypecontacts *ngIf="this.taskForm.controls['sourceId'].value == apptypes.project" 
+                        [appTypeId]="apptypes.project" [linkTypeId]="task.projectId"></az-apptypecontacts>
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+        
+
+    </div>
+</div>

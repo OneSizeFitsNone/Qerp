@@ -2,7 +2,25 @@
     <div class="col">
         <div widget class="card">
             <div class="card-header">
-                <span class="text-uppercase">{{ "companies" | translate }}</span>      
+                <span class="text-uppercase">{{ "companies" | translate }}</span>    
+                <div class="widget-controls">
+
+                    <a href="javascript:void(0)" (click)="onSearch()">
+                        <i class="fa fa-search mr-3 cursor" data-toggle="tooltip" data-animation="false"
+                            data-placement="bottom" title="{{ 'general.search' | translate }}"></i>
+                    </a>
+                    &nbsp;
+                    <a href="javascript:void(0)" (click)="advancedSearch = !advancedSearch">
+                        <i class="fa fa-search-plus mr-3 cursor" data-toggle="tooltip" data-animation="false"
+                            data-placement="bottom" title="{{ 'general.advanced' | translate }}"></i>
+                    </a>
+                    &nbsp;
+                    <a [routerLink]="['/pages/crm/company', 0]">
+                        <i class="fa fa-plus-square  mr-3 cursor" data-toggle="tooltip" data-animation="false"
+                            data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
+                    </a>
+
+                </div>   
             </div>
             <div class="card-body">
 
@@ -12,24 +30,6 @@
                             <mat-label>{{ "general.search" | translate }}</mat-label>
                             <input matInput name="name" [(ngModel)]="company.name" (ngModelChange)="onInputChange('name')">
                         </mat-form-field>
-                    </div>
-                    <div class="form-group col-lg-9 col-md-6 col-sm-4 d-flex align-items-center">
-                        <div class="box">
-                                <a href="javascript:void(0)" (click)="onSearch()">
-                                    <i class="fa fa-search searchformicon" data-toggle="tooltip" data-animation="false"
-                                        data-placement="bottom" title="{{ 'general.search' | translate }}"></i>
-                                </a>
-                                &nbsp;
-                                <a href="javascript:void(0)" (click)="advancedSearch = !advancedSearch">
-                                    <i class="fa fa-search-plus searchformicon" data-toggle="tooltip" data-animation="false"
-                                        data-placement="bottom" title="{{ 'general.advanced' | translate }}"></i>
-                                </a>
-                                &nbsp;
-                                <a [routerLink]="['/pages/crm/company', 0]">
-                                    <i class="fa fa-plus-square  searchformicon" data-toggle="tooltip" data-animation="false"
-                                        data-placement="bottom" title="{{ 'general.add' | translate }}"></i>
-                                </a>
-                        </div>
                     </div>
                     <div *ngIf="advancedSearch" class="form-group col-md-12">
                         <div class="row">

@@ -19,7 +19,7 @@
             <div class="col-lg-3 col-md-12 col-sm-12 bottom-30">
                 <mat-tab-group dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
                     <mat-tab *ngIf="milestone.linkedtypeId == null">
-
+                        &nbsp;
                     </mat-tab>
 
                     <mat-tab *ngIf="milestone.linkedapptypeId == apptypes.prospect && milestone.linkedtypeId != null" label="{{ 'prospect' | translate}}">

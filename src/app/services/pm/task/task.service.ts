@@ -63,14 +63,15 @@ export class TaskService {
         oTask.id = 0;
         oTask.title = "";
         oTask.contactId = (<IUser>JSON.parse(localStorage.getItem("currentuser"))).contactId;
+        oTask.sourceId = null;
         if(appTypeId == this.appTypes.project) {
-          oTask.projectId = linkTypeId
+          oTask.projectId = linkTypeId;
         }
         else if(appTypeId == this.appTypes.prospect) {
-          oTask.prospectId = linkTypeId
+          oTask.prospectId = linkTypeId;
         }
         else if(appTypeId == this.appTypes.milestone) {
-          oTask.milestoneId = linkTypeId
+          oTask.milestoneId = linkTypeId;
         }
           
         this._task.next(oTask);
