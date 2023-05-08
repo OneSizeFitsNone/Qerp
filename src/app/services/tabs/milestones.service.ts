@@ -159,6 +159,34 @@ export class MilestonesService {
           }
         });
       }
+
+      public saveFromSelect(oMilestone: IMilestone) {
+        this.http.post<IReturnResult>(this.url, oMilestone, {
+          headers: new HttpHeaders({
+            "Content-Type": "application/json"
+          })
+        }).subscribe({
+          next: (result: IReturnResult) => {
+            if(result.success) { 
+              let arrContacts = this._milestones.value;
+              arrContacts.unshift(result.object);
+              this._milestones.next(arrContacts);
+              //this._contact.next(result.object);
+              if(result.message.length > 0) {
+                  this.toastr.warning(this.translate.instant(result.message));
+              }
+              this.toastr.success(this.translate.instant('milestone.created'));
+            }
+            else {
+              this._milestone.next(<IMilestone>{});
+              this.toastr.warning(this.translate.instant(result.message));
+            }
+          },
+          error: err => {
+            this.toastr.error(this.translate.instant("err") + err);
+          }
+        });
+      }
   
       public async deleteMilestone(oMilestone: IMilestone) {
         if(oMilestone.id == 0) {

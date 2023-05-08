@@ -220,9 +220,15 @@
                 </div>
                 
             </mat-tab>
+            <mat-tab label="{{ 'milestones' | translate}}">
+                <div class="col-md-12 mt-3">
+                    <az-milestones-tab [appTypeId]="appTypes.project" [linkTypeId]="project.id"></az-milestones-tab>
+                </div>
+            </mat-tab>
+
             <mat-tab label="{{ 'tasks' | translate}}">
                 <div class="col-md-12 mt-3">
-                    comming soon!
+                    <az-tasks-tab [appTypeId]="appTypes.project" [linkTypeId]="project.id"></az-tasks-tab>
                 </div>
             </mat-tab>
         </mat-tab-group>

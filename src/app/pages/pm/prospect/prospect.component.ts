@@ -19,7 +19,7 @@ import { ICity } from 'src/app/interfaces/city';
   selector: 'az-prospect',
   templateUrl: './prospect.component.html',
   styleUrls: ['./prospect.component.scss'],
-  providers: [ProspectService, CompanyService, ContactService, ParameterService]
+  providers: [ProspectService, CompanyService, ContactService, ParameterService, AppTypes]
 })
 
 export class ProspectComponent {

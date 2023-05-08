@@ -19,7 +19,7 @@ import { ICity } from 'src/app/interfaces/city';
   selector: 'az-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss'],
-  providers: [ProjectService, CompanyService, ContactService, ParameterService]
+  providers: [ProjectService, CompanyService, ContactService, ParameterService, AppTypes]
 })
 
 export class ProjectComponent {

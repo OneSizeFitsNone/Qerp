@@ -80,8 +80,8 @@ export class TaskService {
         this._tasks.next(oCc);
     }
 
-    public getTask(id: number) {
-      this.http.get<IReturnResult>(this.url + `${id}`, {
+    public getTask(myId: number) {
+      this.http.get<IReturnResult>(this.url + `${myId}`, {
         headers: new HttpHeaders({
           "Content-Type": "application/json"
         })
@@ -90,7 +90,7 @@ export class TaskService {
           if(result.success) {
             this._task.next(result.object);
             let lstTasks = this._tasks.value;
-            let i = lstTasks.findIndex(m => m.id == id);
+            let i = lstTasks.findIndex(m => m.id == myId);
             if(i > -1) {
               lstTasks[i] = result.object;
               this._tasks.next(lstTasks);

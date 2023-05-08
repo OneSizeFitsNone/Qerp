@@ -138,6 +138,7 @@
     "milestone.typenumber": "Number",
     "milestone.saved": "Milestone saved",
     "milestone.created": "Milestone created",
+    "milestone.select": "Select milestone",
 
     "task": "Task",
     "tasks": "Tasks",

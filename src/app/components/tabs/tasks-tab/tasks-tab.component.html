@@ -32,6 +32,9 @@
         <thead>
             <tr>
                 <th>{{ "task.title" | translate}}</th>
+                <th *ngIf="appTypeId == appTypes.project || appTypeId == appTypes.prospect">
+                    {{ "milestone" | translate }}
+                </th>
                 <th>{{ "general.description" | translate}}</th>
                 <th>{{ "task.executor" | translate }}</th>
                 <th>{{ "general.deadline" | translate }}</th>
@@ -46,7 +49,6 @@
         <tbody>
             <ng-container *ngFor="let oCr of tasksSearch">
                 <tr>
-
                     <td>
                         <span *ngIf="task.id != oCr.id">
                             <a href="javascript:void(0)" [routerLink]="['/pages/pm/task', oCr.id]">{{ oCr.title }}</a>
@@ -56,6 +58,26 @@
                             <input matInput name="title" [(ngModel)]="task.title">
                         </mat-form-field>
                     </td>
+
+                    <th *ngIf="appTypeId == appTypes.project || appTypeId == appTypes.prospect">
+                        <span *ngIf="task.id != oCr.id">
+                            {{ oCr.milestone?.name }}
+                        </span>
+                        <mat-form-field *ngIf="task.id == oCr.id" class="mat-field">
+                            <mat-select placeholder="{{ 'milestone.select' | translate}}" [(ngModel)]="task.milestoneId" (openedChange)="searchmilestone.focus()">
+                                <mat-form-field class="mat-field">
+                                    <input #searchmilestone matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="milestoneSearch" 
+                                        (input)="onSearchMilestone($event.target.value)" (keydown)="$event.stopPropagation()">
+                                    <a href="javascript:void(0)" (click)="onEnterSearch('milestone')">
+                                        <i *ngIf="milestoneSearch.length > 2" class="fa fa-plus-square cursor"></i>
+                                    </a>                                            
+                                </mat-form-field>
+                                <mat-option [value]="null"></mat-option>
+                                <mat-option *ngFor="let milestone of milestones" [value]="milestone.id">{{ milestone.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </th>
+
 
                     <td>
                         <span *ngIf="task.id != oCr.id">
