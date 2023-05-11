@@ -37,8 +37,8 @@
                             <tr >
                                 <td>{{ oCr.name }}</td>
                                 <td style="white-space: pre-wrap;">{{ oCr.description }}</td>
-                                <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                                <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                                <td>{{ oCr.created | date:"dd/MM/yyyy HH:mm" }}</td>
+                                <td>{{ oCr.updated | date:"dd/MM/yyyy HH:mm" }}</td>
                                 <td class="text-right">
                                     <i class="fa fa-edit cursor mr-2" (click)="editContactrole(oCr)"></i>
                                     <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>
@@ -53,8 +53,8 @@
                                 <td style="white-space: pre-wrap;">
                                     <textarea class="form-control" name="description" [(ngModel)]="contactrole.description" placeholder="{{ 'general.description' | translate }}" rows="2"></textarea>
                                 </td>
-                                <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                                <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                                <td>{{ oCr.created | date:"dd/MM/yyyy HH:mm" }}</td>
+                                <td>{{ oCr.updated | date:"dd/MM/yyyy HH:mm" }}</td>
                                 <td class="text-right">
                                     <i class="fa fa-save cursor mr-2" (click)="saveContactrole(contactrole)"></i>
                                     <i class="fa fa-trash-o cursor" (click)="deleteContactrole(oCr)"></i>

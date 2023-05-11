@@ -76,8 +76,8 @@
                                             <tr >
                                                 <td>{{ para?.name | translate }}</td>
                                                 <td style="white-space: pre-wrap;">{{ para?.description }}</td>
-                                                <td>{{ para?.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                                                <td>{{ para?.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                                                <td>{{ para?.created | date:"dd/MM/yyyy HH:mm" }}</td>
+                                                <td>{{ para?.updated | date:"dd/MM/yyyy HH:mm" }}</td>
                                                 <td class="text-right">
                                                     <ng-container *ngIf="selectedGroup?.canEdit && para.companyId != -1">
                                                         <i class="fa fa-edit cursor mr-2" (click)="onEditParameter(para)"></i>
@@ -100,8 +100,8 @@
                                                         <textarea matInput name="description" [(ngModel)]="parameter.description" rows="2"></textarea>
                                                     </mat-form-field>
                                                 </td>
-                                                <td>{{ oCr?.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                                                <td>{{ oCr?.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                                                <td>{{ oCr?.created | date:"dd/MM/yyyy HH:mm" }}</td>
+                                                <td>{{ oCr?.updated | date:"dd/MM/yyyy HH:mm" }}</td>
                                                 <td class="text-right">
                                                     <i class="fa fa-save cursor mr-2" (click)="onSaveParameter(parameter)"></i>
                                                     <i class="fa fa-trash-o cursor" (click)="onDeleteParameter(para)"></i>

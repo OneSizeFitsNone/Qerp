@@ -12,7 +12,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@matheo/datepicker';
+import { MatNativeDateModule } from '@matheo/datepicker/core';
 import { ImageModule } from 'src/app/components/images/image.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import { CKEditorModule } from 'ng2-ckeditor';
@@ -20,6 +21,7 @@ import { TabsModule } from 'src/app/components/tabs/tabs.module';
 import { MilestoneComponent } from './milestone/milestone.component';
 import { MilestonesComponent } from './milestones/milestones.component';
 import { TaskComponent } from './task/task.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full'},
@@ -45,6 +47,7 @@ export const routes: Routes = [
     MatInputModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     ImageModule,
     MatTabsModule,
     CKEditorModule,
@@ -61,7 +64,10 @@ export const routes: Routes = [
         TaskComponent
     ],
     exports: [ 
-    ]
+    ],
+    providers: [
+      {provide: MAT_DATE_LOCALE, useValue: 'nl-BE'},
+    ],
 })
 
 export class PMModule { }

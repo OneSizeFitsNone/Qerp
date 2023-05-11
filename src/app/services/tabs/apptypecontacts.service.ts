@@ -125,7 +125,15 @@ export class ApptypecontactsService {
             let oCr = <IAppTypeContact>result.object;
             let oCrs = this._apptypecontacts.value;
             let i = oCrs.findIndex(i => i.id == oApptypecontact.id)
-            oCrs[i]=oCr;
+            if(i >= 0) { 
+              oCrs[i]=oCr; 
+            }
+            oCrs.sort((a,b) => {
+              if(a.client.name > a.client.name) return 1;
+              if(a.client.name < a.client.name) return -1;
+              if(a.contact.fullname > a.contact.fullname) return 1;
+              if(a.contact.fullname < a.contact.fullname) return -1;
+            });
             this._apptypecontacts.next(oCrs);
             this._apptypecontact.next(<IAppTypeContact>{});
             if(result.message.length > 0) {

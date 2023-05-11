@@ -13,6 +13,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApptypecontactsComponent } from './apptypecontacts/apptypecontacts.component';
 import { MilestonesTabComponent } from './milestones-tab/milestones-tab.component';
 import { TasksTabComponent } from './tasks-tab/tasks-tab.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@matheo/datepicker';
+import { MatNativeDateModule } from '@matheo/datepicker/core';
 
 @NgModule({
   imports: [
@@ -26,6 +29,8 @@ import { TasksTabComponent } from './tasks-tab/tasks-tab.component';
     MatSelectModule,
     MatInputModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     RouterModule
   ], 
     declarations: [
@@ -39,7 +44,10 @@ import { TasksTabComponent } from './tasks-tab/tasks-tab.component';
       ApptypecontactsComponent,
       MilestonesTabComponent,
       TasksTabComponent
-    ]
+    ],
+    providers: [
+      {provide: MAT_DATE_LOCALE, useValue: 'nl-BE'},
+    ],
 })
 
 export class TabsModule { }

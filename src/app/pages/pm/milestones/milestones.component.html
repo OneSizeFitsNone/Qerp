@@ -54,6 +54,7 @@
                                             <input #searchProspect name="searchProspect" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="prospectSearch" 
                                             (input)="onSearchProspect($event.target.value)" (keydown)="$event.stopPropagation()">                                        
                                         </mat-form-field>
+                                        <mat-option [value]="null" hidden></mat-option>
                                         <mat-option *ngFor="let prospect of prospects" [value]="prospect.id">{{ prospect.number }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -67,6 +68,7 @@
                                             <input #searchProject name="searchProject" matInput placeholder="{{ 'general.search' | translate }}" [(ngModel)]="projectSearch" 
                                             (input)="onSearchProject($event.target.value)" (keydown)="$event.stopPropagation()">                                        
                                         </mat-form-field>
+                                        <mat-option [value]="null" hidden></mat-option>
                                         <mat-option *ngFor="let project of projects" [value]="project.id">{{ project.number }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -91,14 +93,18 @@
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "general.deadlineFrom" | translate }}</mat-label>
-                                    <input matInput name="deadlineFrom" type="datetime-local" [(ngModel)]="milestone.deadlineFrom" (keyup.enter)="onInputChange('deadlineFrom')">
+                                    <input matInput name="deadlineFrom" [matDatepicker]="deadlineFromPicker"  [(ngModel)]="milestone.deadlineFrom" (keyup.enter)="onInputChange('deadlineFrom')">
+                                    <mat-datepicker-toggle matSuffix [for]="deadlineFromPicker"></mat-datepicker-toggle>
+                                    <mat-datepicker [twelveHour]="false" type="datetime" #deadlineFromPicker></mat-datepicker>
                                 </mat-form-field>
                             </div>
 
                             <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "general.deadlineTo" | translate }}</mat-label>
-                                    <input matInput name="deadlineTo" type="datetime-local" [(ngModel)]="milestone.deadlineTo" (keyup.enter)="onInputChange('deadlineTo')">
+                                    <input matInput name="deadlineTo" [matDatepicker]="deadlineToPicker"  [(ngModel)]="milestone.deadlineTo" (keyup.enter)="onInputChange('deadlineTo')">
+                                    <mat-datepicker-toggle matSuffix [for]="deadlineToPicker"></mat-datepicker-toggle>
+                                    <mat-datepicker [twelveHour]="false" type="datetime" #deadlineToPicker></mat-datepicker>
                                 </mat-form-field>
                             </div>
 
@@ -149,7 +155,7 @@
                                     </td>
 
                                     <td>
-                                        {{ c.deadline | date:"yyyy/MM/dd HH:mm" }}
+                                        {{ c.deadline | date:"dd/MM/yyyy HH:mm" }}
                                     </td>
 
                                     <td>
@@ -167,11 +173,11 @@
                                     </td>
 
                                     <td>
-                                        {{ c.created | date:"yyyy/MM/dd HH:mm" }}
+                                        {{ c.created | date:"dd/MM/yyyy HH:mm" }}
                                     </td>
                 
                                     <td>
-                                        {{ c.updated | date:"yyyy/MM/dd HH:mm" }}
+                                        {{ c.updated | date:"dd/MM/yyyy HH:mm" }}
                                     </td>
 
                                 </tr>

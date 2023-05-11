@@ -103,8 +103,8 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                        <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                        <td>{{ oCr.created | date:"dd/MM/yyyy HH:mm" }}</td>
+                        <td>{{ oCr.updated | date:"dd/MM/yyyy HH:mm" }}</td>
                         <td>
                             <i *ngIf="oCr.id!=clientContact.id" class="fa fa-edit cursor mr-2" (click)="editClientcontact(oCr)"></i>
                             <i *ngIf="oCr.id==clientContact.id" class="fa fa-save cursor mr-2" (click)="saveClientcontact(clientContact)"></i>
@@ -182,8 +182,8 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ oCr.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                        <td>{{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                        <td>{{ oCr.created | date:"dd/MM/yyyy HH:mm" }}</td>
+                        <td>{{ oCr.updated | date:"dd/MM/yyyy HH:mm" }}</td>
                         <td>
                             <i *ngIf="oCr.id!=clientContact.id" class="fa fa-edit cursor mr-2" (click)="editClientcontact(oCr)"></i>
                             <i *ngIf="oCr.id==clientContact.id" class="fa fa-save cursor mr-2" (click)="saveClientcontact(clientContact)"></i>

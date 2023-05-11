@@ -64,6 +64,7 @@ export class TaskService {
         oTask.title = "";
         oTask.contactId = (<IUser>JSON.parse(localStorage.getItem("currentuser"))).contactId;
         oTask.sourceId = null;
+        oTask.completed = false;
         if(appTypeId == this.appTypes.project) {
           oTask.projectId = linkTypeId;
         }
@@ -144,10 +145,16 @@ export class TaskService {
               let oCr = <ITask>result.object;
               let oCrs = this._tasks.value;
               let i = oCrs.findIndex(i => i.id == oTask.id)
-              if(i > -1) { oCrs[i]=oCr; }
+              if(i > -1) { 
+                oCrs[i]=oCr; 
+              }
               oCrs.sort((a,b) => {
-                return <any>new Date(a.deadline) - <any>new Date(b.deadline)
+                if(new Date(a.deadline).getTime() > new Date(b.deadline).getTime()) return 1;
+                if(new Date(a.deadline).getTime() < new Date(b.deadline).getTime()) return -1;
+                if(a.title > b.title) return 1;
+                if(a.title < b.title) return -1;
               });
+
               this._tasks.next(oCrs);
 
               if(clearObject) {

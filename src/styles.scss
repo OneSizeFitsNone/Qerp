@@ -24,7 +24,6 @@ $icon-font-path: "../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 @import "app/theme/styles/libs-override";
 @import "app/theme/styles/base";
 
-
 @-webkit-keyframes spin-cubeGridScaleDelay {
   0%, 70%, 100% {
     -webkit-transform: scale3D(1, 1, 1);

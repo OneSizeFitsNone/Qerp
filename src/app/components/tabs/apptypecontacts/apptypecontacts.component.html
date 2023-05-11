@@ -137,8 +137,8 @@
                         </mat-form-field>
                     </td>
 
-                    <td>{{ ocr.created | date:"yyyy/MM/dd HH:mm" }}</td>
-                    <td>{{ ocr.updated | date:"yyyy/MM/dd HH:mm" }}</td>
+                    <td>{{ ocr.created | date:"dd/MM/yyyy HH:mm" }}</td>
+                    <td>{{ ocr.updated | date:"dd/MM/yyyy HH:mm" }}</td>
                     <td>
                         <i *ngIf="ocr.id!=apptypecontact.id" class="fa fa-edit cursor mr-2" (click)="editApptypecontact(ocr)"></i>
                         <i *ngIf="ocr.id==apptypecontact.id" class="fa fa-save cursor mr-2" (click)="saveApptypecontact(apptypecontact)"></i>

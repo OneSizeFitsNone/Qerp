@@ -44,7 +44,7 @@
                                         data-placement="bottom" title="{{ 'general.deadline' | translate }}"></i>
                                 </div>
                                 <div class="col-md-10">
-                                    {{ task.prospect.deadline | date:"yyyy/MM/dd HH:mm" }}
+                                    {{ task.prospect.deadline | date:"dd/MM/yyyy HH:mm" }}
                                 </div>
                             </div>
                             <!-- end prospect region -->
@@ -141,7 +141,7 @@
                                         data-placement="bottom" title="{{ 'general.deadline' | translate }}"></i>
                                 </div>
                                 <div class="col-md-10">
-                                    {{ task.project.deadline | date:"yyyy/MM/dd HH:mm" }}
+                                    {{ task.project.deadline | date:"dd/MM/yyyy HH:mm" }}
                                 </div>
                             </div>
                             <!-- end prospect region -->
@@ -238,7 +238,7 @@
                                         data-placement="bottom" title="{{ 'general.deadline' | translate }}"></i>
                                 </div>
                                 <div class="col-md-10">
-                                    {{ task.milestone.deadline | date:"yyyy/MM/dd HH:mm" }}
+                                    {{ task.milestone.deadline | date:"dd/MM/yyyy HH:mm" }}
                                 </div>
                             </div>
 
@@ -404,7 +404,9 @@
                             <div class="col-md-6">
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "general.deadline" | translate }}</mat-label>
-                                    <input matInput type="datetime-local" formControlName="deadline">
+                                    <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline">
+                                    <mat-datepicker-toggle matSuffix [for]="deadlinePicker"></mat-datepicker-toggle>
+                                    <mat-datepicker [twelveHour]="false" type="datetime" #deadlinePicker></mat-datepicker>
                                     <mat-error *ngIf="taskForm.get('deadline').touched && taskForm.get('deadline').hasError('required')">
                                         {{ "general.deadline" | translate }} {{ "form.isrequired" | translate}}
                                     </mat-error>

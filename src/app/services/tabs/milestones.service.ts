@@ -135,7 +135,16 @@ export class MilestonesService {
               let oCr = <IMilestone>result.object;
               let oCrs = this._milestones.value;
               let i = oCrs.findIndex(i => i.id == oMilestone.id)
-              if(i > -1) { oCrs[i]=oCr; }
+              if(i > -1) { 
+                oCrs[i]=oCr; 
+              }
+              oCrs.sort((a,b) => {
+                if(new Date(a.deadline).getTime() > new Date(b.deadline).getTime()) return 1;
+                if(new Date(a.deadline).getTime() < new Date(b.deadline).getTime()) return -1;
+                if(a.name > b.name) return 1;
+                if(a.name < b.name) return -1;
+              });
+              
               this._milestones.next(oCrs);
 
               if(clearObject) {

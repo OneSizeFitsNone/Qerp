@@ -110,11 +110,13 @@
 
                     <td>
                         <span *ngIf="task.id != oCr.id">
-                            {{ oCr.deadline | date:"yyyy/MM/dd HH:mm" }}
+                            {{ oCr.deadline | date:"dd/MM/yyyy HH:mm" }}
                         </span>
                         <mat-form-field *ngIf="task.id == oCr.id" class="mat-field">
                             <mat-label>{{ "general.deadline" | translate }}</mat-label>
-                            <input matInput type="datetime-local" [(ngModel)]="task.deadline">
+                            <input matInput [matDatepicker]="deadlinePicker" [(ngModel)]="task.deadline">
+                            <mat-datepicker-toggle matSuffix [for]="deadlinePicker"></mat-datepicker-toggle>
+                            <mat-datepicker [twelveHour]="false" type="datetime" #deadlinePicker></mat-datepicker>
                         </mat-form-field>
                     </td>
 
@@ -147,11 +149,11 @@
                     </td>
 
                     <td>
-                        {{ oCr.created | date:"yyyy/MM/dd HH:mm" }}
+                        {{ oCr.created | date:"dd/MM/yyyy HH:mm" }}
                     </td>
 
                     <td>
-                        {{ oCr.updated | date:"yyyy/MM/dd HH:mm" }}
+                        {{ oCr.updated | date:"dd/MM/yyyy HH:mm" }}
                     </td>
 
                     <td>
