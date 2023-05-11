@@ -67,11 +67,12 @@ export class TasksTabComponent {
 
     this.contactService.contacts.subscribe(c => { 
       this.contacts = c;
-      //this.ref.detectChanges();
+      this.ref.detectChanges();
     });
 
     this.milestoneService.milestones.subscribe(m => {
       this.milestones = m
+      this.ref.detectChanges();
     });
   }
 
