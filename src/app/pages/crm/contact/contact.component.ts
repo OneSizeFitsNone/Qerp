@@ -30,6 +30,8 @@ export class ContactComponent {
   public cities: Array<ICity> = [];
   public appTypes: AppTypes = new AppTypes();
 
+  public tabIndex = 0;
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private contactService: ContactService,
@@ -138,6 +140,10 @@ export class ContactComponent {
     oSavedItem.apptypeId = this.appTypes.contact;
     oSavedItem.routelink = this.routers.url;
     this.saveditemService.save(oSavedItem);
+  }
+
+  public onTabIndexChange(i: any) {
+    this.tabIndex=i;
   }
   
 }

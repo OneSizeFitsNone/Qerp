@@ -203,21 +203,21 @@
 
         <div *ngIf="contact.id && contact.id > 0" class="row">
             <div class="col-md-12">
-                <mat-tab-group dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+                <mat-tab-group (selectedIndexChange)="onTabIndexChange($event)" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
                     <mat-tab label="{{ 'companies' | translate}}">
                         <div class="col-md-12 mt-3">
-                            <az-clientcontacts-tab [appTypeId]="appTypes.contact" [linkTypeId]="contact.id"></az-clientcontacts-tab> 
+                            <az-clientcontacts-tab *ngIf="tabIndex == 0" [appTypeId]="appTypes.contact" [linkTypeId]="contact.id"></az-clientcontacts-tab> 
                         </div>
                         
                     </mat-tab>
                     <mat-tab label="{{ 'prospects' | translate}}">
                         <div class="col-md-12 mt-3">
-                            <az-apptypecontacts [appTypeId]="appTypes.prospect" [sourceAppTypeId]="appTypes.contact" [sourceLinkTypeId]="contact.id" ></az-apptypecontacts>
+                            <az-apptypecontacts *ngIf="tabIndex == 1" [appTypeId]="appTypes.prospect" [sourceAppTypeId]="appTypes.contact" [sourceLinkTypeId]="contact.id" ></az-apptypecontacts>
                         </div>
                     </mat-tab>
                     <mat-tab label="{{ 'projects' | translate}}">
                         <div class="col-md-12 mt-3">
-                            <az-apptypecontacts [appTypeId]="appTypes.project" [sourceAppTypeId]="appTypes.contact" [sourceLinkTypeId]="contact.id" ></az-apptypecontacts>
+                            <az-apptypecontacts *ngIf="tabIndex == 2" [appTypeId]="appTypes.project" [sourceAppTypeId]="appTypes.contact" [sourceLinkTypeId]="contact.id" ></az-apptypecontacts>
                         </div>                        
                     </mat-tab>
                 </mat-tab-group>

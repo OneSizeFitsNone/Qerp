@@ -32,6 +32,8 @@ export class CompanyComponent {
   public invoiceProvinces: Array<IProvince> = [];
   public invoiceCities: Array<ICity> = [];
   public appTypes: AppTypes = new AppTypes();
+
+  public tabIndex = 0;
   
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -172,6 +174,10 @@ export class CompanyComponent {
     oSavedItem.apptypeId = this.appTypes.client;
     oSavedItem.routelink = this.router.url;
     this.saveditemService.save(oSavedItem);
+  }
+
+  public onTabIndexChange(i: any) {
+    this.tabIndex=i;
   }
 
 }

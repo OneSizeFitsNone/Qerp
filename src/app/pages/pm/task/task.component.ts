@@ -41,6 +41,8 @@ export class TaskComponent {
   public contactSearch: string = "";
 
   public taskForm: UntypedFormGroup;
+
+  public tabIndex = 0;
   
   constructor(
     private taskService: TaskService,
@@ -243,6 +245,9 @@ export class TaskComponent {
     this.contactService.findUser(oContact);
   }
 
+  public onTabIndexChange(i: any) {
+    this.tabIndex=i;
+  }
 
 }
 

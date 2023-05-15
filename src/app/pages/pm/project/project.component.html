@@ -214,23 +214,23 @@
             </div>
         </div>
 
-        <mat-tab-group *ngIf="project.id > 0" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab-group *ngIf="project.id > 0" (selectedIndexChange)="onTabIndexChange($event)" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
             
             <mat-tab label="{{ 'contacts' | translate}}">
                 <div class="col-md-12 mt-3">
-                    <az-apptypecontacts [appTypeId]="appTypes.project" [linkTypeId]="project.id" ></az-apptypecontacts>
+                    <az-apptypecontacts *ngIf="tabIndex == 0" [appTypeId]="appTypes.project" [linkTypeId]="project.id" ></az-apptypecontacts>
                 </div>
                 
             </mat-tab>
             <mat-tab label="{{ 'milestones' | translate}}">
                 <div class="col-md-12 mt-3">
-                    <az-milestones-tab [appTypeId]="appTypes.project" [linkTypeId]="project.id" [parent]="project"></az-milestones-tab>
+                    <az-milestones-tab *ngIf="tabIndex == 1" [appTypeId]="appTypes.project" [linkTypeId]="project.id" [parent]="project"></az-milestones-tab>
                 </div>
             </mat-tab>
 
             <mat-tab label="{{ 'tasks' | translate}}">
                 <div class="col-md-12 mt-3">
-                    <az-tasks-tab [appTypeId]="appTypes.project" [linkTypeId]="project.id" [parent]="project"></az-tasks-tab>
+                    <az-tasks-tab *ngIf="tabIndex == 2" [appTypeId]="appTypes.project" [linkTypeId]="project.id" [parent]="project"></az-tasks-tab>
                 </div>
             </mat-tab>
         </mat-tab-group>

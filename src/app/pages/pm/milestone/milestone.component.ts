@@ -33,6 +33,8 @@ export class MilestoneComponent {
 
   public milestoneForm: UntypedFormGroup;
 
+  public tabIndex = 0;
+
   constructor(
     private milestonesService: MilestonesService,
     private projectService: ProjectService,
@@ -148,6 +150,10 @@ export class MilestoneComponent {
 
   public onUpdateTasks(event: any){
     this.milestonesService.getMilestone(this.id);
+  }
+
+  public onTabIndexChange(i: any) {
+    this.tabIndex=i;
   }
 
 

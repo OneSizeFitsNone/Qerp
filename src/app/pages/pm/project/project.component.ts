@@ -40,6 +40,8 @@ export class ProjectComponent {
   private st: number = null;
   private sl: number = null;
 
+  public tabIndex = 0;
+  
   constructor(
     private projectService: ProjectService,
     private companyService: CompanyService,
@@ -167,6 +169,10 @@ export class ProjectComponent {
     else if(type == "company") {
       this.companyService.saveFromSelect(this.companySearch);
     } 
+  }
+
+  public onTabIndexChange(i: any) {
+    this.tabIndex=i;
   }
 
 }

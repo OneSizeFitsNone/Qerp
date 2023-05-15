@@ -221,11 +221,11 @@
             </div>
         </div>
 
-        <mat-tab-group *ngIf="milestone.id > 0" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab-group *ngIf="milestone.id > 0" (selectedIndexChange)="onTabIndexChange($event)" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
             
             <mat-tab label="{{ 'tasks' | translate}}">
                 <div class="col-md-12 mt-3">
-                    <az-tasks-tab [appTypeId]="apptypes.milestone" [linkTypeId]="milestone.id" [parent]="milestone" (onUpdateTasks)="onUpdateTasks($event)"></az-tasks-tab>
+                    <az-tasks-tab *ngIf="tabIndex == 0" [appTypeId]="apptypes.milestone" [linkTypeId]="milestone.id" [parent]="milestone" (onUpdateTasks)="onUpdateTasks($event)"></az-tasks-tab>
                 </div>
             </mat-tab>
 

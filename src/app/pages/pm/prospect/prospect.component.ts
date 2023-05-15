@@ -42,6 +42,8 @@ export class ProspectComponent {
 
   public reloadChildren: boolean = false;
 
+  public tabIndex = 0;
+
   constructor(
     private prospectService: ProspectService,
     private companyService: CompanyService,
@@ -172,6 +174,10 @@ export class ProspectComponent {
     else if(type == "company") {
       this.companyService.saveFromSelect(this.companySearch);
     } 
+  }
+
+  public onTabIndexChange(i: any) {
+    this.tabIndex=i;
   }
 
 }

@@ -437,13 +437,13 @@
             </div>
         </div>
 
-        <mat-tab-group *ngIf="task.id > 0" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab-group *ngIf="task.id > 0" (selectedIndexChange)="onTabIndexChange($event)" dynamicHeight animationDuration="0ms" class="card border-0 box-shadow" mat-stretch-tabs="false" mat-align-tabs="start">
             
             <mat-tab label="{{ 'contacts' | translate}}">
                 <div class="col-md-12 mt-3">
-                    <az-apptypecontacts *ngIf="this.taskForm.controls['sourceId'].value == apptypes.prospect" 
+                    <az-apptypecontacts *ngIf="tabIndex == 0 && this.taskForm.controls['sourceId'].value == apptypes.prospect" 
                         [appTypeId]="apptypes.prospect" [linkTypeId]="task.prospectId" ></az-apptypecontacts>
-                    <az-apptypecontacts *ngIf="this.taskForm.controls['sourceId'].value == apptypes.project" 
+                    <az-apptypecontacts *ngIf="tabIndex == 0 && this.taskForm.controls['sourceId'].value == apptypes.project" 
                         [appTypeId]="apptypes.project" [linkTypeId]="task.projectId"></az-apptypecontacts>
                 </div>
             </mat-tab>
