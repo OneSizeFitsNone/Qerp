@@ -14,6 +14,7 @@ export interface IProspect {
     deadline: Date;
     description: string;
     estimatedBudget: number;
+    statusId: number
     created: Date;
     updated: Date;
 
@@ -21,6 +22,7 @@ export interface IProspect {
     company: ICompany;
     contact: IContact;
     prospectType: IParameter;
+    status: IParameter;
 
     forcedId: number;
     deadlineFrom: Date;

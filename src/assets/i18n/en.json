@@ -58,6 +58,7 @@
     "general.deadline": "Deadline",
     "general.deadlineFrom": "Deadline from",
     "general.deadlineTo": "Deadline to",
+    "general.status": "Status",
     
     "address.address": "Address",
     "address.postalCode": "Postalcode",
@@ -106,6 +107,7 @@
     "prospect.saved": "Prospect saved",
     "prospect.created": "Prospect created",
     "prospect.select": "Select prospect",
+    "prospect.estimatedBudget": "Estimated budget",
     
     "projects": "Projects",
     "project": "Project",
@@ -118,6 +120,7 @@
     "project.saved": "Project saved",
     "project.created": "Project created",
     "project.select": "Select project",
+    "project.estimatedBudget": "Estimated budget",
 
     "parameters": "Parameters",
     "parameter": "Parameter",
@@ -156,10 +159,17 @@
     "priority": "Priority",
     "prospecttypes": "Prospect types",
     "projecttypes": "Project types",
+    "projectstatuses": "Project statuses",
+    "prospectstatuses": "Prospect statuses",
     "high": "High",
     "low": "Low",
     "medium": "Medium",
     "type": "Type",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "ongoing": "Ongoing",
+    "win": "Win",
+    "loss": "Loss",
+    "startup": "Startup",
+    "closed": "Closed"
 }

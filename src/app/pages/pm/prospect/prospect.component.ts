@@ -30,6 +30,7 @@ export class ProspectComponent {
   public companies: Array<IClient> = [];
   public contacts: Array<IContact> = [];
   public prospectTypes: Array<IParameter> = [];
+  public statuses: Array<IParameter> = [];
   public appTypes: AppTypes = new AppTypes();
 
   public prospectForm:UntypedFormGroup;
@@ -68,18 +69,13 @@ export class ProspectComponent {
 
     this.route.params.subscribe(params => {
       this.id = +params['id'];
-      if(this.id == 0) {
-          this.prospectService.createProspect(this.st, this.sl);       
-      }
-      else {
-        this.prospectService.getProspect(this.id);
-      }
     });
 
     this.prospectForm = this.formBuilder.group({
       'clientId': ['', Validators.required],
       'contactId': ['', Validators.required],
       'prospectTypeId': ['', Validators.required],
+      'statusId': ['', Validators.required],
       'number': ['', numberValidator(this.id)],
       'description': [''],
       'deadline': [''],
@@ -113,6 +109,14 @@ export class ProspectComponent {
     });
 
     this.prospectTypes = await this.parameterService.getByGroupSystemCode('prospecttypes');
+    this.statuses = await this.parameterService.getByGroupSystemCode('prospectstatuses');
+
+    if(this.id == 0) {
+      this.prospectService.createProspect(this.st, this.sl);       
+    }
+    else {
+      this.prospectService.getProspect(this.id);
+    }
   }
 
   onSubmit() {

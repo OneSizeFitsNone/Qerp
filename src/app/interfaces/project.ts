@@ -21,6 +21,7 @@ export interface IProject {
     name: string;
     description: string;
     deadline: Date;
+    statusId: number;
     created: Date;
     updated: Date;
 
@@ -28,6 +29,7 @@ export interface IProject {
     company: ICompany;
     contact: IContact;
     projectType: IParameter;
+    status: IParameter;
     Prospect: IProspect;
 
     forcedId: number;    

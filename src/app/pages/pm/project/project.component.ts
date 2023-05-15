@@ -30,6 +30,7 @@ export class ProjectComponent {
   public companies: Array<IClient> = [];
   public contacts: Array<IContact> = [];
   public projectTypes: Array<IParameter> = [];
+  public statuses: Array<IParameter> = [];
   public appTypes: AppTypes = new AppTypes();
 
   public projectForm:UntypedFormGroup;
@@ -78,6 +79,7 @@ export class ProjectComponent {
       'clientId': ['', Validators.required],
       'contactId': ['', Validators.required],
       'projectTypeId': ['', Validators.required],
+      'statusId': ['', Validators.required],
       'number': ['', numberValidator(this.id)],
       'description': [''],
       'deadline': [''],
@@ -108,6 +110,7 @@ export class ProjectComponent {
     });
 
     this.projectTypes = await this.parameterService.getByGroupSystemCode('projecttypes');
+    this.statuses = await this.parameterService.getByGroupSystemCode('projectstatuses');
   }
 
   onSubmit() {

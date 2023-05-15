@@ -25,10 +25,21 @@
             <div class="card-body">
 
                 <form class="row">
-                    <div class="form-group col-lg-3 col-md-6 col-sm-8">
+
+                    <div class="form-group col-lg-3 col-md-6 col-sm-12 mb-4">
                         <mat-form-field style="width: 100%;">
                             <mat-label>{{ "prospect.searchNumber" | translate }}</mat-label>
                             <input matInput name="number" [(ngModel)]="prospect.number" (ngModelChange)="onInputChange('number')">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <mat-form-field class="mat-field">
+                            <mat-label>{{ "general.status" | translate }}</mat-label>
+                            <mat-select name="statusId" [(ngModel)]="prospect.statusId" (ngModelChange)="onInputChange('statusId')">                                      
+                                <mat-option [value]="null"></mat-option>
+                                <mat-option *ngFor="let status of statuses" [value]="status.id">{{ status.name | translate }}</mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
 
@@ -116,6 +127,7 @@
                         <thead>
                             <tr>
                                 <th>{{ "prospect.number" | translate}}</th>
+                                <th>{{ "general.status" | translate }}</th>
                                 <th>{{ "company" | translate}}</th>
                                 <th>{{ "contact" | translate }}</th>
                                 <th>{{ "type" | translate }}</th>
@@ -130,6 +142,9 @@
                                 <tr>
                                     <td>
                                         <a href="javascript:void(0)" [routerLink]="['/pages/pm/prospect', c.id]">{{ c.number }}</a>
+                                    </td>
+                                    <td>
+                                        {{ c.status?.name | translate }}
                                     </td>
                                     <td>
                                         <span *ngIf="c.client">

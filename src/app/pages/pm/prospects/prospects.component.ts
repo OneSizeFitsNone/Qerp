@@ -25,6 +25,7 @@ export class ProspectsComponent {
   public companies: Array<IClient> = [];
   public contacts: Array<IContact> = [];
   public prospectTypes: Array<IParameter> = [];
+  public statuses: Array<IParameter> = [];
 
   public contactSearch: string = "";
   public companySearch: string = "";
@@ -55,6 +56,7 @@ export class ProspectsComponent {
       this.companies = c;
     });
     this.prospectTypes = await this.parameterService.getByGroupSystemCode("prospecttypes");
+    this.statuses = await this.parameterService.getByGroupSystemCode("prospectstatuses");
     let oHistory = this.searchHistory.getHistory(this.apptypes.prospect);
     if(oHistory) {
       this.prospect = <IProspect>oHistory;

@@ -59,6 +59,7 @@
     "general.deadline": "Deadline",
     "general.deadlineFrom": "Deadline van",
     "general.deadlineTo": "Deadline tot",
+    "general.status": "Status",
     
     "address.address": "Adres",
     "address.postalCode": "Postcode",
@@ -106,6 +107,7 @@
     "prospect.saved": "Prospect bewaard",
     "prospect.created": "Prospect aangemaakt",
     "prospect.select": "Selecteer prospect",
+    "prospect.estimatedBudget": "Ingeschat budget",
     
     "projects": "Projecten",
     "project": "Project",
@@ -118,6 +120,7 @@
     "project.saved": "Project bewaard",
     "project.created": "Project aangemaakt",
     "project.select": "Selecteer project",
+    "project.estimatedBudget": "Ingeschat budget",
 
     "parameters": "Parameters",
     "parameter": "Parameter",
@@ -155,10 +158,17 @@
     "priority": "Prioriteit",
     "prospecttypes": "Prospect types",
     "projecttypes": "Project types",
+    "projectstatuses": "Project statussen",
+    "prospectstatuses": "Prospect statussen",
     "high": "Hoog",
     "low": "Laag",
     "medium": "Medium",
     "type": "Type",
     "yes": "Ja",
-    "no": "Neen"
+    "no": "Neen",
+    "ongoing": "Lopend",
+    "win": "Win",
+    "loss": "Verloren",
+    "startup": "Beginnend",
+    "closed": "Afgesloten"
 }

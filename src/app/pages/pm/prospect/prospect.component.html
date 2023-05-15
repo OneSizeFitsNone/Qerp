@@ -136,12 +136,24 @@
                                 </mat-form-field>
                             </div>
 
+                            <div class="col-md-6"></div>
+
                             <div class="col-md-6" >
                                 <mat-form-field class="mat-field">
                                     <mat-label>{{ "prospect.type" | translate }}</mat-label>
                                     <mat-select formControlName="prospectTypeId">
                                         <mat-option [value]="null"></mat-option>
-                                        <mat-option *ngFor="let prospectType of prospectTypes" [value]="prospectType.id">{{ prospectType.name }}</mat-option>
+                                        <mat-option *ngFor="let prospectType of prospectTypes" [value]="prospectType.id">{{ prospectType.name | translate }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6" >
+                                <mat-form-field class="mat-field">
+                                    <mat-label>{{ "general.status" | translate }}</mat-label>
+                                    <mat-select formControlName="statusId">
+                                        <mat-option [value]="null"></mat-option>
+                                        <mat-option *ngFor="let status of statuses" [value]="status.id">{{ status.name | translate }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -191,7 +203,7 @@
 
                             <div class="col-md-6">
                                 <mat-form-field class="mat-field">
-                                    <mat-label>{{ "prospect.edtimatedBudget" | translate }}</mat-label>
+                                    <mat-label>{{ "prospect.estimatedBudget" | translate }}</mat-label>
                                     <input matInput type="number" formControlName="estimatedBudget">
                                 </mat-form-field>
                             </div> 
