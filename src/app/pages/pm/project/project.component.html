@@ -224,13 +224,13 @@
             </mat-tab>
             <mat-tab label="{{ 'milestones' | translate}}">
                 <div class="col-md-12 mt-3">
-                    <az-milestones-tab [appTypeId]="appTypes.project" [linkTypeId]="project.id"></az-milestones-tab>
+                    <az-milestones-tab [appTypeId]="appTypes.project" [linkTypeId]="project.id" [parent]="project"></az-milestones-tab>
                 </div>
             </mat-tab>
 
             <mat-tab label="{{ 'tasks' | translate}}">
                 <div class="col-md-12 mt-3">
-                    <az-tasks-tab [appTypeId]="appTypes.project" [linkTypeId]="project.id"></az-tasks-tab>
+                    <az-tasks-tab [appTypeId]="appTypes.project" [linkTypeId]="project.id" [parent]="project"></az-tasks-tab>
                 </div>
             </mat-tab>
         </mat-tab-group>

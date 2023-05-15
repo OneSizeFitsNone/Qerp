@@ -169,6 +169,30 @@ export class TaskComponent {
   public onProspectProjectChange() {
     this.taskForm.get("milestoneId").setValue(0);
     this.milestones = [];
+
+    if(this.id == 0) 
+    {
+      if(this.taskForm.get("sourceId").value == this.apptypes.project && this.taskForm.get("projectId").value > 0) {
+        let projId = this.taskForm.get("projectId").value;
+        let oProject = this.projects.find(x => x.id == projId);
+        this.taskForm.get("deadline").setValue(oProject?.deadline);
+      }
+      else if(this.taskForm.get("sourceId").value == this.apptypes.prospect && this.taskForm.get("prospectId").value > 0) {
+        let prosId = this.taskForm.get("prospectId").value;
+        let oProspect = this.prospects.find(x => x.id == prosId);
+        this.taskForm.get("deadline").setValue(oProspect?.deadline);
+      }
+    }
+
+    this.onSearchMilestone("");
+  }
+
+  public onMilestoneChange() {
+    if(this.id == 0 && this.taskForm.get("milestoneId").value > 0) { 
+      let mileId = this.taskForm.get("milestoneId").value;
+      let oMilestone = this.milestones.find(x => x.id == mileId);
+      this.taskForm.get("deadline").setValue(oMilestone?.deadline);
+    }
   }
 
   public onSearchProspect(searchString: string) {

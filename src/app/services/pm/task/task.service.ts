@@ -58,13 +58,15 @@ export class TaskService {
         });
     }
     
-    public async createTask(appTypeId: number = null, linkTypeId: number = null) {
+    public async createTask(appTypeId: number = null, linkTypeId: number = null, deadline: Date = null) {
         let oTask = <ITask>{};
         oTask.id = 0;
         oTask.title = "";
         oTask.contactId = (<IUser>JSON.parse(localStorage.getItem("currentuser"))).contactId;
         oTask.sourceId = null;
         oTask.completed = false;
+        oTask.deadline = deadline ? new Date(deadline) : null;
+        
         if(appTypeId == this.appTypes.project) {
           oTask.projectId = linkTypeId;
         }

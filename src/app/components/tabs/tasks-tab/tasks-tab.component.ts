@@ -89,7 +89,7 @@ export class TasksTabComponent {
   }
 
   public onCreateTask() {
-    this.taskService.createTask(this.appTypeId, this.linkTypeId);
+    this.taskService.createTask(this.appTypeId, this.linkTypeId, this.parent?.deadline);
   }
 
   public editTask(oTask: ITask) {
@@ -146,6 +146,10 @@ export class TasksTabComponent {
       oMilestone.linkedtypeId = this.linkTypeId;
       this.milestoneService.saveFromSelect(oMilestone);
     }
+  }
+
+  public isPassedDeadline(oTask: ITask) {
+    return (!oTask.completed) && new Date(oTask.deadline).getTime() < new Date().getTime();
   }
 
 }

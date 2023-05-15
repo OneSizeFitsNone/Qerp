@@ -225,7 +225,7 @@
             
             <mat-tab label="{{ 'tasks' | translate}}">
                 <div class="col-md-12 mt-3">
-                    <az-tasks-tab [appTypeId]="apptypes.milestone" [linkTypeId]="milestone.id" (onUpdateTasks)="onUpdateTasks($event)"></az-tasks-tab>
+                    <az-tasks-tab [appTypeId]="apptypes.milestone" [linkTypeId]="milestone.id" [parent]="milestone" (onUpdateTasks)="onUpdateTasks($event)"></az-tasks-tab>
                 </div>
             </mat-tab>
 

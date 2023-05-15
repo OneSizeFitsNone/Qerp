@@ -14,6 +14,7 @@ import { MilestonesService } from 'src/app/services/tabs/milestones.service';
 export class MilestonesTabComponent {
   @Input() appTypeId: number = null;
   @Input() linkTypeId: number = null;
+  @Input() parent: any = null;
 
   private milestones: Array<IMilestone> = [];
   public milestonesSearch: Array<IMilestone> = [];
@@ -61,7 +62,7 @@ export class MilestonesTabComponent {
   }
 
   public onCreateMilestone() {
-    this.milestonesService.createMilestone(this.appTypeId, this.linkTypeId);
+    this.milestonesService.createMilestone(this.appTypeId, this.linkTypeId, this.parent?.deadline);
   }
 
   public editMilestone(oMilestone: IMilestone) {

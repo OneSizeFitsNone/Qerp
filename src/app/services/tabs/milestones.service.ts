@@ -57,13 +57,14 @@ export class MilestonesService {
         });
     }
     
-    public async createMilestone(appTypeId: number = null, linkTypeId: number = null) {
+    public async createMilestone(appTypeId: number = null, linkTypeId: number = null, deadline: Date = null) {
         let oMilestone = <IMilestone>{};
         oMilestone.id = 0;
         oMilestone.name = "";
         oMilestone.linkedapptypeId = appTypeId ?? this.appTypes.prospect;
         oMilestone.linkedtypeId = linkTypeId;
         oMilestone.completed = false;
+        oMilestone.deadline = deadline ? new Date(deadline) : null;
           
         this._milestone.next(oMilestone);
         let oCc = this._milestones.value;

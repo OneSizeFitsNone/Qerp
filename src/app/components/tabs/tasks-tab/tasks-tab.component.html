@@ -110,7 +110,7 @@
 
                     <td>
                         <span *ngIf="task.id != oCr.id">
-                            {{ oCr.deadline | date:"dd/MM/yyyy HH:mm" }}
+                            <span *ngIf="oCr.deadline" [ngClass]="isPassedDeadline(oCr) ? 'text-danger' : ''">{{ oCr.deadline | date:"dd/MM/yyyy HH:mm" }}</span>
                         </span>
                         <mat-form-field *ngIf="task.id == oCr.id" class="mat-field">
                             <mat-label>{{ "general.deadline" | translate }}</mat-label>
