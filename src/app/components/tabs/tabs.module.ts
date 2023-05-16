@@ -16,6 +16,8 @@ import { TasksTabComponent } from './tasks-tab/tasks-tab.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@matheo/datepicker';
 import { MatNativeDateModule } from '@matheo/datepicker/core';
+import { ImageTabComponent } from './image-tab/image-tab.component';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   imports: [
@@ -31,19 +33,22 @@ import { MatNativeDateModule } from '@matheo/datepicker/core';
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    RouterModule
+    RouterModule,
+    DragulaModule.forRoot(), 
   ], 
     declarations: [
       ClientcontactsTabComponent,
       ApptypecontactsComponent,
       MilestonesTabComponent,
       TasksTabComponent,
+      ImageTabComponent,
     ],
     exports: [ 
       ClientcontactsTabComponent,
       ApptypecontactsComponent,
       MilestonesTabComponent,
-      TasksTabComponent
+      TasksTabComponent,
+      ImageTabComponent,
     ],
     providers: [
       {provide: MAT_DATE_LOCALE, useValue: 'nl-BE'},

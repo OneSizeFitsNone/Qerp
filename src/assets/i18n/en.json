@@ -155,6 +155,9 @@
     "task.source": "Source",
     "task.sourceNumber": "Number",
 
+    "images": "Images",
+    "image": "Image",
+
 
     "priority": "Priority",
     "prospecttypes": "Prospect types",

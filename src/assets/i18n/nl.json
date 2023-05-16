@@ -155,6 +155,9 @@
     "task.source": "Bron",
     "task.sourceNumber": "Nummer",
 
+    "images": "Afbeeldingen",
+    "image": "Afbeelding",
+
     "priority": "Prioriteit",
     "prospecttypes": "Prospect types",
     "projecttypes": "Project types",
