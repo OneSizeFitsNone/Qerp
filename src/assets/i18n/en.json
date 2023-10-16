@@ -59,6 +59,8 @@
     "general.deadlineFrom": "Deadline from",
     "general.deadlineTo": "Deadline to",
     "general.status": "Status",
+    "general.start": "Start",
+    "general.end": "End",
     
     "address.address": "Address",
     "address.postalCode": "Postalcode",

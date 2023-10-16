@@ -19,6 +19,8 @@ export interface ITask {
     title: string;
     description: string;
     deadline: Date;
+    start: Date;
+    end: Date;
     maxTime: number;
     toInvoice: boolean;
     completed: boolean;

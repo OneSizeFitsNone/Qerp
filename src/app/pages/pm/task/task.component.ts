@@ -84,6 +84,8 @@ export class TaskComponent {
       'contactId': ['', Validators.required],
       
       'deadline': [''],
+      'start': [''],
+      'end': [''],
       'toInvoice': [''],
 
       'description': ['']
@@ -247,6 +249,17 @@ export class TaskComponent {
 
   public onTabIndexChange(i: any) {
     this.tabIndex=i;
+  }
+
+  public onStartChange(event: any) {
+    if(event.value == null) {
+      this.taskForm.controls["end"].clearValidators();
+    }
+    else{
+      this.taskForm.controls["end"].setValidators(Validators.required);
+    }
+    this.taskForm.controls["end"].updateValueAndValidity()
+    this.ref.detectChanges();
   }
 
 }

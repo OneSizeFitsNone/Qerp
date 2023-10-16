@@ -60,6 +60,8 @@
     "general.deadlineFrom": "Deadline van",
     "general.deadlineTo": "Deadline tot",
     "general.status": "Status",
+    "general.start": "Start",
+    "general.end": "Einde",
     
     "address.address": "Adres",
     "address.postalCode": "Postcode",
